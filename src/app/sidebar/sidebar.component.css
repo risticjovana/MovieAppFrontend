@@ -1,0 +1,140 @@
+/* Sidebar styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 200px;
+  background-color: #e65447;
+  color: white;
+  padding: 20px;
+  overflow: hidden;
+  z-index: 10;
+  /*box-shadow: 5px 0px 25px 5px rgba(252, 54, 143, 0.9);  Glowing border effect on the right */
+}
+/* Sidebar header */
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar-logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #fff; /* Adds a white border around the logo for a clean look */
+}
+
+/* Sidebar title */
+.sidebar h2 {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+
+/* Sidebar menu styles */
+.sidebar-menu {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 20px;
+}
+
+/* Sidebar menu items */
+.sidebar-menu li {
+  margin: 20px 0;
+}
+
+/* Links within the menu */
+.sidebar-menu li a {
+  color: #fff;  /* Lighter text color for less contrast */
+  text-decoration: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 20px;  /* Rounded corners for menu items */
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for menu items */
+.sidebar-menu li a:hover {
+  color: #f4f4f4;  /* Light color on hover */
+  background-color: #c43a2d;  /* Dark background color on hover */
+  transform: scale(1.02);  /* Slight zoom effect for interaction */
+}
+
+/* Active link styling */
+.sidebar-menu li a.active {
+  font-weight: bold;
+  color: #f4f4f4;
+  background-color: #c43a2d;  /* Highlight the active item with a different color */
+}
+
+/* Content section styles */
+
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  height: 100vh; /* Ensures content takes up full height */
+  flex-grow: 1;
+}
+
+/* Sidebar toggle button */
+.sidebar .toggle-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #333;
+  border: none;
+  color: white;
+  font-size: 22px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.sidebar .toggle-btn:hover {
+  background: #444;
+}
+
+/* When the sidebar is collapsed */
+.sidebar.close {
+  width: 80px;  /* Sidebar shrinks */
+}
+
+.sidebar.close .sidebar-menu li a {
+  justify-content: center;  /* Center the text when sidebar is closed */
+  font-size: 16px;
+}
+
+.sidebar.close .sidebar-menu li a span {
+  display: none;  /* Hide the text on smaller screen when collapsed */
+}
+
+/* Content padding adjusts when sidebar is closed */
+.sidebar.close ~ .content {
+  margin-left: 80px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+      width: 200px;
+  }
+
+  .sidebar.close {
+      width: 60px;
+  }
+
+  .content {
+      margin-left: 200px;
+  }
+
+  .sidebar.close ~ .content {
+      margin-left: 60px;
+  }
+}
