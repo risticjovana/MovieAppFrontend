@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'reserve-ticket', component: TicketReservationComponent },
+  { path: 'ticket-reservation', component: TicketReservationComponent },
   { path: '**', redirectTo: 'login' }, // move this to the end
 ];
 @NgModule({

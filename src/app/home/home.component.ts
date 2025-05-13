@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  showSidebar: boolean = true;
   token: string | null = null;
   user: any = null;
 

@@ -1,1 +1,12 @@
-<p>ticket-reservation works!</p>
+<div class="movie-grid">
+  <div class="movie-card" *ngFor="let movie of movies">
+    <img [src]="movie.imageUrl || 'assets/default-poster.png'" alt="{{ movie.name }}" class="movie-poster" />
+    <h3>{{ movie.name }}</h3>
+    <p><strong>Year:</strong> {{ movie.year }}</p>
+    <p><strong>Rating:</strong> {{ movie.rating }}</p>
+    <p><strong>Duration:</strong> {{ movie.duration }} mins</p>
+    <p>{{ movie.description }}</p>
+    <p><strong>Favorite:</strong> {{ movie.isFavorite ? 'Yes' : 'No' }}</p>
+    <p><strong>Watched:</strong> {{ movie.watched ? 'Yes' : 'No' }}</p>
+  </div>
+</div>
