@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TicketReservationComponent } from './ticket-reservation/ticket-reservation.component';
+import { MovieProjectionsComponent } from './movie-projections/movie-projections.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TicketReservationComponent } from './ticket-reservation/ticket-reservat
     HomeComponent,
     SidebarComponent,
     TicketReservationComponent,
+    MovieProjectionsComponent,
   ],
   imports: [
     BrowserModule,

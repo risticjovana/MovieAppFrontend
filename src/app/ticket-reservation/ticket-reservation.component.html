@@ -1,5 +1,10 @@
 <div class="movie-grid">
-  <div class="movie-card" *ngFor="let movie of movies">
+  <div
+    class="movie-card"
+    *ngFor="let movie of movies"
+    (click)="goToProjections(movie.contentId)"
+    style="cursor: pointer;"
+  >
     <img [src]="movie.imageUrl || 'assets/default-poster.png'" alt="{{ movie.name }}" class="movie-poster" />
     <h3>{{ movie.name }}</h3>
     <p><strong>Year:</strong> {{ movie.year }}</p>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../services/movie.service';
 import { MovieDTO } from '../model/movie';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-reservation',
@@ -10,7 +11,7 @@ import { MovieDTO } from '../model/movie';
 export class TicketReservationComponent implements OnInit {
   movies: MovieDTO[] = [];
 
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService, private router: Router) {}
 
   ngOnInit(): void {
     this.movieService.getAvailableMovies().subscribe({
@@ -18,4 +19,8 @@ export class TicketReservationComponent implements OnInit {
       error: (err) => console.error('Error loading movies:', err)
     });
   }
+
+  goToProjections(contentId: number) {
+  this.router.navigate(['/movies', contentId, 'projections']);
+}
 }

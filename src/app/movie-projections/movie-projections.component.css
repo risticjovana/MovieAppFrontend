@@ -1,0 +1,120 @@
+.loading {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.error {
+  color: #d9534f;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.cinema-box {
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: #f9f9ff;
+  box-shadow: 0 2px 5px rgba(0, 123, 255, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.cinema-box:hover {
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.cinema-name {
+  margin-top: 0;
+  color: #0056b3;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #007bff;
+  padding-bottom: 0.3rem;
+}
+
+/* Container to layout projection cards horizontally */
+.projections-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Each projection is a small card (square-ish) */
+.projection-card {
+  background-color: #e1ecff;
+  border: 1.5px solid #007bff;
+  border-radius: 6px;
+  padding: 1rem;
+  min-width: 160px;
+  color: #222; /* dark text for readability */
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  user-select: none;
+}
+
+/* Optional: add subtle hover effect for projection cards */
+.projection-card:hover {
+  background-color: #c7dbff;
+  border-color: #0056b3;
+  cursor: pointer;
+}
+
+/* popup backdrop */
+.popup-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* popup content */
+.popup {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  color: #222;
+}
+
+.close-btn {
+  margin-top: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* 10 seats per row */
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.seat {
+  background-color: #cce5ff;
+  border: 1px solid #007bff;
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.seat.booked {
+  background-color: #dee2e6;
+  color: #888;
+  pointer-events: none;
+}

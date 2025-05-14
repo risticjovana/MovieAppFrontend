@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MovieDTO } from '../model/movie';
+import { CinemaWithProjectionsDTO } from '../model/cinema-with-projections';
 
 
 @Injectable({
@@ -14,5 +15,9 @@ export class MovieService {
 
   getAvailableMovies(): Observable<MovieDTO[]> {
     return this.http.get<MovieDTO[]>(`${this.baseUrl}/availableMovies`);
+  }
+
+  getProjectionsByContentId(contentId: number): Observable<CinemaWithProjectionsDTO[]> {
+    return this.http.get<CinemaWithProjectionsDTO[]>(`${this.baseUrl}/projectionsByContent/${contentId}`);
   }
 }
