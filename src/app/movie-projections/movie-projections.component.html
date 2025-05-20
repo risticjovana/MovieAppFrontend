@@ -4,36 +4,65 @@
 <div *ngIf="!isLoading && !errorMsg">
   <h2>Projections for Movie ID: {{ contentId }}</h2>
 
-  <div *ngFor="let cinema of cinemasWithProjections" class="cinema-box">
-    <h3>{{ cinema.cinemaName }}</h3>
-    <div class="projections-container">
+  <!-- Cinema selector -->
+  <label for="cinemaSelect">Select Cinema:</label>
+  <select id="cinemaSelect" [(ngModel)]="selectedCinemaId" (change)="onCinemaChange()">
+    <option [ngValue]="null" disabled>Select a cinema</option>
+    <option *ngFor="let cinema of cinemasWithProjections" [ngValue]="cinema.cinemaId">
+      {{ cinema.cinemaName }}
+    </option>
+  </select>
+
+  <div class="date-selector">
+    <button (click)="previousWeek()" class="arrow-btn">&lt;</button>
+
+    <div class="days-row">
       <div
-        class="projection-card"
-        *ngFor="let proj of cinema.projections"
-        (click)="openSeatsPopup(proj)"
+        *ngFor="let day of daysInWeek"
+        class="day"
+        [class.selected]="day.toDateString() === selectedDate?.toDateString()"
+        (click)="selectDate(day)"
       >
-        <div><strong>Date:</strong> {{ proj.date | date:'mediumDate' }}</div>
-        <div><strong>Time:</strong> {{ proj.time }}</div>
-        <div><strong>Tickets:</strong> {{ proj.availableTickets }}</div>
-        <div><strong>Room:</strong> {{ proj.roomNumber }}</div>
+        <div class="day-name">{{ day | date:'EEE' }}</div>
+        <div class="day-number">{{ day | date:'d' }}</div>
+      </div>
+    </div>
+
+    <button (click)="nextWeek()" class="arrow-btn">&gt;</button>
+  </div>
+
+  <!-- Projection selector -->
+  <label for="projectionSelect">Select Projection Time:</label>
+  <select
+    id="projectionSelect"
+    [(ngModel)]="selectedProjectionId"
+    (change)="onProjectionChange()"
+    [disabled]="!filteredProjections.length"
+  >
+    <option [ngValue]="null" disabled>Select a projection</option>
+    <option *ngFor="let proj of filteredProjections" [ngValue]="proj.id">
+      {{ proj.time.substring(0,5) }}
+    </option>
+  </select>
+
+  <!-- Seat grid always rendered -->
+  <div class="seat-grid-wrapper">
+  <div class="screen-wrapper">
+    <div class="screen-arc"></div>
+    <div class="screen-label">SCREEN</div>
+  </div>
+  <div *ngFor="let row of rows" class="seat-row">
+    <div class="seat-group left">
+      <div *ngFor="let seat of row.left" class="seat" [class.empty]="seat === null">
+      </div>
+    </div>
+
+    <div class="aisle"></div>
+
+    <div class="seat-group right">
+      <div *ngFor="let seat of row.right" class="seat" [class.empty]="seat === null">
       </div>
     </div>
   </div>
 </div>
-
-<!-- Popup modal -->
-<div class="popup-backdrop" *ngIf="showPopup" (click)="closePopup()">
-  <div class="popup" (click)="$event.stopPropagation()">
-    <h3>Seats for Projection ID: {{ selectedProjection?.id }}</h3>
-    <div class="seat-grid">
-      <div
-        class="seat"
-        *ngFor="let seat of seatArray; let i = index"
-        [class.booked]="i >= selectedProjection?.availableTickets"
-      >
-        {{ i + 1 }}
-      </div>
-    </div>
-    <button class="close-btn" (click)="closePopup()">Close</button>
-  </div>
 </div>

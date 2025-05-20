@@ -1,120 +1,157 @@
-.loading {
-  font-style: italic;
-  color: #666;
-  margin-bottom: 1rem;
+.seat-row {
+  display: inline-flex;       
+  justify-content: center;   
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.error {
-  color: #d9534f;
-  font-weight: bold;
-  margin-bottom: 1rem;
+.seat-group {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 6px;
+  padding: 0;   
+  margin: 0;       
+  box-sizing: border-box;
+  max-content: max-content; 
 }
 
-.cinema-box {
-  border: 2px solid #007bff;
-  border-radius: 8px;
-  padding: 1rem 1.5rem;
-  margin-bottom: 1.5rem;
-  background-color: #f9f9ff;
-  box-shadow: 0 2px 5px rgba(0, 123, 255, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.cinema-box:hover {
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
-}
-
-.cinema-name {
-  margin-top: 0;
-  color: #0056b3;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #007bff;
-  padding-bottom: 0.3rem;
-}
-
-/* Container to layout projection cards horizontally */
-.projections-container {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-/* Each projection is a small card (square-ish) */
-.projection-card {
-  background-color: #e1ecff;
-  border: 1.5px solid #007bff;
-  border-radius: 6px;
-  padding: 1rem;
-  min-width: 160px;
-  color: #222; /* dark text for readability */
-  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
-  font-size: 0.9rem;
+.seat-grid-wrapper {
+  margin: 30px auto 0 auto; 
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  user-select: none;
-}
-
-/* Optional: add subtle hover effect for projection cards */
-.projection-card:hover {
-  background-color: #c7dbff;
-  border-color: #0056b3;
-  cursor: pointer;
-}
-
-/* popup backdrop */
-.popup-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-/* popup content */
-.popup {
-  background-color: #fff;
-  padding: 2rem;
+  background-color: #121212;
+  padding: 20px;
   border-radius: 12px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  color: #222;
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.close-btn {
-  margin-top: 1rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
+.seat-group.left {
+  justify-content: end; 
 }
 
-.seat-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr); /* 10 seats per row */
-  gap: 0.5rem;
-  margin-top: 1rem;
+.seat-group.right {
+  justify-content: start;
+}
+
+.aisle {
+  width: 30px; 
+  height: 40px;
+  border-radius: 8px;
 }
 
 .seat {
-  background-color: #cce5ff;
-  border: 1px solid #007bff;
-  padding: 0.5rem;
-  text-align: center;
-  border-radius: 4px;
+  width: 30px;
+  height: 40px;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  user-select: none;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
 }
 
-.seat.booked {
-  background-color: #dee2e6;
-  color: #888;
-  pointer-events: none;
+.seat:hover:not(.empty) {
+  background-color: #555;
+}
+
+.seat.empty {
+  background-color: transparent;
+  cursor: default;
+}
+
+.screen-arc {
+  width: 400px;
+  height: 50px;
+  border-top: 4px solid #e94f20;
+  border-radius: 800px / 80px;
+  position: relative;
+
+  background: transparent;
+  box-shadow: none; 
+  filter: drop-shadow(0 0 6px #e94f20);
+}
+
+.screen-wrapper {
+  width: 400px;
+  margin: 0 auto 30px auto;
+  text-align: center; 
+}
+
+.screen-label {
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  color: #908f8f;
+  font-size: 14px;
+  margin-top: -30px;
+}
+
+.date-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.arrow-btn {
+  font-size: 24px;
+  padding: 5px 12px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.arrow-btn:hover {
+  color: #000;
+}
+
+.days-row {
+  display: flex;
+  gap: 12px;
+}
+
+.day {
+  cursor: pointer;
+  padding: 8px 0;
+  width: 50px;  
+  border-radius: 15px;
+  text-align: center;
+  user-select: none;
+  transition: background-color 0.3s, color 0.3s; 
+  color: #333; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+
+.day.selected {
+  background-color: #333;
+  color: white;
+  font-weight: bold;
+  border-color: #333;
+}
+
+.day-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.day-number {
+  font-size: 1.1rem;
+  margin-top: 2px;
 }
