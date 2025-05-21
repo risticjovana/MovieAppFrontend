@@ -4,46 +4,67 @@
 <div *ngIf="!isLoading && !errorMsg">
   <h2>Projections for Movie ID: {{ contentId }}</h2>
 
-  <!-- Cinema selector -->
-  <label for="cinemaSelect">Select Cinema:</label>
-  <select id="cinemaSelect" [(ngModel)]="selectedCinemaId" (change)="onCinemaChange()">
-    <option [ngValue]="null" disabled>Select a cinema</option>
-    <option *ngFor="let cinema of cinemasWithProjections" [ngValue]="cinema.cinemaId">
-      {{ cinema.cinemaName }}
-    </option>
-  </select>
+  <div class="controls-row">
+    <!-- Date picker -->
+    <div class="date-selector">
+      <button (click)="previousWeek()" class="arrow-btn">&lt;</button>
+      <div class="days-row">
+        <div
+          *ngFor="let day of daysInWeek"
+          class="day"
+          [class.selected]="day.toDateString() === selectedDate?.toDateString()"
+          (click)="selectDate(day)"
+        >
+          <div class="day-name">{{ day | date:'EEE' }}</div>
+          <div class="day-number">{{ day | date:'d' }}</div>
+        </div>
+      </div>
+      <button (click)="nextWeek()" class="arrow-btn">&gt;</button>
+    </div>
 
-  <div class="date-selector">
-    <button (click)="previousWeek()" class="arrow-btn">&lt;</button>
-
-    <div class="days-row">
-      <div
-        *ngFor="let day of daysInWeek"
-        class="day"
-        [class.selected]="day.toDateString() === selectedDate?.toDateString()"
-        (click)="selectDate(day)"
-      >
-        <div class="day-name">{{ day | date:'EEE' }}</div>
-        <div class="day-number">{{ day | date:'d' }}</div>
+    <!-- Cinema selector -->
+    <div class="form-group">
+      <label for="cinemaSelect">Cinema</label>
+      <div class="select-wrapper">
+      <select id="cinemaSelect" [(ngModel)]="selectedCinemaId" (change)="onCinemaChange()">
+        <option *ngFor="let cinema of cinemasWithProjections" [ngValue]="cinema.cinemaId">
+          {{ cinema.cinemaName }}
+        </option>
+      </select>
       </div>
     </div>
 
-    <button (click)="nextWeek()" class="arrow-btn">&gt;</button>
+    <!-- Projection selector -->
+    <div class="form-group">
+      <label for="projectionSelect">Time</label>
+      <div class="select-wrapper">
+      <select
+        id="projectionSelect"
+        [(ngModel)]="selectedProjectionId"
+        (change)="onProjectionChange()"
+        [disabled]="!filteredProjections.length"
+      >
+        <option *ngFor="let proj of filteredProjections" [ngValue]="proj.id">
+          {{ proj.time.substring(0,5) }}
+        </option>
+      </select>
+      </div>
+    </div>
   </div>
 
-  <!-- Projection selector -->
-  <label for="projectionSelect">Select Projection Time:</label>
-  <select
-    id="projectionSelect"
-    [(ngModel)]="selectedProjectionId"
-    (change)="onProjectionChange()"
-    [disabled]="!filteredProjections.length"
-  >
-    <option [ngValue]="null" disabled>Select a projection</option>
-    <option *ngFor="let proj of filteredProjections" [ngValue]="proj.id">
-      {{ proj.time.substring(0,5) }}
-    </option>
-  </select>
+  <div class="seat-layout-wrapper">
+  <!-- Seat Summary Panel -->
+  <div class="seat-summary">
+    <h3>Booking Summary</h3>
+    <p>Selected Seats: {{ getReservedSeatCount() }}</p>
+    <p>Total Price: ${{ getReservedSeatCount() * 20 }}</p>
+
+    <button 
+      (click)="submitReservation()" 
+      [disabled]="selectedSeats.size === 0">
+      Reserve Selected Seats
+    </button>
+  </div>
 
   <!-- Seat grid always rendered -->
   <div class="seat-grid-wrapper">
@@ -52,17 +73,32 @@
     <div class="screen-label">SCREEN</div>
   </div>
   <div *ngFor="let row of rows" class="seat-row">
-    <div class="seat-group left">
-      <div *ngFor="let seat of row.left" class="seat" [class.empty]="seat === null">
-      </div>
+  <div class="seat-group left">
+    <div
+      *ngFor="let seat of row.left"
+      class="seat"
+      [class.empty]="seat === null"
+      [class.selected]="seat && selectedSeats.has(seat.number)"
+      [class.booked]="seat?.booked"
+      (click)="seat && !seat.booked && toggleSeatSelection(seat.number)"
+    >
+    </div>
     </div>
 
     <div class="aisle"></div>
 
     <div class="seat-group right">
-      <div *ngFor="let seat of row.right" class="seat" [class.empty]="seat === null">
+      <div
+        *ngFor="let seat of row.right"
+        class="seat"
+        [class.empty]="seat === null"
+        [class.selected]="seat && selectedSeats.has(seat.number)"
+        [class.booked]="seat?.booked"
+        (click)="seat && !seat.booked && toggleSeatSelection(seat.number)"
+      >
       </div>
     </div>
   </div>
+</div>
 </div>
 </div>
