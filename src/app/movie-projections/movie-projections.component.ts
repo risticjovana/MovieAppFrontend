@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CinemaWithProjectionsDTO } from '../model/cinema-with-projections';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '../services/movie.service';
 import { FormsModule } from '@angular/forms';
 import { Seat } from '../model/seat';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-movie-projections',
@@ -23,8 +24,11 @@ export class MovieProjectionsComponent {
   startDate: Date = this.getStartOfWeek(new Date());
   daysInWeek: Date[] = [];
   selectedDate: Date | null = null;
+  selectedCinema: any;
+  token: string | null = null;
+  user: any = null;
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService,) {
+  constructor(private route: ActivatedRoute, private movieService: MovieService, private router: Router) {
     this.generateWeek(this.startDate);
   }
 
@@ -34,12 +38,24 @@ export class MovieProjectionsComponent {
       if (id) {
         this.contentId = +id;
         this.loadProjections(this.contentId);
+        this.loadMovieInfo(this.contentId);
       }
     });
     const today = new Date();
     this.selectedDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
     this.generateSeats(50);
+      if (this.isBrowser()) {
+      this.token = localStorage.getItem('token');
+      if (this.token) {
+        try {
+          this.user = jwtDecode(this.token);  // Decode the token
+          console.log(this.user);  // The user data from the token
+        } catch (error) {
+          console.error('Invalid token', error);
+        }
+      }
+    }
   }
 
   loadProjections(contentId: number) {
@@ -71,34 +87,34 @@ export class MovieProjectionsComponent {
 
 
   generateSeats(count: number) {
-  this.rows = [];
-  if (count === 0) return;
+    this.rows = [];
+    if (count === 0) return;
 
-  const seatsPerRow = 10;
-  const halfSeatsPerRow = seatsPerRow / 2;
-  const totalRows = Math.ceil(count / seatsPerRow);
+    const seatsPerRow = 12;
+    const halfSeatsPerRow = seatsPerRow / 2;
+    const totalRows = Math.ceil(count / seatsPerRow);
 
-  // Ensure seatMap is ready
-  if (this.seatMap.length !== count) {
-    this.generateSeatMap(count);
-  }
-
-  let seatIndex = 0;
-  for (let i = 0; i < totalRows; i++) {
-    const rowLeft: (Seat | null)[] = [];
-    const rowRight: (Seat | null)[] = [];
-
-    for (let j = 0; j < halfSeatsPerRow; j++) {
-      rowLeft.push(seatIndex < count ? this.seatMap[seatIndex++] : null);
+    // Ensure seatMap is ready
+    if (this.seatMap.length !== count) {
+      this.generateSeatMap(count);
     }
 
-    for (let j = 0; j < halfSeatsPerRow; j++) {
-      rowRight.push(seatIndex < count ? this.seatMap[seatIndex++] : null);
-    }
+    let seatIndex = 0;
+    for (let i = 0; i < totalRows; i++) {
+      const rowLeft: (Seat | null)[] = [];
+      const rowRight: (Seat | null)[] = [];
 
-    this.rows.push({ left: rowLeft, right: rowRight });
+      for (let j = 0; j < halfSeatsPerRow; j++) {
+        rowLeft.push(seatIndex < count ? this.seatMap[seatIndex++] : null);
+      }
+
+      for (let j = 0; j < halfSeatsPerRow; j++) {
+        rowRight.push(seatIndex < count ? this.seatMap[seatIndex++] : null);
+      }
+
+      this.rows.push({ left: rowLeft, right: rowRight });
+    }
   }
-}
 
 
   getGridColumn(index: number): string {
@@ -111,6 +127,7 @@ export class MovieProjectionsComponent {
   onCinemaChange() {
     const selectedCinema = this.cinemasWithProjections.find(c => c.cinemaId === this.selectedCinemaId);
     this.filteredProjections = selectedCinema ? selectedCinema.projections : [];
+    this.selectedCinema = this.cinemasWithProjections.find(c => c.cinemaId === this.selectedCinemaId);
 
     if (this.filteredProjections.length > 0) {
       this.selectedProjectionId = this.filteredProjections[0].id;
@@ -170,9 +187,10 @@ export class MovieProjectionsComponent {
   }
 
   selectedSeats: Set<number> = new Set();
+  bookedSeats: Set<number> = new Set();
 
   toggleSeatSelection(seatNumber: number | null) {
-    if (seatNumber === null) return;
+    if (seatNumber === null || this.bookedSeats.has(seatNumber)) return; // Can't select booked seats
 
     if (this.selectedSeats.has(seatNumber)) {
       this.selectedSeats.delete(seatNumber);
@@ -183,48 +201,74 @@ export class MovieProjectionsComponent {
     console.log('Selected (unconfirmed) seats:', Array.from(this.selectedSeats));
   }
 
+
   getReservedSeatCount(): number {
       return this.selectedSeats.size;
   }
 
   submitReservation() {
-  const reservedCount = this.getReservedSeatCount();
-  const reservedSeats = Array.from(this.selectedSeats);
-  const key = this.getStorageKey();
+    if (!this.isBrowser()) return;
 
-  // Save to localStorage only now (confirmed)
-  localStorage.setItem(key, JSON.stringify(reservedSeats));
+    const reservedSeats = Array.from(this.selectedSeats);
+    const key = this.getStorageKey();
 
-  // Optionally: Mark seats as booked in seatMap
-  for (let seat of this.seatMap) {
-    if (this.selectedSeats.has(seat.number)) {
-      seat.booked = true;
+    const existingReserved: number[] = JSON.parse(localStorage.getItem(key) || '[]');
+    const updatedReserved = Array.from(new Set([...existingReserved, ...reservedSeats]));
+
+    localStorage.setItem(key, JSON.stringify(updatedReserved));
+
+    if (this.selectedProjectionId == null) {
+      alert('Projection ID nije definisan!');
+      return;
     }
+
+    const reservationData = {
+      projectionId: this.selectedProjectionId,
+      contentId: this.contentId,
+      userId: this.user.id,
+      seatNumber: reservedSeats.length,
+      roomNumber: this.selectedProjection.roomNumber,
+      purchaseTime: new Date().toISOString()
+    };
+
+    console.log('Sending reservation data:', reservationData);
+
+    this.movieService.reserveTicket(reservationData).subscribe({
+      next: () => {
+        console.log(`Reservation successful for ${reservedSeats.length} seats.`);
+        this.openPopup(reservedSeats.map(String));
+        this.selectedSeats.clear();
+        this.generateSeatMap(this.seatMap.length);
+      },
+      error: (err) => {
+        console.error('Reservation failed:', err);
+      }
+    });
+
+    // Prikaži popup pre brisanja izabrane mape
+    this.openPopup(reservedSeats.map(String));
+
+    this.selectedSeats.clear();
+    this.generateSeatMap(this.seatMap.length);
+
+    console.log(`Reservation submitted for ${reservedSeats.length} seats.`);
   }
-
-  // Clear current selection
-  this.selectedSeats.clear();
-
-  console.log(`Reservation submitted for ${reservedCount} seats.`);
-}
-
 
   seatMap: Seat[] = [];
 
   generateSeatMap(count: number) {
     this.seatMap = [];
-    this.selectedSeats.clear(); // Reset to re-sync from storage
 
-    const storage = this.getLocalStorage();
-    const key = this.getStorageKey();
-    const savedSeatNumbers: number[] = storage ? JSON.parse(storage.getItem(key) || '[]') : [];
+    let savedSeatNumbers: number[] = [];
+
+    if (this.isBrowser()) {
+      const key = this.getStorageKey();
+      savedSeatNumbers = JSON.parse(localStorage.getItem(key) || '[]');
+    }
 
     for (let i = 1; i <= count; i++) {
       const isBooked = savedSeatNumbers.includes(i);
       this.seatMap.push(new Seat(i, isBooked));
-      if (isBooked) {
-        this.selectedSeats.add(i);
-      }
     }
   }
 
@@ -232,5 +276,36 @@ export class MovieProjectionsComponent {
     return `reservedSeats_cinema${this.selectedCinemaId}_proj${this.selectedProjectionId}`;
   }
 
-  
+  isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+  }
+
+  showTicketPopup = false;
+  reservedSeats: string[] = [];
+
+  openPopup(seats: string[]) {
+    this.reservedSeats = seats;
+    this.showTicketPopup = true;
+  }
+
+  closePopup() {
+    this.router.navigate(['/home']);
+    this.showTicketPopup = false;
+  }
+
+  movieInfo: any;
+
+  loadMovieInfo(id: number) {
+    this.movieService.getAvailableMovies().subscribe({
+      next: (movies) => {
+        this.movieInfo = movies.find(m => m.contentId === id);
+        if (!this.movieInfo) {
+          console.warn('Movie not found with ID:', id);
+        }
+      },
+      error: (err) => {
+        console.error('Failed to load movies', err);
+      }
+    });
+  }
 }

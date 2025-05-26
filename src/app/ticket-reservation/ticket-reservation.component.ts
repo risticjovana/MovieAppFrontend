@@ -21,6 +21,6 @@ export class TicketReservationComponent implements OnInit {
   }
 
   goToProjections(contentId: number) {
-  this.router.navigate(['/movies', contentId, 'projections']);
-}
+    this.router.navigate(['/movies', contentId, 'projections']);
+  }
 }

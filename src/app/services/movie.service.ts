@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MovieDTO } from '../model/movie';
 import { CinemaWithProjectionsDTO } from '../model/cinema-with-projections';
+import { Ticket } from '../model/ticket';
 
 
 @Injectable({
@@ -19,5 +20,9 @@ export class MovieService {
 
   getProjectionsByContentId(contentId: number): Observable<CinemaWithProjectionsDTO[]> {
     return this.http.get<CinemaWithProjectionsDTO[]>(`${this.baseUrl}/projectionsByContent/${contentId}`);
+  }
+
+  reserveTicket(ticket: Ticket): Observable<any> {
+    return this.http.post(`${this.baseUrl}/reserve`, ticket);
   }
 }

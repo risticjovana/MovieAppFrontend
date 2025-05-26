@@ -21,12 +21,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #121212;
+  background-color: #fff;
   padding: 20px;
   border-radius: 12px;
-  max-width: 500px;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .seat-group.left {
@@ -38,7 +35,7 @@
 }
 
 .seat.booked {
-  background-color: gray !important;
+  background-color: gray;
   cursor: not-allowed;
   pointer-events: none;
 }
@@ -79,7 +76,6 @@
   border-color: #cc441b;
   cursor: pointer;
 }
-
 
 .screen-arc {
   width: 400px;
@@ -173,8 +169,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin: 20px auto;
+  margin: 0 auto;
   width: 80%;
 }
 
@@ -280,20 +275,14 @@ button:disabled {
 
 /* Seat Summary Panel */
 .seat-summary {
-  background-color: #1e1e1e;
-  color: white;
+  background-color: white;
+  color: black;
   padding: 0px 20px;
-  border-radius: 12px;
-  min-width: 220px;
-  max-width: 400px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  width: 30%;
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-grow: 1;
-  min-height: 400px; /* Ensures a minimum height */
-  height: 100%; 
 }
 
 /* Seat Summary Header */
@@ -334,3 +323,160 @@ button:disabled {
   opacity: 0.6;
 }
 
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  
+  background: #fff;
+  color: #000;
+  padding: 2rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+
+
+.card {
+  background: linear-gradient(to bottom, #e84c3d 0%, #e84c3d 26%, #ecedef 26%, #ecedef 100%);
+  height: 11em;
+  float: left;
+  position: relative;
+  padding: 1em;
+  margin-top: 10px;
+}
+
+.cardLeft {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  width: 16em;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+
+.cardRight {
+  width: 6.5em;
+  border-left: 0.18em dashed #fff;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  position: relative;
+}
+
+.cardRight::before,
+.cardRight::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0.9em;
+  height: 0.9em;
+  background: #fff;
+  border-radius: 50%;
+  left: -0.5em;
+}
+
+.cardRight::before {
+  top: -0.4em;
+}
+
+.cardRight::after {
+  bottom: -0.4em;
+}
+
+h1 {
+  font-size: 1.1em;
+  margin-top: 0;
+  color: #fff;
+}
+
+h1 span {
+  font-weight: normal;
+}
+
+h2 {
+  text-align: center;
+}
+
+.title, .name, .seatTicket, .time {
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.title h2,
+.name h2,
+.seatTicket h2,
+.time h2 {
+  font-size: 0.9em;
+  color: #525252;
+  margin: 0;
+}
+
+.title span,
+.name span,
+.seatTicket span,
+.time span {
+  font-size: 0.7em;
+  color: #a2aeae;
+}
+
+.title {
+  margin: 2em 0 0 0;
+}
+
+.seatTicket, .time {
+  float: left;
+}
+
+.number {
+  margin: 3.5em 0 0 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.number h3 {
+  color: #e84c3d;
+  margin: 0.9em 0 0 0;
+  font-size: 2.5em;
+}
+
+.number span {
+  display: block;
+  color: #a2aeae;
+}
+
+.barcode {
+  height: 2em;
+  width: 0;
+  margin: 1.2em 0 0 0.8em;
+  box-shadow:
+    1px 0 0 1px #343434,
+    5px 0 0 1px #343434,
+    10px 0 0 1px #343434,
+    11px 0 0 1px #343434,
+    15px 0 0 1px #343434,
+    18px 0 0 1px #343434,
+    22px 0 0 1px #343434,
+    23px 0 0 1px #343434,
+    26px 0 0 1px #343434,
+    30px 0 0 1px #343434,
+    35px 0 0 1px #343434,
+    37px 0 0 1px #343434,
+    41px 0 0 1px #343434,
+    44px 0 0 1px #343434,
+    47px 0 0 1px #343434,
+    51px 0 0 1px #343434,
+    56px 0 0 1px #343434,
+    59px 0 0 1px #343434,
+    64px 0 0 1px #343434,
+    68px 0 0 1px #343434,
+    72px 0 0 1px #343434,
+    74px 0 0 1px #343434,
+    77px 0 0 1px #343434,
+    81px 0 0 1px #343434;
+}
