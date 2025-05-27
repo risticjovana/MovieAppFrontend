@@ -5,12 +5,12 @@
 }
 
 .sidebar {
-  width: 250px;
+  width: 20%;
   flex-shrink: 0;
   z-index: 1;
 }
 
 .main-content {
-  flex: 1;
+  width: 80%;
   overflow-y: auto;
 }
