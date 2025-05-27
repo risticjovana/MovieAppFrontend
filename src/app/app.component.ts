@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
-  showSidebar: boolean = true;
+export class AppComponent{
+  showSidebar = true;
 
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    // Subscribe to the route changes and update sidebar visibility
-    this.router.events.subscribe(() => {
-      // Check if the current route is 'login' or 'register' and hide the sidebar
-      const currentRoute = this.router.url;
-      this.showSidebar = currentRoute !== '/login' && currentRoute !== '/register';
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const currentUrl = event.urlAfterRedirects;
+        this.showSidebar = currentUrl !== '/login' && currentUrl !== '/register';
+      }
     });
   }
 }

@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TicketReservationComponent } from './ticket-reservation/ticket-reservation.component';
 import { MovieProjectionsComponent } from './movie-projections/movie-projections.component';
+import { MyReservationsComponent } from './my-reservations/my-reservations.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MovieProjectionsComponent } from './movie-projections/movie-projections
     SidebarComponent,
     TicketReservationComponent,
     MovieProjectionsComponent,
+    MyReservationsComponent,
   ],
   imports: [
     BrowserModule,

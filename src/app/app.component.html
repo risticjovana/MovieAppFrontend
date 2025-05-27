@@ -1,8 +1,5 @@
-<div class="layout">
-  <aside class="sidebar" *ngIf="showSidebar">
-    <app-sidebar></app-sidebar>
-  </aside>
-
+<div class="app-layout">
+  <app-sidebar *ngIf="showSidebar"></app-sidebar>
   <main class="main-content">
     <router-outlet></router-outlet>
   </main>

@@ -116,7 +116,6 @@ export class MovieProjectionsComponent {
     }
   }
 
-
   getGridColumn(index: number): string {
     const seatsPerRow = 10;
     const aisleAfter = 5;
@@ -289,7 +288,7 @@ export class MovieProjectionsComponent {
   }
 
   closePopup() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/my-reservations']);
     this.showTicketPopup = false;
   }
 
