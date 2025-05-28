@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CinemaWithProjectionsDTO } from '../model/cinema-with-projections';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '../services/movie.service';
-import { FormsModule } from '@angular/forms';
 import { Seat } from '../model/seat';
 import { jwtDecode } from 'jwt-decode';
 
@@ -11,7 +10,7 @@ import { jwtDecode } from 'jwt-decode';
   templateUrl: './movie-projections.component.html',
   styleUrl: './movie-projections.component.css'
 })
-export class MovieProjectionsComponent {
+export class MovieProjectionsComponent implements OnInit {
   contentId!: number;
   cinemasWithProjections: CinemaWithProjectionsDTO[] = [];
   isLoading = true;
@@ -141,8 +140,8 @@ export class MovieProjectionsComponent {
   onProjectionChange() {
     this.selectedProjection = this.filteredProjections.find(p => p.id === this.selectedProjectionId);
     const available = this.selectedProjection?.seatNumber ?? 50;
-    this.generateSeats(available);
     this.generateSeatMap(available);
+    this.generateSeats(available);
   }
 
   getColumnCount(seatCount: number): number {
@@ -211,11 +210,29 @@ export class MovieProjectionsComponent {
     const reservedSeats = Array.from(this.selectedSeats);
     const key = this.getStorageKey();
 
-    const existingReserved: number[] = JSON.parse(localStorage.getItem(key) || '[]');
-    const updatedReserved = Array.from(new Set([...existingReserved, ...reservedSeats]));
+    // Load existing data from localStorage
+    const rawData = localStorage.getItem(key);
+    let allReservations: Record<number, number[]> = {};
 
-    localStorage.setItem(key, JSON.stringify(updatedReserved));
+    if (rawData) {
+      try {
+        allReservations = JSON.parse(rawData);
+      } catch (err) {
+        console.error('Failed to parse reservation data:', err);
+      }
+    }
 
+    // Merge new reservations for this user
+    const userId = this.user?.id;
+    const existingSeats = allReservations[userId] || [];
+    const updatedSeats = Array.from(new Set([...existingSeats, ...reservedSeats]));
+
+    allReservations[userId] = updatedSeats;
+
+    // Save back to localStorage
+    localStorage.setItem(key, JSON.stringify(allReservations));
+
+    // Continue with reservation backend call
     if (this.selectedProjectionId == null) {
       alert('Projection ID nije definisan!');
       return;
@@ -224,7 +241,7 @@ export class MovieProjectionsComponent {
     const reservationData = {
       projectionId: this.selectedProjectionId,
       contentId: this.contentId,
-      userId: this.user.id,
+      userId: userId,
       seatNumber: reservedSeats.length,
       roomNumber: this.selectedProjection.roomNumber,
       purchaseTime: new Date().toISOString()
@@ -237,39 +254,46 @@ export class MovieProjectionsComponent {
         console.log(`Reservation successful for ${reservedSeats.length} seats.`);
         this.openPopup(reservedSeats.map(String));
         this.selectedSeats.clear();
-        this.generateSeatMap(this.seatMap.length);
+        this.generateSeatMap(this.seatMap.length);  // Regenerate the map
       },
       error: (err) => {
         console.error('Reservation failed:', err);
       }
     });
-
-    // Prikaži popup pre brisanja izabrane mape
-    this.openPopup(reservedSeats.map(String));
-
-    this.selectedSeats.clear();
-    this.generateSeatMap(this.seatMap.length);
-
-    console.log(`Reservation submitted for ${reservedSeats.length} seats.`);
   }
+
 
   seatMap: Seat[] = [];
 
   generateSeatMap(count: number) {
     this.seatMap = [];
 
-    let savedSeatNumbers: number[] = [];
+    let allReserved: Record<number, number[]> = {};
 
     if (this.isBrowser()) {
       const key = this.getStorageKey();
-      savedSeatNumbers = JSON.parse(localStorage.getItem(key) || '[]');
+      const raw = localStorage.getItem(key);
+      if (raw) {
+        try {
+          allReserved = JSON.parse(raw);
+        } catch (err) {
+          console.error('Failed to parse seat map data:', err);
+        }
+      }
+    }
+
+    // Flatten all reserved seats from all users
+    const booked = new Set<number>();
+    for (const seatList of Object.values(allReserved)) {
+      seatList.forEach(seat => booked.add(seat));
     }
 
     for (let i = 1; i <= count; i++) {
-      const isBooked = savedSeatNumbers.includes(i);
+      const isBooked = booked.has(i);
       this.seatMap.push(new Seat(i, isBooked));
     }
   }
+
 
   getStorageKey(): string {
     return `reservedSeats_cinema${this.selectedCinemaId}_proj${this.selectedProjectionId}`;

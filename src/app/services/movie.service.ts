@@ -22,7 +22,9 @@ export class MovieService {
     return this.http.get<CinemaWithProjectionsDTO[]>(`${this.baseUrl}/projectionsByContent/${contentId}`);
   }
 
-  reserveTicket(ticket: Ticket): Observable<any> {
-    return this.http.post(`${this.baseUrl}/reserve`, ticket);
+  reserveTicket(ticket: Ticket): Observable<string> {
+    return this.http.post<string>(`${this.baseUrl}/reserve`, ticket, {
+      responseType: 'text' as 'json'
+    });
   }
 }
