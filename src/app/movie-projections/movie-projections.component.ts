@@ -296,7 +296,7 @@ export class MovieProjectionsComponent implements OnInit {
 
 
   getStorageKey(): string {
-    return `reservedSeats_cinema${this.selectedCinemaId}_proj${this.selectedProjectionId}`;
+    return `reservedSeats_movie${this.contentId}_cinema${this.selectedCinemaId}_proj${this.selectedProjectionId}`;
   }
 
   isBrowser(): boolean {

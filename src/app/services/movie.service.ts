@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { MovieDTO } from '../model/movie';
 import { CinemaWithProjectionsDTO } from '../model/cinema-with-projections';
 import { Ticket } from '../model/ticket';
+import { ProjectionDTO } from '../model/projection';
+import { Cinema } from '../model/cinema';
 
 
 @Injectable({
@@ -26,5 +28,17 @@ export class MovieService {
     return this.http.post<string>(`${this.baseUrl}/reserve`, ticket, {
       responseType: 'text' as 'json'
     });
+  }
+
+  getMovieById(contentId: number): Observable<MovieDTO> {
+    return this.http.get<MovieDTO>(`${this.baseUrl}/getmoviebyid/${contentId}`);
+  }
+
+  getCinemaById(cinemaId: number): Observable<Cinema> {
+    return this.http.get<Cinema>(`${this.baseUrl}/getcinemabyid/${cinemaId}`);
+  }
+
+  getProjectionById(projectionId: number): Observable<ProjectionDTO> {
+    return this.http.get<ProjectionDTO>(`${this.baseUrl}/getprojectionbyid/${projectionId}`);
   }
 }
