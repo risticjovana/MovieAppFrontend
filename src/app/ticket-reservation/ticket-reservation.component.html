@@ -1,17 +1,32 @@
-<div class="movie-grid">
+<div class="movie-card-container">
   <div
     class="movie-card"
     *ngFor="let movie of movies"
     (click)="goToProjections(movie.contentId)"
-    style="cursor: pointer;"
   >
-    <img [src]="movie.imageUrl || 'assets/default-poster.png'" alt="{{ movie.name }}" class="movie-poster" />
-    <h3>{{ movie.name }}</h3>
-    <p><strong>Year:</strong> {{ movie.year }}</p>
-    <p><strong>Rating:</strong> {{ movie.rating }}</p>
-    <p><strong>Duration:</strong> {{ movie.duration }} mins</p>
-    <p>{{ movie.description }}</p>
-    <p><strong>Favorite:</strong> {{ movie.isFavorite ? 'Yes' : 'No' }}</p>
-    <p><strong>Watched:</strong> {{ movie.watched ? 'Yes' : 'No' }}</p>
+    <div class="movie-card_left">
+      <img
+        [src]="posterMap[movie.contentId] || 'assets/default-movie.jpg'"
+        [alt]="movie.name"
+      />
+    </div>
+    <div class="movie-card_right">
+      <h1>{{ movie.name }}</h1>
+      <div class="movie-card_right__details">
+        <ul>
+          <li><strong>Year:</strong> {{ movie.year }}</li>
+          <li><strong>Rating:</strong> {{ movie.rating }}</li>
+          <li><strong>Duration:</strong> {{ movie.duration }} mins</li>
+        </ul>
+      </div>
+      <div class="movie-card_right__review">
+        <p>{{ movie.description }}</p>
+      </div>
+      <div class="movie-card_right__button" >
+        <a href="#" (click)="goToProjections(movie.contentId); $event.preventDefault(); $event.stopPropagation();">
+          BUY TICKETS
+        </a>
+      </div>
+    </div>
   </div>
 </div>

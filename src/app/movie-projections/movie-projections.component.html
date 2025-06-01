@@ -1,6 +1,19 @@
 <div *ngIf="!isLoading && !errorMsg">
-  <h2>Projections for Movie ID: {{ contentId }}</h2>
+  <!-- Show only if movieInfo is available -->
+   <div class="movie-info-container" [ngStyle]="{'background-image': 'url(' + backdropUrl + ')'}">
+    <div class="movie-info-content">
+      <h1 class="movie-title">{{ movieInfo?.name }}</h1>
+      
+      <div class="movie-details-row">
+        <p><strong>Year:</strong> {{ movieInfo?.year }}</p>
+        <p><strong>Duration:</strong> {{ movieInfo?.duration }} mins</p>
+        <p><strong>Rating:</strong> {{ movieInfo?.rating }}</p>
+      </div>
 
+      <p class="movie-description">{{ movieInfo?.description }}</p>
+    </div>
+  </div>
+  
   <div class="controls-row">
     <!-- Date picker -->
     <div class="date-selector">

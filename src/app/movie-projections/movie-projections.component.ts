@@ -26,6 +26,15 @@ export class MovieProjectionsComponent implements OnInit {
   selectedCinema: any;
   token: string | null = null;
   user: any = null;
+  rows: { left: (Seat | null)[], right: (Seat | null)[] }[] = [];  
+  selectedSeats: Set<number> = new Set();
+  bookedSeats: Set<number> = new Set();
+  seatMap: Seat[] = [];
+  showTicketPopup = false;
+  reservedSeats: string[] = [];
+  movieInfo: any;
+  posterUrl: string = 'assets/default-movie.jpg';
+  backdropUrl: string = 'assets/default-backdrop.jpg';
 
   constructor(private route: ActivatedRoute, private movieService: MovieService, private router: Router) {
     this.generateWeek(this.startDate);
@@ -81,9 +90,6 @@ export class MovieProjectionsComponent implements OnInit {
       }
     });
   }
-
-  rows: { left: (Seat | null)[], right: (Seat | null)[] }[] = [];
-
 
   generateSeats(count: number) {
     this.rows = [];
@@ -184,9 +190,6 @@ export class MovieProjectionsComponent implements OnInit {
     return typeof window !== 'undefined' ? window.localStorage : null;
   }
 
-  selectedSeats: Set<number> = new Set();
-  bookedSeats: Set<number> = new Set();
-
   toggleSeatSelection(seatNumber: number | null) {
     if (seatNumber === null || this.bookedSeats.has(seatNumber)) return; // Can't select booked seats
 
@@ -198,7 +201,6 @@ export class MovieProjectionsComponent implements OnInit {
 
     console.log('Selected (unconfirmed) seats:', Array.from(this.selectedSeats));
   }
-
 
   getReservedSeatCount(): number {
       return this.selectedSeats.size;
@@ -262,9 +264,6 @@ export class MovieProjectionsComponent implements OnInit {
     });
   }
 
-
-  seatMap: Seat[] = [];
-
   generateSeatMap(count: number) {
     this.seatMap = [];
 
@@ -294,7 +293,6 @@ export class MovieProjectionsComponent implements OnInit {
     }
   }
 
-
   getStorageKey(): string {
     return `reservedSeats_movie${this.contentId}_cinema${this.selectedCinemaId}_proj${this.selectedProjectionId}`;
   }
@@ -302,9 +300,6 @@ export class MovieProjectionsComponent implements OnInit {
   isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
-
-  showTicketPopup = false;
-  reservedSeats: string[] = [];
 
   openPopup(seats: string[]) {
     this.reservedSeats = seats;
@@ -316,19 +311,37 @@ export class MovieProjectionsComponent implements OnInit {
     this.showTicketPopup = false;
   }
 
-  movieInfo: any;
-
   loadMovieInfo(id: number) {
     this.movieService.getAvailableMovies().subscribe({
       next: (movies) => {
         this.movieInfo = movies.find(m => m.contentId === id);
         if (!this.movieInfo) {
           console.warn('Movie not found with ID:', id);
+          return;
         }
+
+        // Fetch poster based on movie title (OMDb)
+        this.movieService.getPoster(this.movieInfo.name).subscribe({
+          next: (poster) => this.posterUrl = poster,
+          error: () => {
+            console.warn('Failed to load poster, using default.');
+            this.posterUrl = 'assets/default-movie.jpg';
+          }
+        });
+
+        // Fetch backdrop based on movie title (TMDb)
+        this.movieService.getBackdrop(this.movieInfo.name).subscribe({
+          next: (backdrop) => this.backdropUrl = backdrop,
+          error: () => {
+            console.warn('Failed to load backdrop, using default.');
+            this.backdropUrl = 'assets/default-backdrop.jpg';
+          }
+        });
       },
       error: (err) => {
         console.error('Failed to load movies', err);
       }
     });
   }
+
 }

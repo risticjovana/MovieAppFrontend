@@ -1,3 +1,7 @@
+body{
+  background: #18283b;
+}
+
 .seat-row {
   display: inline-flex;       
   justify-content: center;   
@@ -14,7 +18,6 @@
   padding: 0;   
   margin: 0;       
   box-sizing: border-box;
-  max-content: max-content; 
 }
 
 .seat-grid-wrapper {
@@ -480,3 +483,56 @@ h2 {
     77px 0 0 1px #343434,
     81px 0 0 1px #343434;
 }
+
+.movie-info-container {
+  position: relative;
+  width: 100%;
+  height: 600px; /* adjust as you want */
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  color: white;
+  display: flex;
+  align-items: flex-end; /* align content to bottom */
+  padding-left: 40px;
+  padding-bottom: 30px; /* add some space from bottom */
+  overflow: hidden;
+}
+
+.movie-info-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* dark overlay on backdrop */
+  z-index: 0;
+}
+
+.movie-info-content {
+  position: relative; /* above overlay */
+  max-width: 50%; /* left half */
+  z-index: 1;
+}
+
+.movie-title {
+  font-size: 3rem; /* big title */
+  margin-bottom: 1rem;
+}
+
+.movie-details-row {
+  display: flex;
+  gap: 2rem;          /* space between items */
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.movie-details-row p {
+  margin: 0;
+}
+
+.movie-description {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  width: 70%;
+}
+

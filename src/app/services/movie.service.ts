@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { MovieDTO } from '../model/movie';
 import { CinemaWithProjectionsDTO } from '../model/cinema-with-projections';
 import { Ticket } from '../model/ticket';
@@ -41,4 +41,35 @@ export class MovieService {
   getProjectionById(projectionId: number): Observable<ProjectionDTO> {
     return this.http.get<ProjectionDTO>(`${this.baseUrl}/getprojectionbyid/${projectionId}`);
   }
+
+  getPoster(title: string): Observable<string> {
+    const apiKey = 'd3328071';
+    const url = `https://www.omdbapi.com/?t=${encodeURIComponent(title)}&type=movie&apikey=${apiKey}`;
+
+    return this.http.get<any>(url).pipe(
+      map(response => {
+        if (response && response.Poster && response.Poster !== 'N/A') {
+          return response.Poster;
+        }
+        return 'assets/default-movie.jpg';
+      })
+    );
+  }
+  getBackdrop(title: string): Observable<string> {
+    const apiKey = '162c3a034e5d753ea69686ec9c50494b'; // Replace with your actual TMDb API key
+    const baseUrl = 'https://api.themoviedb.org/3';
+    const searchUrl = `${baseUrl}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(title)}`;
+
+    return this.http.get<any>(searchUrl).pipe(
+      map(response => {
+        const movie = response.results?.[0];
+        if (movie?.backdrop_path) {
+          return `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
+        }
+        return 'assets/default-backdrop.jpg'; // fallback image
+      }),
+      catchError(() => of('assets/default-backdrop.jpg')) // fallback on error
+    );
+  }
+
 }
