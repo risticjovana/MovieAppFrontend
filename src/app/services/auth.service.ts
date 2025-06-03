@@ -22,4 +22,8 @@ export class AuthService {
     register(payload: any): Observable<any> {
         return this.http.post(`${this.apiUrl}/register`, payload, { responseType: 'text' });
     }
+
+    logout(): void {
+        localStorage.removeItem('token'); // or any user-related storage item
+    }
 }

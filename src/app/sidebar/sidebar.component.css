@@ -25,12 +25,6 @@ body {
   font-family: "Tahoma", sans-serif;
 }
 
-.sidebar hr {
-  margin: 0;
-  border: none;
-  border-top: 1px solid #2c3e50;
-}
-
 .sidebar-menu {
   list-style: none;
   margin: 0;
@@ -39,7 +33,7 @@ body {
 
 .sidebar-menu li {
   width: 90%;
-  padding: 5px 12px;  
+  padding: 5px 12px;
   box-sizing: border-box;
 }
 
@@ -55,12 +49,52 @@ body {
   font-family: "Tahoma", sans-serif;
 }
 
-.sidebar-menu li a i { 
+.sidebar-menu li a i {
   margin-right: 5px;
 }
 
 .sidebar-menu li a:hover,
 .sidebar-menu li a.active {
+  background-color: #6a798a;
+  color: #fff;
+}
+
+/* === NEW: Logout styling === */
+.sidebar-logout {
+  margin-top: auto;
+  padding: 10px 0;
+}
+
+hr {
+  margin: 0 12px 8px 12px;
+  border: none;
+  border-top: 1px solid #2c3e50;
+}
+
+.sidebar-logout li {
+  width: 90%;
+  list-style: none;
+  padding: 5px 12px;
+  margin-bottom: 20px;
+}
+
+.sidebar-logout li a {
+  display: block;
+  width: 90%;
+  padding: 12px;
+  border-radius: 7px;
+  color: #f5f6fa;
+  text-decoration: none;
+  font-size: large;
+  transition: background-color 0.2s, color 0.2s;
+  font-family: "Tahoma", sans-serif;
+}
+
+.sidebar-logout li a i {
+  margin-right: 5px;
+}
+
+.sidebar-logout li a:hover {
   background-color: #6a798a;
   color: #fff;
 }
