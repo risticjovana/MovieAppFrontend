@@ -1,1 +1,44 @@
-<p>outdoor-cinema works!</p>
+<div class="cinema-area-wrapper">
+  <div class="cinema-area">
+
+    <!-- Parking Lot -->
+    <div class="parking-lot">
+      <div class="screen-wrapper">
+        <div class="screen-arc"></div>
+        <div class="screen-label">SCREEN</div>
+      </div>
+      <div *ngFor="let row of rows; let rowIndex = index">
+        <!-- Parking row -->
+        <div class="parking-row">
+          <div
+            class="parking-spot"
+            *ngFor="let spot of spots; let spotIndex = index"
+            (click)="selectSpot(rowIndex, spotIndex)"
+            [class.selected]="selectedSpot?.row === rowIndex && selectedSpot?.spot === spotIndex"
+          >
+            {{ 100 + rowIndex * spots.length + spotIndex + 1 }}
+          </div>
+        </div>
+
+        <!-- Aisle between rows -->
+        <div class="aisle" *ngIf="rowIndex < rows.length - 1"></div>
+      </div>
+    </div>
+
+    <!-- Summary panel -->
+    <div class="summary-panel">
+    <h3>Reservation Summary</h3>
+
+    <ng-container *ngIf="selectedSpot; else noSelection">
+        <p><strong>Selected Seat:</strong> {{ 100 + selectedSpot.row * spots.length + selectedSpot.spot + 1 }}</p>
+        <p><strong>Price:</strong> {{ price | currency }}</p>
+        <button (click)="reserveSpot()">Reserve Spot</button>
+    </ng-container>
+
+    <ng-template #noSelection>
+        <p>No seat selected yet.</p>
+    </ng-template>
+    </div>
+
+  </div>
+</div>

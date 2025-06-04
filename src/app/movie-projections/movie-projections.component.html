@@ -62,7 +62,7 @@
     </div>
   </div>
 
-  <div class="seat-layout-wrapper">
+  <div class="seat-layout-wrapper" *ngIf="selectedCinema?.type == 'Indoor'">
     <!-- Seat grid always rendered -->
     <div class="seat-grid-wrapper">
     <div class="screen-wrapper">
@@ -144,8 +144,8 @@
     </div>
   </div>
 
-  <button (click)="closePopup()">See all of my reservations</button>
+  <button (click)="closePopup()">See your reservations</button>
 </div>
-
+<app-outdoor-cinema *ngIf="selectedCinema?.type === 'Outdoor'" [cinema]="selectedCinema"></app-outdoor-cinema>
 
 </div>

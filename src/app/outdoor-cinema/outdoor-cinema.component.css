@@ -1,0 +1,111 @@
+.cinema-area-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.cinema-area {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.screen-arc {
+  width: 400px;
+  height: 50px;
+  border-top: 4px solid #e94f20;
+  border-radius: 800px / 80px;
+  position: relative;
+
+  background: transparent;
+  box-shadow: none; 
+  filter: drop-shadow(0 0 6px #e94f20);
+}
+
+.screen-wrapper {
+  width: 400px;
+  margin: 0 auto 30px auto;
+  text-align: center; 
+}
+
+.screen-label {
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  color: #908f8f;
+  font-size: 14px;
+  margin-top: -30px;
+}
+
+.parking-lot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.parking-row {
+  display: flex;
+  justify-content: center;
+}
+
+.parking-spot {
+  width: 50px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  border-right: 2px solid #ccc;
+  color: #757575;
+  font-weight: bold;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+/* Left border for the first spot */
+.parking-spot:first-child {
+  border-left: 2px solid #ccc;
+}
+
+/* Hover effect */
+.parking-spot:hover {
+  background-color: #659cbb;
+  transform: scale(1.05);
+  color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.aisle {
+  height: 70px; /* This is your aisle (drive lane) between parking rows */
+}
+
+.summary-panel {
+  width: 250px;
+  background-color: #4594c3;
+  padding: 20px;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.summary-panel h3 {
+  margin-top: 0;
+}
+
+.summary-panel button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.summary-panel button:hover {
+  background-color: #c53f1a;
+}
+
+.parking-spot.selected {
+  background-color: #e94f20;
+  color: white;
+}
