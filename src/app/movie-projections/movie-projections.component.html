@@ -63,43 +63,16 @@
   </div>
 
   <div class="seat-layout-wrapper">
-  <!-- Seat Summary Panel -->
-  <div class="seat-summary">
-    <h3>Booking Summary</h3>
-    <p>Selected Seats: {{ getReservedSeatCount() }}</p>
-    <p>Total Price: ${{ getReservedSeatCount() * 20 }}</p>
-
-    <button 
-      (click)="submitReservation()" 
-      [disabled]="selectedSeats.size === 0">
-      Reserve Selected Seats
-    </button>
-  </div>
-
-  <!-- Seat grid always rendered -->
-  <div class="seat-grid-wrapper">
-  <div class="screen-wrapper">
-    <div class="screen-arc"></div>
-    <div class="screen-label">SCREEN</div>
-  </div>
-  <div *ngFor="let row of rows" class="seat-row">
-  <div class="seat-group left">
-    <div
-      *ngFor="let seat of row.left"
-      class="seat"
-      [class.empty]="seat === null"
-      [class.selected]="seat && selectedSeats.has(seat.number)"
-      [class.booked]="seat?.booked"
-      (click)="seat && !seat.booked && toggleSeatSelection(seat.number)"
-    >
+    <!-- Seat grid always rendered -->
+    <div class="seat-grid-wrapper">
+    <div class="screen-wrapper">
+      <div class="screen-arc"></div>
+      <div class="screen-label">SCREEN</div>
     </div>
-    </div>
-
-    <div class="aisle"></div>
-
-    <div class="seat-group right">
+    <div *ngFor="let row of rows" class="seat-row">
+    <div class="seat-group left">
       <div
-        *ngFor="let seat of row.right"
+        *ngFor="let seat of row.left"
         class="seat"
         [class.empty]="seat === null"
         [class.selected]="seat && selectedSeats.has(seat.number)"
@@ -107,9 +80,35 @@
         (click)="seat && !seat.booked && toggleSeatSelection(seat.number)"
       >
       </div>
+      </div>
+
+      <div class="aisle"></div>
+
+      <div class="seat-group right">
+        <div
+          *ngFor="let seat of row.right"
+          class="seat"
+          [class.empty]="seat === null"
+          [class.selected]="seat && selectedSeats.has(seat.number)"
+          [class.booked]="seat?.booked"
+          (click)="seat && !seat.booked && toggleSeatSelection(seat.number)"
+        >
+        </div>
+      </div>
     </div>
   </div>
-</div>
+  <!-- Seat Summary Panel -->
+    <div class="seat-summary">
+      <h3>Booking Summary</h3>
+      <p>Selected Seats: {{ getReservedSeatCount() }}</p>
+      <p>Total Price: ${{ getReservedSeatCount() * 20 }}</p>
+
+      <button 
+        (click)="submitReservation()" 
+        [disabled]="selectedSeats.size === 0">
+        Reserve Selected Seats
+      </button>
+    </div>
 </div>
 <!-- Ticket Popup -->
 <div class="popup" *ngIf="showTicketPopup">

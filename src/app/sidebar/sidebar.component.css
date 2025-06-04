@@ -1,18 +1,18 @@
 body {
   margin: 0;
-  background-color: #1e1e2f;
+  background-color: #1E2136;
   font-family: "Tahoma", sans-serif;
 }
 
 .sidebar {
   width: 230px;
   height: 100vh;
-  background-color: #18283b;
+  background-color: #1E2136;
   color: #f5f6fa;
   display: flex;
   flex-direction: column;
   padding: 0;
-  border-radius: 10px;
+  border-radius: 10px 0;
   overflow: hidden;
 }
 
@@ -20,7 +20,7 @@ body {
   padding: 1px 10px;
   text-align: center;
   font-size: 1rem;
-  background-color: #18283b;
+  background-color: #1E2136;
   color: #f5f6fa;
   font-family: "Tahoma", sans-serif;
 }
@@ -55,7 +55,7 @@ body {
 
 .sidebar-menu li a:hover,
 .sidebar-menu li a.active {
-  background-color: #6a798a;
+  background-color: #9277f0;
   color: #fff;
 }
 
@@ -68,7 +68,7 @@ body {
 hr {
   margin: 0 12px 8px 12px;
   border: none;
-  border-top: 1px solid #2c3e50;
+  border-top: 1px solid #FFF;
 }
 
 .sidebar-logout li {

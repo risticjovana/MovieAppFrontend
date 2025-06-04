@@ -9,8 +9,7 @@ body {
 .movie-card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 30px;
+  justify-content: center; 
 }
 
 .movie-card {
@@ -18,7 +17,7 @@ body {
   height: 400px;
   background: transparent;
   position: relative;
-  margin: 40px auto; /* center horizontally with some top/bottom space */
+  margin: 30px auto; /* center horizontally with some top/bottom space */
   border-radius: 10px;
   box-shadow: 0px 20px 30px 3px rgba(0, 0, 0, 0.55);
   display: flex;
@@ -44,10 +43,10 @@ body {
 
 .movie-card_right {
   width: 60%;
-  background: #000000;
+  background: #fff;
   height: 100%;
   border-radius: 0 10px 10px 0;
-  color: white;
+  color: #21265B;
   display: flex;
   flex-direction: column;
   padding-left: 30px;
@@ -71,14 +70,14 @@ body {
 }
 
 .movie-card_right__details ul li {
-  color: #e3e3e3;
+  color: #776FA1;
   font-weight: 400;
   font-size: 14px;
   padding: 0;
 }
 
 .movie-card_right__review p {
-  color: white;
+  color: #776FA1;
   font-size: 18px;
   margin: 10px 30px 0 0;
   line-height:25px;
@@ -93,9 +92,9 @@ body {
 }
 
 .movie-card_right__button a {
-  color: #fff;
+  color: #776FA1;
   text-decoration: none;
-  border: 2px solid #fff;
+  border: 2px solid #776FA1;
   padding: 10px 20px 10px 20px;
   font-size: 15px;
   border-radius: 5px;
@@ -105,7 +104,7 @@ body {
 }
 
 .movie-card_right__button a:hover {
-  color: #000000;
+  color: #ffffff;
   border-color: #e94f20;
   background-color: #e94f20;
   background-size: 12px 12px;

@@ -1,5 +1,5 @@
 body{
-  background: #18283b;
+  background: #FFF;
 }
 
 .seat-row {
@@ -270,18 +270,19 @@ button:disabled {
 /* Wrapper for both the summary and seat grid */
 .seat-layout-wrapper {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: stretch;
   margin-top: 30px;
   width: 100%;
+  height:inherit;
 }
 
 /* Seat Summary Panel */
 .seat-summary {
-  background-color: white;
   color: black;
   padding: 0px 20px;
-  width: 30%;
+  width: 20%;
+  height: 80%;
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
@@ -303,7 +304,7 @@ button:disabled {
 
 /* Reservation Button */
 .seat-summary button {
-  background-color: #e94f20;
+  background-color: #2aa198;
   color: white;
   border: none;
   padding: 10px 16px;
@@ -317,7 +318,7 @@ button:disabled {
 }
 
 .seat-summary button:hover:not(:disabled) {
-  background-color: #cc441b;
+  background-color: #2aa198;
 }
 
 .seat-summary button:disabled {
@@ -329,7 +330,7 @@ button:disabled {
 .popup {
   position: fixed;
   top: 50%;
-  left: 60%;
+  left: 50%;
   transform: translate(-50%, -50%);
   
   background: #fff;
@@ -341,8 +342,6 @@ button:disabled {
   max-height: 80vh;
   overflow-y: auto;
 }
-
-
 
 .card {
   background: linear-gradient(to bottom, #e84c3d 0%, #e84c3d 26%, #ecedef 26%, #ecedef 100%);
@@ -362,7 +361,6 @@ button:disabled {
   flex-direction: column;
   justify-content: center; 
 }
-
 
 .cardRight {
   width: 6.5em;
@@ -509,7 +507,7 @@ h2 {
 
 .movie-info-content {
   position: relative; /* above overlay */
-  max-width: 50%; /* left half */
+  max-width: 70%; /* left half */
   z-index: 1;
 }
 
@@ -535,4 +533,3 @@ h2 {
   line-height: 1.5;
   width: 70%;
 }
-

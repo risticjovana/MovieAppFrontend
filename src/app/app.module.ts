@@ -12,6 +12,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { TicketReservationComponent } from './ticket-reservation/ticket-reservation.component';
 import { MovieProjectionsComponent } from './movie-projections/movie-projections.component';
 import { MyReservationsComponent } from './my-reservations/my-reservations.component';
+import { OutdoorCinemaComponent } from './outdoor-cinema/outdoor-cinema.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MyReservationsComponent } from './my-reservations/my-reservations.compo
     TicketReservationComponent,
     MovieProjectionsComponent,
     MyReservationsComponent,
+    OutdoorCinemaComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 .app-layout {
   display: flex;
   height: 100vh; /* full viewport height */
-  width: 100vw;
+  overflow: hidden;
 }
 
 app-sidebar {
@@ -10,8 +10,9 @@ app-sidebar {
 }
 
 .main-content {
-  flex-grow: 1;   /* take remaining space */
-  overflow-y: auto; /* scroll if content is long */
-  width: calc(100% - 230px); /* optional, fallback */
-  background-color: #fff; /* or your content background */
+  flex-grow: 1;   
+  overflow-y: auto; 
+  width: calc(100% - 230px);
+  background-color: #FFF; 
+  border-radius: 0 10px;
 }
