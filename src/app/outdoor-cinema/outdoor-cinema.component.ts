@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CinemaWithProjectionsDTO } from '../model/cinema-with-projections';
 
 @Component({
@@ -8,6 +8,8 @@ import { CinemaWithProjectionsDTO } from '../model/cinema-with-projections';
 })
 export class OutdoorCinemaComponent {
   @Input() cinema!: CinemaWithProjectionsDTO | undefined
+  @Output() reserve = new EventEmitter<number>(); // Emit seat number
+
   rows = Array(3).fill(0);  // 4 parking rows
   spots = Array(7).fill(0); // 6 spots per row
   selectedSpot: { row: number, spot: number } | null = null;
@@ -19,8 +21,7 @@ export class OutdoorCinemaComponent {
 
   reserveSpot() {
     if (this.selectedSpot) {
-      const seatNumber = 100 + this.selectedSpot.row * this.spots.length + this.selectedSpot.spot + 1;
-      console.log(`Reserving seat ${seatNumber}`); 
+      this.reserve.emit(1);
     }
   }
 }

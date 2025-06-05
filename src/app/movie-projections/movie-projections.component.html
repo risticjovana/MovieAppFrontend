@@ -146,6 +146,9 @@
 
   <button (click)="closePopup()">See your reservations</button>
 </div>
-<app-outdoor-cinema *ngIf="selectedCinema?.type === 'Outdoor'" [cinema]="selectedCinema"></app-outdoor-cinema>
+<app-outdoor-cinema *ngIf="selectedCinema?.type === 'Outdoor'" 
+[cinema]="selectedCinema"
+(reserve)="handleOutdoorReservation($event)"
+></app-outdoor-cinema>
 
 </div>

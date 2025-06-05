@@ -344,4 +344,29 @@ export class MovieProjectionsComponent implements OnInit {
     });
   }
 
+  handleOutdoorReservation(seatNumber: number) {
+    console.log('Sending reservation for seat:', seatNumber);
+
+    if (this.selectedProjectionId == null) {
+      alert('Projection ID nije definisan!');
+      return;
+    }
+
+    const reservationData = {
+      projectionId: this.selectedProjectionId,
+      contentId: this.contentId,
+      userId: this.user?.id,
+      seatNumber: seatNumber,
+      roomNumber: this.selectedProjection.roomNumber,
+      purchaseTime: new Date().toISOString()
+    };
+
+    // Example: Call reservation service
+    this.movieService.reserveTicket(reservationData).subscribe({
+      next: () => console.log('Reservation successful!'),
+      error: (err) => console.error('Reservation failed', err)
+    });
+  }
+
+
 }
