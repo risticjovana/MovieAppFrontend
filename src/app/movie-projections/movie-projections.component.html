@@ -13,56 +13,55 @@
       <p class="movie-description">{{ movieInfo?.description }}</p>
     </div>
   </div>
-  
-  <div class="controls-row">
-    <!-- Date picker -->
-    <div class="date-selector">
-      <button (click)="previousWeek()" class="arrow-btn">&lt;</button>
-      <div class="days-row">
-        <div
-          *ngFor="let day of daysInWeek"
-          class="day"
-          [class.selected]="day.toDateString() === selectedDate?.toDateString()"
-          (click)="selectDate(day)"
-        >
-          <div class="day-name">{{ day | date:'EEE' }}</div>
-          <div class="day-number">{{ day | date:'d' }}</div>
+  <div class="reservation-wrapper">    
+    <div class="controls-row">
+      <!-- Date picker -->
+      <div class="date-selector">
+        <button (click)="previousWeek()" class="arrow-btn">&lt;</button>
+        <div class="days-row">
+          <div
+            *ngFor="let day of daysInWeek"
+            class="day"
+            [class.selected]="day.toDateString() === selectedDate?.toDateString()"
+            (click)="selectDate(day)"
+          >
+            <div class="day-name">{{ day | date:'EEE' }}</div>
+            <div class="day-number">{{ day | date:'d' }}</div>
+          </div>
+        </div>
+        <button (click)="nextWeek()" class="arrow-btn">&gt;</button>
+      </div>
+
+      <!-- Cinema selector -->
+      <div class="form-group">
+        <label for="cinemaSelect">Cinema</label>
+        <div class="select-wrapper">
+        <select id="cinemaSelect" [(ngModel)]="selectedCinemaId" (change)="onCinemaChange()">
+          <option *ngFor="let cinema of cinemasWithProjections" [ngValue]="cinema.cinemaId">
+            {{ cinema.cinemaName }}
+          </option>
+        </select>
         </div>
       </div>
-      <button (click)="nextWeek()" class="arrow-btn">&gt;</button>
-    </div>
 
-    <!-- Cinema selector -->
-    <div class="form-group">
-      <label for="cinemaSelect">Cinema</label>
-      <div class="select-wrapper">
-      <select id="cinemaSelect" [(ngModel)]="selectedCinemaId" (change)="onCinemaChange()">
-        <option *ngFor="let cinema of cinemasWithProjections" [ngValue]="cinema.cinemaId">
-          {{ cinema.cinemaName }}
-        </option>
-      </select>
+      <!-- Projection selector -->
+      <div class="form-group">
+        <label for="projectionSelect">Time</label>
+        <div class="select-wrapper">
+        <select
+          id="projectionSelect"
+          [(ngModel)]="selectedProjectionId"
+          (change)="onProjectionChange()"
+          [disabled]="!filteredProjections.length"
+        >
+          <option *ngFor="let proj of filteredProjections" [ngValue]="proj.id">
+            {{ proj.time.substring(0,5) }}
+          </option>
+        </select>
+        </div>
       </div>
     </div>
-
-    <!-- Projection selector -->
-    <div class="form-group">
-      <label for="projectionSelect">Time</label>
-      <div class="select-wrapper">
-      <select
-        id="projectionSelect"
-        [(ngModel)]="selectedProjectionId"
-        (change)="onProjectionChange()"
-        [disabled]="!filteredProjections.length"
-      >
-        <option *ngFor="let proj of filteredProjections" [ngValue]="proj.id">
-          {{ proj.time.substring(0,5) }}
-        </option>
-      </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="seat-layout-wrapper" *ngIf="selectedCinema?.type == 'Indoor'">
+    <div class="seat-layout-wrapper" *ngIf="selectedCinema?.type == 'Indoor'">
     <!-- Seat grid always rendered -->
     <div class="seat-grid-wrapper">
     <div class="screen-wrapper">
@@ -97,58 +96,58 @@
       </div>
     </div>
   </div>
-  <!-- Seat Summary Panel -->
-    <div class="seat-summary">
-      <h3>Booking Summary</h3>
-      <p>Selected Seats: {{ getReservedSeatCount() }}</p>
-      <p>Total Price: ${{ getReservedSeatCount() * 20 }}</p>
+    <!-- Seat Summary Panel -->
+      <div class="seat-summary">
+        <h3>Booking Summary</h3>
+        <p>Selected Seats: {{ getReservedSeatCount() }}</p>
+        <p>Total Price: ${{ getReservedSeatCount() * 20 }}</p>
 
-      <button 
-        (click)="submitReservation()" 
-        [disabled]="selectedSeats.size === 0">
-        Reserve Selected Seats
-      </button>
-    </div>
-</div>
-<!-- Ticket Popup -->
-<div class="popup" *ngIf="showTicketPopup">
-  <h2>Your reserved tickets</h2>
-
-  <div *ngFor="let seat of reservedSeats" class="cardWrap">
-    <div class="card cardLeft">
-      <h1>{{ selectedCinema?.cinemaName }}</h1>
-
-      <div class="title">
-        <h2>{{ movieInfo?.name }}</h2>
-        <span>movie</span>
-      </div>
-
-      <div class="seatTicket">
-        <h2>{{ seat }}</h2>
-        <span>seat</span>
-      </div>
-
-      <div class="time">
-        <h2>{{ selectedProjection?.time }}</h2>
-        <span>time</span>
+        <button 
+          (click)="submitReservation()" 
+          [disabled]="selectedSeats.size === 0">
+          Reserve Selected Seats
+        </button>
       </div>
     </div>
+    <!-- Ticket Popup -->
+    <div class="popup" *ngIf="showTicketPopup">
+      <h2>Your reserved tickets</h2>
 
-    <div class="card cardRight">
-      <div class="eye"></div>
-      <div class="number">
-        <h3>{{ seat }}</h3>
-        <span>seat</span>
+      <div *ngFor="let seat of reservedSeats" class="cardWrap">
+        <div class="card cardLeft">
+          <h1>{{ selectedCinema?.cinemaName }}</h1>
+
+          <div class="title">
+            <h2>{{ movieInfo?.name }}</h2>
+            <span>movie</span>
+          </div>
+
+          <div class="seatTicket">
+            <h2>{{ seat }}</h2>
+            <span>seat</span>
+          </div>
+
+          <div class="time">
+            <h2>{{ selectedProjection?.time }}</h2>
+            <span>time</span>
+          </div>
+        </div>
+
+        <div class="card cardRight">
+          <div class="eye"></div>
+          <div class="number">
+            <h3>{{ seat }}</h3>
+            <span>seat</span>
+          </div>
+          <div class="barcode"></div>
+        </div>
       </div>
-      <div class="barcode"></div>
+
+      <button (click)="closePopup()">See your reservations</button>
     </div>
+    <app-outdoor-cinema *ngIf="selectedCinema?.type === 'Outdoor'" 
+    [cinema]="selectedCinema"
+    (reserve)="handleOutdoorReservation($event)"
+    ></app-outdoor-cinema>
   </div>
-
-  <button (click)="closePopup()">See your reservations</button>
-</div>
-<app-outdoor-cinema *ngIf="selectedCinema?.type === 'Outdoor'" 
-[cinema]="selectedCinema"
-(reserve)="handleOutdoorReservation($event)"
-></app-outdoor-cinema>
-
 </div>

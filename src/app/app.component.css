@@ -13,6 +13,6 @@ app-sidebar {
   flex-grow: 1;   
   overflow-y: auto; 
   width: calc(100% - 230px);
-  background-color: #FFF; 
+  background-color: #24182B; 
   border-radius: 0 10px;
 }
