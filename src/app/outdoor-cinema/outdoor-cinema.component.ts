@@ -21,7 +21,8 @@ export class OutdoorCinemaComponent {
 
   reserveSpot() {
     if (this.selectedSpot) {
-      this.reserve.emit(1);
+      const seatNumber = 100 + this.selectedSpot.row * this.spots.length + this.selectedSpot.spot + 1;
+      this.reserve.emit(seatNumber);
     }
   }
 }

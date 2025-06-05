@@ -356,14 +356,17 @@ export class MovieProjectionsComponent implements OnInit {
       projectionId: this.selectedProjectionId,
       contentId: this.contentId,
       userId: this.user?.id,
-      seatNumber: seatNumber,
+      seatNumber: 1,
       roomNumber: this.selectedProjection.roomNumber,
       purchaseTime: new Date().toISOString()
     };
 
     // Example: Call reservation service
     this.movieService.reserveTicket(reservationData).subscribe({
-      next: () => console.log('Reservation successful!'),
+      next: () => {
+        this.reservedSeats = [seatNumber.toString()]; 
+        this.showTicketPopup = true;
+      },
       error: (err) => console.error('Reservation failed', err)
     });
   }
