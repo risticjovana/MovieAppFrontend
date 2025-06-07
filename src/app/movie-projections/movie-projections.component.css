@@ -30,8 +30,6 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
-  padding: 20px;
   border-radius: 12px;
 }
 
@@ -82,25 +80,25 @@ body{
 }
 
 .seat.selected {
-  background-color: #659cbb; /* orangy */
-  border-color: #659cbb;
+  background-color: #e9207e; /* orangy */
+  border-color: #e9207e;
   cursor: pointer;
 }
 
 .screen-arc {
-  width: 400px;
+  width: 600px;
   height: 50px;
-  border-top: 4px solid #e94f20;
+  border-top: 4px solid #e9207e;
   border-radius: 800px / 80px;
   position: relative;
 
   background: transparent;
   box-shadow: none; 
-  filter: drop-shadow(0 0 6px #e94f20);
+  filter: drop-shadow(0 0 6px #e9207e);
 }
 
 .screen-wrapper {
-  width: 400px;
+  width: 600px;
   margin: 0 auto 30px auto;
   text-align: center; 
 }
@@ -155,7 +153,6 @@ body{
   justify-content: center;
   box-sizing: border-box;
 }
-
 
 .day.selected {
   background-color: #2aa198;
@@ -274,39 +271,95 @@ button:disabled {
   opacity: 0.6;
 }
 
-/* Wrapper for both the summary and seat grid */
-.seat-layout-wrapper {
+.seat-layout-container {
   display: flex;
-  justify-content: center;
-  align-items: stretch;
-  margin-top: 30px;
-  width: 100%;
-  height:inherit;
+  gap: 2rem;
+  align-items: stretch; /* ensure stretch */
+  margin: 30px auto;
+  width: 95%;
+  min-height: 500px; 
 }
 
-/* Seat Summary Panel */
-.seat-summary {
-  color: black;
-  padding: 0px 20px;
-  width: 20%;
-  height: 80%;
-  font-family: Arial, sans-serif;
+.seat-summary { 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between; 
+  padding: 1rem;
 }
+
+.seat-summary > * {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.seat-summary > :first-child {
+  margin-top: 5rem;
+}
+
+.seat-summary > :last-child {
+  margin-bottom: 2rem;
+}
+
+.seat-list {
+  list-style: none;   
+  display: flex;
+  flex-wrap: wrap;     
+  gap: 7px;
+  height: 36px;          /* fixed height for one row of seats */
+  margin: 0;
+  padding: 0;
+  /* Always reserve space */
+  overflow-y: hidden;  
+}
+
+.seat-list li {
+  background-color: #e9207e;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  user-select: none;
+  cursor: default;
+  white-space: nowrap;
+  align-content: center;
+}
+
+.seat-summary hr {
+  border: none;
+  border-top: 1px solid #ccc; 
+  margin-bottom: -20px;           
+  width: 100%;
+}
+
+.seat-main-content {
+  flex: 3;
+  display: flex;
+  flex-direction: column; /* Makes legend and grid stack vertically */
+}
+
+.seat-legend {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.seat-grid-wrapper {
+  padding: 1rem;
+  border-radius: 8px;
+}
+
 
 /* Seat Summary Header */
 .seat-summary h3 {
   margin-top: 0;
-  margin-bottom: 16px;
-  color: #e94f20;
+  color: #fff;
 }
 
 /* Paragraphs in the Summary */
 .seat-summary p {
-  font-size: 16px;
-  margin: 8px 0;
+  font-size: 18px;
+  margin-bottom: -20px;
 }
 
 /* Reservation Button */
@@ -321,7 +374,7 @@ button:disabled {
   cursor: pointer;
   transition: background-color 0.3s;
   width: 100%;
-  margin-top: 16px;
+  margin-bottom: 48px;
 }
 
 .seat-summary button:hover:not(:disabled) {
@@ -564,4 +617,26 @@ h2 {
   font-size: 1.2rem;
   line-height: 1.5;
   width: 70%;
+}
+
+.seat-legend {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.seat.example {
+  pointer-events: none;
+  width: 30px;
+  height: 40px;
+  border: 2px solid #ccc;
 }
