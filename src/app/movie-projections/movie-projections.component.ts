@@ -95,7 +95,7 @@ export class MovieProjectionsComponent implements OnInit {
     this.rows = [];
     if (count === 0) return;
 
-    const seatsPerRow = 12;
+    const seatsPerRow = 16;
     const halfSeatsPerRow = seatsPerRow / 2;
     const totalRows = Math.ceil(count / seatsPerRow);
 
@@ -345,23 +345,42 @@ export class MovieProjectionsComponent implements OnInit {
   }
 
   handleOutdoorReservation(seatNumber: number) {
-    console.log('Sending reservation for seat:', seatNumber);
-
     if (this.selectedProjectionId == null) {
-      alert('Projection ID nije definisan!');
+      alert('Projection ID undefined!');
       return;
     }
+    const userId = this.user?.id;
+    const key = this.getStorageKey();
+
+    // Load existing data from localStorage
+    const rawData = localStorage.getItem(key);
+    let allReservations: Record<number, number[]> = {};
+  
+    //parse reservation data
+    if (rawData) {
+      try {
+        allReservations = JSON.parse(rawData);
+      } catch (err) {
+        console.error('Failed to parse reservation data:', err);
+      }
+    }
+
+    const existingSeats = allReservations[userId] || [];
+    const updatedSeats = Array.from(new Set([...existingSeats, seatNumber]));
+    allReservations[userId] = updatedSeats;
+
+    // Save back to localStorage
+    localStorage.setItem(key, JSON.stringify(allReservations)); 
 
     const reservationData = {
       projectionId: this.selectedProjectionId,
       contentId: this.contentId,
-      userId: this.user?.id,
+      userId: userId,
       seatNumber: 1,
       roomNumber: this.selectedProjection.roomNumber,
       purchaseTime: new Date().toISOString()
     };
 
-    // Example: Call reservation service
     this.movieService.reserveTicket(reservationData).subscribe({
       next: () => {
         this.reservedSeats = [seatNumber.toString()]; 
@@ -370,6 +389,4 @@ export class MovieProjectionsComponent implements OnInit {
       error: (err) => console.error('Reservation failed', err)
     });
   }
-
-
 }
