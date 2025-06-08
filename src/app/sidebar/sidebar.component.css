@@ -7,7 +7,7 @@ body {
 .sidebar {
   width: 230px;
   height: 100vh;
-  background-color: #1E2136;
+  background-color: #7b4178;
   color: #f5f6fa;
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@ body {
   padding: 1px 10px;
   text-align: center;
   font-size: 1rem;
-  background-color: #1E2136;
+  background-color: #7b4178;
   color: #f5f6fa;
   font-family: "Tahoma", sans-serif;
 }

@@ -1,6 +1,6 @@
 <div *ngIf="!isLoading && !errorMsg">
   <!-- Show only if movieInfo is available -->
-   <div class="movie-info-container" [ngStyle]="{'background-image': 'url(' + backdropUrl + ')'}">
+   <div class="movie-info-container" [ngStyle]="{'background-image': 'url(' + backdropUrl + ')', 'background-position': 'center calc(10% - 20px)'}">>
     <div class="movie-info-content">
       <h1 class="movie-title">{{ movieInfo?.name }}</h1>
       
@@ -117,25 +117,40 @@
 
         <!-- Seat Summary Panel (RIGHT) -->
         <div class="seat-summary">
-          <h3>Your Selected Seats</h3>
+          <!-- Part 1: Reservation Summary -->
+          <h3>Your selected seats</h3>
           <p>{{ getReservedSeatCount() }} seats</p>
+          
           <ul class="seat-list">
-            <li *ngFor="let seat of selectedSeats">{{ seat }}</li>
+            <li *ngFor="let seat of selectedSeats">
+              {{ seat }}
+            </li>
           </ul>
-          <hr/>
-          <p>Total Price: ${{ getReservedSeatCount() * 20 }}</p>
 
-          <button 
-            (click)="submitReservation()" 
-            [disabled]="selectedSeats.size === 0">
-            Reserve Selected Seats
-          </button>
+          <hr />
+          <p> </p>
+
+          <!-- Part 2: Payment Details -->
+          <div class="payment-summary">
+            <h4>Payment Details</h4>
+            <p>Tax (10%): ${{ getReservedSeatCount() * 20 * 0.1 }}</p>
+            <p>Discount: $5</p> 
+
+            <p><strong>Total Price: ${{(getReservedSeatCount() * 20 * 1.1 - 5) | number : '1.2-2' }}</strong></p>
+
+            <button 
+              (click)="submitReservation()" 
+              [disabled]="selectedSeats.size === 0">
+              Reserve tickets
+            </button>
+          </div>
         </div>
       </div>
     </div>
     <!-- Ticket Popup -->
+    <div class="overlay" *ngIf="showTicketPopup"></div>
     <div class="popup" *ngIf="showTicketPopup">
-      <h2>Your reserved tickets</h2>
+      <h2 class="popup-header">Congratulations! Your tickets are reserved!</h2>
 
       <div *ngFor="let seat of reservedSeats" class="cardWrap">
         <div class="card cardLeft">
@@ -167,7 +182,7 @@
         </div>
       </div>
 
-      <button (click)="closePopup()">See your reservations</button>
+      <button (click)="closePopup()">View your reservations</button>
     </div>
     <app-outdoor-cinema *ngIf="selectedCinema?.type === 'Outdoor'" 
     [cinema]="selectedCinema"

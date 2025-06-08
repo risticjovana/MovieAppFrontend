@@ -66,6 +66,8 @@ body{
   user-select: none;
   transition: background-color 0.2s ease, transform 0.2s ease;
   cursor: pointer;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .seat:hover:not(.empty) {
@@ -106,7 +108,7 @@ body{
 .screen-label {
   font-weight: bold;
   font-family: Arial, sans-serif;
-  color: #908f8f;
+  color: #fff;
   font-size: 14px;
   margin-top: -30px;
 }
@@ -116,33 +118,33 @@ body{
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin: 20px 0;
+  margin: 0 40px;
 }
 
 .arrow-btn {
   font-size: 24px;
-  padding: 5px 12px;
+  padding: 0px 12px;
   cursor: pointer;
   background: none;
   border: none;
-  color: #fff;
+  color: #ed4895;
   transition: color 0.2s;
 }
 
 .arrow-btn:hover {
-  color: #000;
+  color: #ae185e;
 }
 
 .days-row {
   display: flex;
   gap: 12px;
+  height: 70px;
 }
 
 .day {
   cursor: pointer;
   padding: 8px 0;
   width: 50px;  
-  border-radius: 15px;
   text-align: center;
   user-select: none;
   transition: background-color 0.3s, color 0.3s; 
@@ -155,7 +157,7 @@ body{
 }
 
 .day.selected {
-  background-color: #2aa198;
+  background-color: #7b4178;
   color: white;
   font-weight: bold;
   border-color: #333;
@@ -176,10 +178,8 @@ body{
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  margin: 30px auto;
-  width: 95%;
-  background-color: #402b4c;
-  border-radius: 10px;
+  margin: 0 6px; 
+  background-color: #33223d;
 }
 
 .form-group {
@@ -203,7 +203,8 @@ body{
   width: 100%;
   padding: 8px 32px 8px 12px; 
   border-radius: 8px;
-  background-color: #24182B;
+  background-color: #33223d;
+  border-width: 0;
   color: #fff;
   font-size: 1rem;
   box-sizing: border-box;
@@ -236,104 +237,46 @@ body{
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 6px solid #e94f20; /* arrow color */
+  border-top: 6px solid #e9207e; /* arrow color */
   transform: translateY(-50%);
 }
 
 .form-group label {
   font-weight: 600;
-  margin-left: 5px;
-  font-size: 0.95rem;
-  color: #e94f20; 
+  margin-left: 12px;
+  font-size: 1rem;
+  color: #e9207e; 
 }
 
-button {
-  background-color: #e94f20;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  font-size: 16px;
+.popup button {
+  margin-top: 2rem;
+  margin-left: 37%;
+  padding: 12px;
   font-weight: bold;
-  border-radius: 8px;
+  font-size: 1.2rem;
+  background-color: #e9207e;
+  border: none;
+  border-radius: 10px;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
-  margin-top: 20px;
+  transition: background-color 0.25s ease;
 }
-
-button:hover:not(:disabled) {
-  background-color: #cc441b;
-  box-shadow: 0 0 10px rgba(233, 79, 32, 0.4);
+.popup button:hover:not(:disabled) {
+  background-color: #b81768;
 }
-
-button:disabled {
-  background-color: #888;
+.popup button:disabled {
+  background-color: #555;
   cursor: not-allowed;
-  opacity: 0.6;
 }
 
 .seat-layout-container {
-  display: flex;
-  gap: 2rem;
-  align-items: stretch; /* ensure stretch */
-  margin: 30px auto;
-  width: 95%;
-  min-height: 500px; 
-}
-
-.seat-summary { 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; 
+  display: flex; 
   padding: 1rem;
-}
-
-.seat-summary > * {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.seat-summary > :first-child {
-  margin-top: 5rem;
-}
-
-.seat-summary > :last-child {
-  margin-bottom: 2rem;
-}
-
-.seat-list {
-  list-style: none;   
-  display: flex;
-  flex-wrap: wrap;     
-  gap: 7px;
-  height: 36px;          /* fixed height for one row of seats */
-  margin: 0;
-  padding: 0;
-  /* Always reserve space */
-  overflow-y: hidden;  
-}
-
-.seat-list li {
-  background-color: #e9207e;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 14px;
-  user-select: none;
-  cursor: default;
-  white-space: nowrap;
-  align-content: center;
-}
-
-.seat-summary hr {
-  border: none;
-  border-top: 1px solid #ccc; 
-  margin-bottom: -20px;           
-  width: 100%;
+  margin: 12px 6px; 
 }
 
 .seat-main-content {
-  flex: 3;
+  flex: 2;
   display: flex;
   flex-direction: column; /* Makes legend and grid stack vertically */
 }
@@ -349,42 +292,92 @@ button:disabled {
   border-radius: 8px;
 }
 
-
-/* Seat Summary Header */
-.seat-summary h3 {
-  margin-top: 0;
-  color: #fff;
+.seat-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  color: #ffffff; 
+  width: 300px; /* wider summary panel */
 }
 
-/* Paragraphs in the Summary */
+/* Title and Summary Text */
+.seat-summary h3,
+.seat-summary h4 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
 .seat-summary p {
-  font-size: 18px;
-  margin-bottom: -20px;
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
 }
 
-/* Reservation Button */
-.seat-summary button {
-  background-color: #2aa198;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  font-size: 15px;
-  font-weight: bold;
+.seat-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-height: 30px; /* reserve space even when empty */
+}
+
+.seat-list li {
+  background-color: #e9207e;
   border-radius: 6px;
+  padding: 0.4rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+.seat-list li:last-child {
+  border-bottom: none;
+}
+
+/* Divider */
+hr {
+  border: none;
+  border-top: 1px solid #24182B;
+  margin: 0.5rem 0;
+}
+
+/* Payment section */
+.payment-summary {
+  background-color: #7b4178;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.payment-summary p {
+  font-size: 0.9rem;
+}
+
+/* Reserve Button */
+.payment-summary button {
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #24182B;
+  border: none;
+  border-radius: 6px;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s;
-  width: 100%;
-  margin-bottom: 48px;
+  transition: background-color 0.2s ease;
 }
 
-.seat-summary button:hover:not(:disabled) {
-  background-color: #2aa198;
-}
-
-.seat-summary button:disabled {
-  background-color: #888;
+.payment-summary button:disabled {
   cursor: not-allowed;
-  opacity: 0.6;
+}
+
+.payment-summary button:not(:disabled):hover {
+  background-color: #3e294b;
 }
 
 @media (max-width: 768px) {
@@ -409,15 +402,36 @@ button:disabled {
   left: 55%;
   transform: translate(-50%, -50%);
   
-  background: #fff;
-  color: #000;
+  background: rgba(30, 33, 54, 1);
+  border-radius: 15px;
+  color: #fff;
   padding: 2rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   
   max-height: 80vh;
   overflow-y: auto;
-  width: 60%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 60%; 
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* black with 60% opacity */
+  z-index: 999; 
+}
+
+.popup-header {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: bold;
 }
 
 .cardWrap {
@@ -426,9 +440,8 @@ button:disabled {
   justify-content: center;
 }
 
-
 .card {
-  background: linear-gradient(to bottom, #e84c3d 0%, #e84c3d 26%, #ecedef 26%, #ecedef 100%);
+  background: linear-gradient(to bottom, #e84c3d 0%, #e84c3d 26%, #fff 26%, #fff 100%);
   height: 11em;
   width: 25.5em;
   float: left;
@@ -449,7 +462,7 @@ button:disabled {
 
 .cardRight {
   width: 6.5em;
-  border-left: 0.18em dashed #fff;
+  border-left: 0.18em dashed #1E2136;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   position: relative;
@@ -462,7 +475,7 @@ button:disabled {
   display: block;
   width: 0.9em;
   height: 0.9em;
-  background: #fff;
+  background: #1E2136;
   border-radius: 50%;
   left: -0.5em;
 }
@@ -569,16 +582,15 @@ h2 {
 
 .movie-info-container {
   position: relative;
-  width: 100%;
-  height: 600px; /* adjust as you want */
+  margin: 0 12px;
+  height: 390px; /* adjust as you want */
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
   color: white;
   display: flex;
   align-items: flex-end; /* align content to bottom */
-  padding-left: 40px;
-  padding-bottom: 30px; /* add some space from bottom */
+  padding-left: 40px; 
   overflow: hidden;
 }
 
@@ -592,7 +604,7 @@ h2 {
 
 .movie-info-content {
   position: relative; /* above overlay */
-  max-width: 70%; /* left half */
+  max-width: 85%; /* left half */
   z-index: 1;
 }
 
@@ -604,7 +616,7 @@ h2 {
 .movie-details-row {
   display: flex;
   gap: 2rem;          /* space between items */
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -614,7 +626,7 @@ h2 {
 
 .movie-description {
   margin-top: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   line-height: 1.5;
   width: 70%;
 }
@@ -637,6 +649,6 @@ h2 {
 .seat.example {
   pointer-events: none;
   width: 30px;
-  height: 40px;
+  height: 38px;
   border: 2px solid #ccc;
 }
