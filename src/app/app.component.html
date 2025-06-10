@@ -1,6 +1,18 @@
 <div class="app-layout">
   <app-sidebar *ngIf="showSidebar"></app-sidebar>
-  <main class="main-content">
-    <router-outlet></router-outlet>
-  </main>
+
+  <div class="right-side">
+    <div class="topbar">
+      <select class="topbar-dropdown">
+        <option value="">All</option>
+        <option value="action">Movies</option>
+        <option value="drama">Tv Series</option>
+      </select>
+      <input type="text" placeholder="Search movies..." class="topbar-search" />
+    </div>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>

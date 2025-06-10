@@ -6,20 +6,20 @@ body {
 
 .sidebar {
   width: 230px;
-  height: 100vh;
+  height: 101.5%;
   background-color: #7b4178;
   color: #f5f6fa;
   display: flex;
   flex-direction: column;
   padding: 0;
-  border-radius: 10px 0;
+  border-radius: 25px 25px 0  0;
   overflow: hidden;
 }
 
 .sidebar-header {
-  padding: 1px 10px;
+  padding: 0px 10px;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   background-color: #7b4178;
   color: #f5f6fa;
   font-family: "Tahoma", sans-serif;
@@ -32,7 +32,7 @@ body {
 }
 
 .sidebar-menu li {
-  width: 90%;
+  width: 88%;
   padding: 5px 12px;
   box-sizing: border-box;
 }
@@ -40,8 +40,8 @@ body {
 .sidebar-menu li a {
   display: block;
   width: 100%;
-  padding: 12px;
-  border-radius: 7px;
+  padding: 12px 14px;
+  border-radius: 25px;
   color: #f5f6fa;
   text-decoration: none;
   font-size: large;
@@ -64,12 +64,7 @@ body {
   margin-top: auto;
   padding: 10px 0;
 }
-
-hr {
-  margin: 0 12px 8px 12px;
-  border: none;
-  border-top: 1px solid #FFF;
-}
+ 
 
 .sidebar-logout li {
   width: 90%;
@@ -79,9 +74,9 @@ hr {
 
 .sidebar-logout li a {
   display: block;
-  width: 90%;
+  width: 88%;
   padding: 12px;
-  border-radius: 7px;
+  border-radius: 25px;
   color: #f5f6fa;
   text-decoration: none;
   font-size: large;

@@ -1,32 +1,15 @@
+<h2 class="section-label">Playing This Week</h2>
 <div class="movie-card-container">
   <div
     class="movie-card"
     *ngFor="let movie of movies"
+    [attr.data-title]="movie.name"
     (click)="goToProjections(movie.contentId)"
   >
-    <div class="movie-card_left">
-      <img
-        [src]="posterMap[movie.contentId] || 'assets/default-movie.jpg'"
-        [alt]="movie.name"
-      />
-    </div>
-    <div class="movie-card_right">
-      <h1>{{ movie.name }}</h1>
-      <div class="movie-card_right__details">
-        <ul>
-          <li><strong>Year:</strong> {{ movie.year }}</li>
-          <li><strong>Rating:</strong> {{ movie.rating }}</li>
-          <li><strong>Duration:</strong> {{ movie.duration }} mins</li>
-        </ul>
-      </div>
-      <div class="movie-card_right__review">
-        <p>{{ movie.description }}</p>
-      </div>
-      <div class="movie-card_right__button" >
-        <a href="#" (click)="goToProjections(movie.contentId); $event.preventDefault(); $event.stopPropagation();">
-          BUY TICKETS
-        </a>
-      </div>
-    </div>
+    <img
+      [src]="posterMap[movie.contentId] || 'assets/default-movie.jpg'"
+      [alt]="movie.name"
+      class="movie-poster"
+    />
   </div>
 </div>
