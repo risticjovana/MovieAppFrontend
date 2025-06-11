@@ -119,7 +119,7 @@
         <div class="seat-summary">
           <!-- Part 1: Reservation Summary -->
           <h3>Your selected seats</h3>
-          <p>{{ getReservedSeatCount() }} seats</p>
+          <p class="seats-label">{{ getReservedSeatCount() }} seats</p>
           
           <ul class="seat-list">
             <li *ngFor="let seat of selectedSeats">
@@ -135,7 +135,7 @@
             <h4>Payment Details</h4>
             <p>Tax (10%): ${{ getReservedSeatCount() * 20 * 0.1 }}</p>
             <p>Discount: $5</p> 
-
+            <hr/>
             <p><strong>Total Price: ${{(getReservedSeatCount() * 20 * 1.1 - 5) | number : '1.2-2' }}</strong></p>
 
             <button 

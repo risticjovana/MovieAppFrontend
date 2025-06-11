@@ -4,7 +4,6 @@
   gap: 1rem;
   justify-content: center;
   padding: 1rem;
-  background-color: #776fa1;
   margin: 0 12px;
   border-radius: 25px;
 }
@@ -61,7 +60,7 @@
 
 .section-label {
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: bold;
   margin: 12px 0 12px;
   color: #fff; /* Netflix-style red */

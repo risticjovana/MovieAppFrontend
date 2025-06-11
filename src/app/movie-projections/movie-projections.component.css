@@ -55,10 +55,12 @@ body{
 }
 
 .seat {
-  width: 30px;
-  height: 40px;
+  width: 40px;
+  height: 50px;
   display: flex;
   align-items: center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   justify-content: center;
   border: 2px solid #ccc;
   color: white;
@@ -67,8 +69,6 @@ body{
   user-select: none;
   transition: background-color 0.2s ease, transform 0.2s ease;
   cursor: pointer;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
 }
 
 .seat:hover:not(.empty) {
@@ -89,7 +89,7 @@ body{
 }
 
 .screen-arc {
-  width: 600px;
+  width: 780px;
   height: 50px;
   border-top: 4px solid #e9207e;
   border-radius: 800px / 80px;
@@ -101,7 +101,7 @@ body{
 }
 
 .screen-wrapper {
-  width: 600px;
+  width: 790px;
   margin: 0 auto 30px auto;
   text-align: center; 
 }
@@ -281,7 +281,7 @@ body{
 .seat-main-content {
   flex: 2;
   display: flex;
-  flex-direction: column; /* Makes legend and grid stack vertically */
+  flex-direction: column;  
   margin-top: 12px;
 }
 
@@ -303,7 +303,8 @@ body{
   padding: 1.5rem;
   border-radius: 12px;
   color: #ffffff; 
-  width: 300px; /* wider summary panel */
+  width: 300px; 
+  margin-top: 4rem;
 }
 
 /* Title and Summary Text */
@@ -324,18 +325,18 @@ body{
   gap: 0.5rem;
   list-style: none;
   padding: 0;
-  margin-top: 20px;
+  margin-top: 0px;
   min-height: 30px; /* reserve space even when empty */
 }
 
 .seat-list li {
-  background-color: #e9207e;
-  border-radius: 25px;
+  background-color: #493157;
+  border-radius: 5px;
   padding: 0.7rem 0.4rem;
   text-align: center;
   font-weight: bold;
   font-size: 0.9rem;
-  color: #ffffff;
+  color: #ff5623;
 }
 
 .seat-list li:last-child {
@@ -351,12 +352,13 @@ hr {
 
 /* Payment section */
 .payment-summary {
-  background-color: #7b4178;
+  background-color: #493157;
   padding: 1rem;
-  border-radius: 25px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
+  margin-top: -2rem;
 }
 
 .payment-summary p {
@@ -364,13 +366,14 @@ hr {
 }
 
 /* Reserve Button */
-.payment-summary button {
+.payment-summary button { 
   margin-top: 0.75rem;
+  margin: auto 50px;
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  background-color: #24182B;
+  background-color: #ff5623;
   border: none;
-  border-radius: 6px;
+  border-radius: 25px;
   color: white;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -641,6 +644,7 @@ h2 {
   justify-content: center;
   gap: 30px;
   margin-bottom: 20px;
+  margin-left: 30px;
 }
 
 .legend-item {
@@ -654,6 +658,6 @@ h2 {
 .seat.example {
   pointer-events: none;
   width: 30px;
-  height: 38px;
+  height: 40px;
   border: 2px solid #ccc;
 }

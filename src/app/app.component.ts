@@ -8,12 +8,14 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent{
   showSidebar = true;
+  showTopbar = true;
 
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const currentUrl = event.urlAfterRedirects;
         this.showSidebar = currentUrl !== '/login' && currentUrl !== '/register';
+        this.showTopbar = currentUrl !== '/login' && currentUrl !== '/register';
       }
     });
   }

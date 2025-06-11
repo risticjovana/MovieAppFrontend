@@ -2,7 +2,7 @@
   <app-sidebar *ngIf="showSidebar"></app-sidebar>
 
   <div class="right-side">
-    <div class="topbar">
+    <div *ngIf="showTopbar" class="topbar">
       <select class="topbar-dropdown">
         <option value="">All</option>
         <option value="action">Movies</option>
