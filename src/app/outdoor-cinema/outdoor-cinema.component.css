@@ -8,6 +8,7 @@
   display: flex;
   align-items: flex-start;
   gap: 40px;
+  width: 98%;
 }
 
 .screen-arc {
@@ -40,6 +41,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 420px;
 }
 
 .parking-row {
@@ -57,38 +59,46 @@
   border-right: 2px solid #ccc;
   color: #757575;
   font-weight: bold;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  cursor: pointer;
+  position: relative;
+  transition: transform 0.5s ease;
+  cursor: pointer; 
+  overflow: hidden;
 }
 
-/* Left border for the first spot */
 .parking-spot:first-child {
   border-left: 2px solid #ccc;
 }
 
-/* Hover effect */
 .parking-spot:hover {
-  background-color: #659cbb;
-  transform: scale(1.05);
-  color: #fff;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  background-image: url('/assets/car.png'); /* Your car icon path */
+  background-size: 138% 85%;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: transparent; 
+}
+
+.parking-spot:hover { 
+  color: transparent; /* hide text */
 }
 
 .aisle {
-  height: 70px; /* This is your aisle (drive lane) between parking rows */
+  height: 70px; 
 }
 
 .summary-panel {
   width: 250px;
   background-color: #4594c3;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 15px;
   font-family: Arial, sans-serif;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  margin-left: auto;
+  margin-top: 247px;
+  margin-bottom: auto;
 }
 
 .summary-panel h3 {
-  margin-top: 0;
+  margin: 0;
 }
 
 .summary-panel button {
@@ -106,6 +116,65 @@
 }
 
 .parking-spot.selected {
-  background-color: #e94f20;
-  color: white;
+  background-image: url('/assets/car.png');
+  background-size: 138% 85%; 
+  background-repeat: no-repeat;
+  background-position: center;
+  color: transparent;   
+} 
+
+.seat-legend {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.seat-legend {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+  margin-left: 450px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.seat.example {
+  pointer-events: none;
+  width: 40px;
+  height: 70px;
+  border-right: 2px solid #ccc;
+  border-left: 2px solid #ccc;
+}
+
+.seat.example.booked {
+  background-image: url('/assets/car.png');
+  background-size: 138% 85%; 
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: grayscale(80%) brightness(60%);
+  border-color: #fff; 
+}
+
+.seat.example.selected {
+  background-image: url('/assets/car.png');
+  background-size: 138% 85%; 
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: none; 
+}
+
+.parking-spot.reserved {
+  background-image: url('/assets/car.png');
+  background-size: 138% 85%; 
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: grayscale(80%) brightness(60%);
+  color: transparent;
 }

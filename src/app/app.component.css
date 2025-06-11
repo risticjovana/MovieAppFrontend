@@ -73,5 +73,11 @@ app-sidebar {
 /* Main content fills remaining space */
 .main-content {
   flex-grow: 1; 
-  overflow-y: auto;
+  overflow-y: auto; 
+  scrollbar-width: none;  
+  -ms-overflow-style: none;
+}
+
+.main-content::-webkit-scrollbar {
+  display: none;                
 }

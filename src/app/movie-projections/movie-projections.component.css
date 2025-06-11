@@ -181,7 +181,6 @@ body{
   align-items: center;
   justify-content: space-between;
   margin: 10px; 
-  margin-left: 12px;
   border-radius: 25px; 
 }
 
@@ -589,7 +588,7 @@ h2 {
 
 .movie-info-container {
   position: relative;
-  margin: 0 12px;
+  margin: 7px 5px 0 12px;
   height: 390px; /* adjust as you want */ 
   background-size: cover;
   background-position: top;
@@ -597,7 +596,6 @@ h2 {
   color: white;
   display: flex;
   align-items: flex-end; /* align content to bottom */
-  padding-left: 40px; 
   overflow: hidden;
   border-radius: 25px;
 }
