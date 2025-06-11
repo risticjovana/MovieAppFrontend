@@ -11,7 +11,7 @@ export class OutdoorCinemaComponent implements OnInit {
   @Output() reserve = new EventEmitter<number>(); // Emit seat number
 
   rows = Array(3).fill(0);  // 3 rows
-  spots = Array(7).fill(0); // 7 spots per row
+  spots = Array(10).fill(0); // 7 spots per row
   selectedSpot: { row: number, spot: number } | null = null;
   price: number = 12.99;
 

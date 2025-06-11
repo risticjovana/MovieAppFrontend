@@ -12,7 +12,7 @@
 }
 
 .screen-arc {
-  width: 400px;
+  width: 600px;
   height: 50px;
   border-top: 4px solid #e94f20;
   border-radius: 800px / 80px;
@@ -24,8 +24,8 @@
 }
 
 .screen-wrapper {
-  width: 400px;
-  margin: 0 auto 30px auto;
+  width: 600px;
+  margin: 0 auto 40px auto;
   text-align: center; 
 }
 
@@ -41,7 +41,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 420px;
+  margin-left: 320px;
+  margin-top: 20px;
 }
 
 .parking-row {
@@ -50,8 +51,8 @@
 }
 
 .parking-spot {
-  width: 50px;
-  height: 90px;
+  width: 60px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,7 +83,7 @@
 }
 
 .aisle {
-  height: 70px; 
+  height: 90px; 
 }
 
 .summary-panel {
@@ -93,6 +94,7 @@
   font-family: Arial, sans-serif;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   margin-left: auto;
+  margin-right: 90px;
   margin-top: 247px;
   margin-bottom: auto;
 }
@@ -134,7 +136,7 @@
   justify-content: center;
   gap: 30px;
   margin-bottom: 20px;
-  margin-left: 450px;
+  margin-left: 340px;
 }
 
 .legend-item {
