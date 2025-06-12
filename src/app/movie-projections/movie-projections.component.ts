@@ -95,7 +95,7 @@ export class MovieProjectionsComponent implements OnInit {
     this.rows = [];
     if (count === 0) return;
 
-    const seatsPerRow = 16;
+    const seatsPerRow = 14;
     const halfSeatsPerRow = seatsPerRow / 2;
     const totalRows = Math.ceil(count / seatsPerRow);
 

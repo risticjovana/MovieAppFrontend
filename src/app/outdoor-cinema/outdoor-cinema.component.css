@@ -25,14 +25,14 @@
 
 .screen-wrapper {
   width: 600px;
-  margin: 0 auto 40px auto;
+  margin: 0 15px 30px auto;
   text-align: center; 
 }
 
 .screen-label {
   font-weight: bold;
   font-family: Arial, sans-serif;
-  color: #908f8f;
+  color: #fff;
   font-size: 14px;
   margin-top: -30px;
 }
@@ -41,7 +41,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 320px;
+  margin-left: 290px;
   margin-top: 20px;
 }
 
@@ -84,37 +84,75 @@
 
 .aisle {
   height: 90px; 
-}
+} 
 
-.summary-panel {
-  width: 250px;
-  background-color: #4594c3;
-  padding: 20px;
-  border-radius: 15px;
-  font-family: Arial, sans-serif;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-  margin-left: auto;
-  margin-right: 90px;
-  margin-top: 247px;
-  margin-bottom: auto;
-}
-
-.summary-panel h3 {
-  margin: 0;
-}
-
-.summary-panel button {
-  margin-top: 15px;
+button {
+  margin-top: 25px;
   padding: 10px 15px;
-  background-color: #000000;
+  background-color: #ff5623;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 60%;
+  margin: 0 auto;
 }
 
-.summary-panel button:hover {
+button:hover {
   background-color: #c53f1a;
+}
+
+.seat-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  color: #ffffff; 
+  width: 300px; 
+  margin-top: 14.5rem;
+  margin-left: 80px;
+  margin-bottom: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Or use a glow effect instead of a border: */
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  background-color: #33223d;
+}
+
+/* Title and Summary Text */
+.seat-summary h3,
+.seat-summary h4 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.seat-summary p {
+  font-size: 0.95rem;
+}
+
+hr{
+  border: 1px solid #fff;
+  width: 300px;
+}
+
+.seat-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin-top: 0px;
+  min-height: 30px; /* reserve space even when empty */
+}
+
+.seat-list li {
+  background-color: #493157;
+  border-radius: 5px;
+  padding: 0.7rem 0.4rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #ff5623;
 }
 
 .parking-spot.selected {
@@ -136,7 +174,7 @@
   justify-content: center;
   gap: 30px;
   margin-bottom: 20px;
-  margin-left: 340px;
+  margin-left: 320px;
 }
 
 .legend-item {

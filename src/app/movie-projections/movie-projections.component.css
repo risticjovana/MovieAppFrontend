@@ -31,7 +31,7 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 12px;
+  border-radius: 12px; 
 }
 
 .seat-group.left {
@@ -55,8 +55,8 @@ body{
 }
 
 .seat {
-  width: 40px;
-  height: 50px;
+  width: 35px;
+  height: 45px;
   display: flex;
   align-items: center;
   border-top-left-radius: 15px;
@@ -89,7 +89,7 @@ body{
 }
 
 .screen-arc {
-  width: 780px;
+  width: 650px;
   height: 50px;
   border-top: 4px solid #e9207e;
   border-radius: 800px / 80px;
@@ -101,7 +101,7 @@ body{
 }
 
 .screen-wrapper {
-  width: 790px;
+  width: 650px;
   margin: 0 auto 30px auto;
   text-align: center; 
 }
@@ -191,9 +191,18 @@ body{
   margin: 0 50px;
 }
 
-.form-group label {
-  font-weight: 500;
-  font-size: 0.9rem;
+.form-group-cinema { 
+  display: flex;
+  flex-direction: column;
+  gap: 4px; 
+  margin-left: 205px;
+} 
+
+.form-group-cinema label {
+  font-weight: 600;
+  margin-left: 12px;
+  font-size: 1rem;
+  color: #e9207e; 
 }
 
 .select-wrapper {
@@ -273,7 +282,10 @@ body{
 
 .seat-layout-container {
   display: flex;  
-  margin: 18px 12px; 
+  flex-direction: row;    /* make children align horizontally */
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 18px 12px;
   border-radius: 25px;
 }
 
@@ -281,7 +293,9 @@ body{
   flex: 2;
   display: flex;
   flex-direction: column;  
-  margin-top: 12px;
+  margin-top: 12px; 
+  margin-left: 175px;
+  width: 50%;
 }
 
 .seat-legend {
@@ -303,7 +317,8 @@ body{
   border-radius: 12px;
   color: #ffffff; 
   width: 300px; 
-  margin-top: 4rem;
+  margin-top: 4rem; 
+  margin-right: 240px;
 }
 
 /* Title and Summary Text */
@@ -358,6 +373,7 @@ hr {
   flex-direction: column;
   gap: 0.9rem;
   margin-top: -2rem;
+  width: 300px;
 }
 
 .payment-summary p {

@@ -43,25 +43,28 @@
       </div>
     </div>
 
-    <!-- Summary panel -->
-    <div class="summary-panel">
-      <h3>Reservation Summary</h3>
-
-      <div>
-        <p><strong>Selected Seat:</strong> {{
-          selectedSpot 
-            ? (100 + selectedSpot.row * spots.length + selectedSpot.spot + 1) 
-            : ' '
-        }}</p>
-        <p><strong>Price:</strong> {{ price | currency }}</p>
-        <button 
-          (click)="reserveSpot()" 
-          [disabled]="!selectedSpot"
-        >
-          Reserve Spot
-        </button>
-      </div> 
-    </div>
-
-  </div>
+    <div class="seat-summary">
+      <!-- Part 1: Reservation Summary -->
+      <h3>Your selected spot</h3>
+      <p class="seats-label">{{ selectedSpot ? 1 : 0 }} parking spot{{ selectedSpot ? '' : 's' }}</p>
+      
+      <ul class="seat-list" *ngIf="selectedSpot">
+        <li>
+          {{
+            selectedSpot 
+              ? (100 + selectedSpot.row * spots.length + selectedSpot.spot + 1) 
+              : ' '
+          }}
+        </li>
+      </ul> 
+      <hr/>
+      <p><strong>Price:</strong> {{ price | currency }}</p>
+      <button 
+        (click)="reserveSpot()" 
+        [disabled]="!selectedSpot"
+      >
+        Reserve Spot
+      </button>
+    </div>  
+  </div> 
 </div>
