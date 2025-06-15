@@ -56,7 +56,7 @@ export class MovieService {
     );
   }
   getBackdrop(title: string): Observable<string> {
-    const apiKey = '162c3a034e5d753ea69686ec9c50494b'; // Replace with your actual TMDb API key
+    const apiKey = '162c3a034e5d753ea69686ec9c50494b';
     const baseUrl = 'https://api.themoviedb.org/3';
     const searchUrl = `${baseUrl}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(title)}`;
 
