@@ -114,7 +114,6 @@ button:hover {
   margin-left: 80px;
   margin-bottom: auto;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  /* Or use a glow effect instead of a border: */
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
   background-color: #33223d;
 }

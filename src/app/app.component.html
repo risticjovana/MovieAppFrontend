@@ -1,4 +1,4 @@
-<div class="app-layout">
+<div class="app-layout" [ngClass]="{ 'auth-background': !showSidebar }">
   <app-sidebar *ngIf="showSidebar"></app-sidebar>
 
   <div class="right-side">
@@ -11,7 +11,7 @@
       <input type="text" placeholder="Search movies..." class="topbar-search" />
     </div>
 
-    <main class="main-content">
+    <main class="main-content" [ngClass]="{ 'auth-main': !showSidebar }">
       <router-outlet></router-outlet>
     </main>
   </div>

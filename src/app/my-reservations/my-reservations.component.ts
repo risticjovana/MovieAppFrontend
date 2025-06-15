@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { MovieDTO } from '../model/movie';
 import { Cinema } from '../model/cinema';
 import { ProjectionDTO } from '../model/projection';
 import { MovieService } from '../services/movie.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-my-reservations',
   templateUrl: './my-reservations.component.html',
-  styleUrl: './my-reservations.component.css'
+  styleUrls: ['./my-reservations.component.css']
 })
 export class MyReservationsComponent implements OnInit {
   user: any;
@@ -18,11 +19,12 @@ export class MyReservationsComponent implements OnInit {
     projectionId: number,
     seats: number[]
   }> = [];
+
   movies: MovieDTO[] = [];
   cinemas: Cinema[] = [];
   projections: ProjectionDTO[] = [];
 
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit() {
     this.loadUserFromToken();
@@ -30,20 +32,18 @@ export class MyReservationsComponent implements OnInit {
   }
 
   loadUserFromToken() {
-    if (typeof localStorage === 'undefined') {
-      this.user = null;
-      return;
-    }
+    if (!isPlatformBrowser(this.platformId)) return;
+    
     const token = localStorage.getItem('token');
     if (token) {
       try {
         this.user = jwtDecode(token);
+        console.log('Decoded user:', this.user);
       } catch {
         this.user = null;
       }
     }
   }
-
 
   loadReservationsFromLocalStorage() {
     if (!this.user) return;
@@ -69,17 +69,8 @@ export class MyReservationsComponent implements OnInit {
 
           if (parsedData[userIdStr]) {
             const seats: number[] = parsedData[userIdStr];
-            const reservation = {
-              movieId,
-              cinemaId,
-              projectionId,
-              seats
-            };
-
-            this.userReservations.push(reservation);
-
-            // Log the loaded reservation to console:
-            console.log('Loaded reservation:', reservation);
+            this.userReservations.push({ movieId, cinemaId, projectionId, seats });
+            console.log(`Loaded reservation for movie ${movieId}, cinema ${cinemaId}, projection ${projectionId}, seats:`, seats); 
           }
         } catch {
           continue;
@@ -88,48 +79,43 @@ export class MyReservationsComponent implements OnInit {
     }
 
     this.fetchReservationDetails();
-    console.log('All loaded reservations:', this.userReservations);
   }
 
   fetchReservationDetails() {
     this.userReservations.forEach(res => {
-      // Movie
-      if (!this.movies.some(m => m.contentId === res.movieId)) {
+      if (!this.movies.find(m => m.contentId === res.movieId)) {
         this.movieService.getMovieById(res.movieId).subscribe(movie => {
-          if (movie) this.movies.push(movie);
-          console.log('Loaded movie:', movie);
+          if (movie) {
+            this.movies.push(movie);
+          }
         });
       }
 
-      // Cinema
-      if (!this.cinemas.some(c => c.cinemaId === res.cinemaId)) {
+      if (!this.cinemas.find(c => c.cinemaId === res.cinemaId)) {
         this.movieService.getCinemaById(res.cinemaId).subscribe(cinema => {
           if (cinema) this.cinemas.push(cinema);
-          console.log('Loaded cinema:', cinema);
         });
       }
 
-      // Projection
-      if (!this.projections.some(p => p.id === res.projectionId)) {
+      if (!this.projections.find(p => p.id === res.projectionId)) {
         this.movieService.getProjectionById(res.projectionId).subscribe(projection => {
-          if (projection) this.projections.push(projection);
-          console.log('Loaded projection:', projection);
+          if (projection) {
+            this.projections.push(projection);
+          }
         });
       }
     });
   }
+
   getMovieName(movieId: number): string {
-    const movie = this.movies.find(m => m.contentId === movieId);
-    return movie?.name || 'Loading...';
+    return this.movies.find(m => m.contentId === movieId)?.name || 'Loading...';
   }
 
   getCinemaName(cinemaId: number): string {
-    const cinema = this.cinemas.find(c => c.cinemaId === cinemaId);
-    return cinema?.name || 'Loading...';
+    return this.cinemas.find(c => c.cinemaId === cinemaId)?.name || 'Loading...';
   }
 
   getProjectionTime(projectionId: number): string {
-    const projection = this.projections.find(p => p.id === projectionId);
-    return projection?.time || 'Loading...';
+    return this.projections.find(p => p.id === projectionId)?.time || 'Loading...';
   }
 }

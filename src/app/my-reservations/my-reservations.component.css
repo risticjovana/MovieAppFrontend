@@ -4,16 +4,23 @@ body, html {
 }
 
 .ticketsContainer {
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;     
   gap: 15px;  
-  justify-content: center;  
+  justify-content: center; 
+  max-width: 100%;
+  box-sizing: border-box;  
 }
 
 .cardWrap {
+  width: 25.5em;
   display: flex;       
   padding: 10px;   
-  width: 25.5em;    
+  width: 25.5em;   
+  flex-direction: row; 
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .card {
@@ -33,8 +40,8 @@ body, html {
 }
 
 .cardRight {
-  width: 6.5em;
-  border-left: 0.18em dashed #fff;
+  width: 6.5em; 
+  border-left: 0.18em dashed #24182B;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   position: relative;
@@ -47,7 +54,7 @@ body, html {
   display: block;
   width: 0.9em;
   height: 0.9em;
-  background: #fff;
+  background: #24182B;
   border-radius: 50%;
   left: -0.5em;
 }
@@ -150,4 +157,26 @@ h2 {
     74px 0 0 1px #343434,
     77px 0 0 1px #343434,
     81px 0 0 1px #343434;
+}
+
+.section-label {
+  display: block;    
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 12px 0 12px;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase; 
+  margin-bottom: 1rem;
+}
+
+.section-label::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #7751ff;
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
 }

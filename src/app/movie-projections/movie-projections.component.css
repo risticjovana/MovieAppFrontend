@@ -180,8 +180,9 @@ body{
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  margin: 10px; 
-  border-radius: 25px; 
+  margin: 10px;   
+  padding: 0 0 15px 0;
+  border-bottom: 1px solid #fff;
 }
 
 .form-group {
@@ -261,7 +262,7 @@ body{
 
 .popup button {
   margin-top: 2rem;
-  margin-left: 37%;
+  margin-left:40%;
   padding: 12px;
   font-weight: bold;
   font-size: 1.2rem;
@@ -360,13 +361,15 @@ body{
 /* Divider */
 hr {
   border: none;
-  border-top: 1px solid #24182B;
+  border-top: 1px solid #fff;
   margin: 0.5rem 0;
 }
 
 /* Payment section */
 .payment-summary {
-  background-color: #493157;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  background-color: #33223d;
   padding: 1rem;
   border-radius: 15px;
   display: flex;
@@ -603,17 +606,15 @@ h2 {
 }
 
 .movie-info-container {
-  position: relative;
-  margin: 7px 5px 0 12px;
-  height: 390px; /* adjust as you want */ 
+  position: relative; 
+  height: 480px; /* adjust as you want */ 
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
   color: white;
   display: flex;
   align-items: flex-end; /* align content to bottom */
-  overflow: hidden;
-  border-radius: 25px;
+  overflow: hidden; 
 }
 
 .movie-info-container::before {

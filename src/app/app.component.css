@@ -9,9 +9,7 @@ app-sidebar {
   width: 230px;
   flex-shrink: 0;
   background-color: #222; /* example */
-  color: white; 
-  margin-top: 12px;
-  margin-bottom: 12px;
+  color: white;  
 }
 
 /* Right side contains topbar and content */
@@ -20,17 +18,20 @@ app-sidebar {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  position: relative;
 }
 
 /* Top bar at the top of right side */
 .topbar {
+  position: absolute;
   display: flex;
-  align-items: center;
-  justify-content: center; 
+  align-items: center; 
   height: 71px;
   gap: 10px;
   color: white;
   flex-shrink: 0;  
+  z-index: 10;
+  margin-left: 33.5%;
 }
 
 /* Search input */
@@ -41,8 +42,10 @@ app-sidebar {
   width: 400px;
   height: 42%;
   font-size: 16px;
-  background-color: #7b4178;
+  /*background-color: #7b4178;*/
+  background-color: transparent;
   color: white;
+  border: 2px solid #ccc;
 }
 
 .topbar-search::placeholder {
@@ -55,11 +58,12 @@ app-sidebar {
   padding: 8px 12px;
   border-radius: 25px;
   border: none;
-  background-color: #7b4178;
+  background-color: transparent;
+  color: white;
+  border: 2px solid #ccc;
   font-size: 16px;
   height: 65%;
-  width: 110px;
-  color: white;
+  width: 110px; 
   appearance: none; 
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -68,6 +72,21 @@ app-sidebar {
   background-position: right 12px center;
   background-size: 20px 20px;
   padding-right: 30px;
+}
+
+.topbar-dropdown option {
+  background-color: #333;  
+  color: white;
+}
+
+.topbar-dropdown:focus option {
+  background-color: #333;
+  color: white;
+}
+
+.topbar-dropdown option:hover {
+  background-color: #fff; /* darker on hover */
+  color: white;
 }
 
 /* Main content fills remaining space */
@@ -80,4 +99,12 @@ app-sidebar {
 
 .main-content::-webkit-scrollbar {
   display: none;                
+}
+
+.auth-background {
+  background-image: url('/assets/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; 
 }

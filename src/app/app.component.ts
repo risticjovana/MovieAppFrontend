@@ -9,6 +9,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AppComponent{
   showSidebar = true;
   showTopbar = true;
+  isAuthPage = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
@@ -16,6 +17,7 @@ export class AppComponent{
         const currentUrl = event.urlAfterRedirects;
         this.showSidebar = currentUrl !== '/login' && currentUrl !== '/register';
         this.showTopbar = currentUrl !== '/login' && currentUrl !== '/register';
+        this.isAuthPage = currentUrl.includes('/login') || currentUrl.includes('/register');
       }
     });
   }

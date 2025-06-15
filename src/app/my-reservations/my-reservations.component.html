@@ -1,33 +1,37 @@
-<div class="ticketsContainer">   
-    <div *ngFor="let reservation of userReservations">
-        <div *ngFor="let seat of reservation.seats" class="cardWrap">
-        <div class="card cardLeft">
-            <h1>{{ getCinemaName(reservation.cinemaId) }}</h1>
+<h2 class="section-label">This Month</h2>
 
-            <div class="title">
+<div class="ticketsContainer">
+  <ng-container *ngFor="let reservation of userReservations">
+    <ng-container *ngFor="let seat of reservation.seats">
+      <div class="cardWrap">
+        <div class="card cardLeft">
+          <h1>{{ getCinemaName(reservation.cinemaId) }}</h1>
+
+          <div class="title">
             <h2>{{ getMovieName(reservation.movieId) }}</h2>
             <span>movie</span>
-            </div>
+          </div>
 
-            <div class="seatTicket">
+          <div class="seatTicket">
             <h2>{{ seat }}</h2>
             <span>seat</span>
-            </div>
+          </div>
 
-            <div class="time">
+          <div class="time">
             <h2>{{ getProjectionTime(reservation.projectionId) }}</h2>
             <span>time</span>
-            </div>
+          </div>
         </div>
 
         <div class="card cardRight">
-            <div class="eye"></div>
-            <div class="number">
+          <div class="eye"></div>
+          <div class="number">
             <h3>{{ seat }}</h3>
             <span>seat</span>
-            </div>
-            <div class="barcode"></div>
+          </div>
+          <div class="barcode"></div>
         </div>
-        </div>
-    </div>
-</div> 
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

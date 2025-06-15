@@ -13,6 +13,7 @@ import { TicketReservationComponent } from './ticket-reservation/ticket-reservat
 import { MovieProjectionsComponent } from './movie-projections/movie-projections.component';
 import { MyReservationsComponent } from './my-reservations/my-reservations.component';
 import { OutdoorCinemaComponent } from './outdoor-cinema/outdoor-cinema.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'; 
 
 @NgModule({
   declarations: [
@@ -30,10 +31,11 @@ import { OutdoorCinemaComponent } from './outdoor-cinema/outdoor-cinema.componen
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
