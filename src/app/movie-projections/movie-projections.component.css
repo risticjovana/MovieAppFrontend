@@ -1,12 +1,7 @@
-body{
-  background: #FFF;
-}
-
-.reservation-wrapper{
-  border-radius: 10px;
-  margin: 7px;
-  background-color: #24182B;
+ .reservation-wrapper{  
   overflow: hidden;
+  color: #F0EEF5;
+  
 }
 
 .seat-row {
@@ -43,7 +38,7 @@ body{
 }
 
 .seat.booked {
-  background-color: #ccc;
+  background-color: #3B3545;
   cursor: not-allowed;
   pointer-events: none;
 }
@@ -62,7 +57,7 @@ body{
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   justify-content: center;
-  border: 2px solid #ccc;
+  border: 2px solid #3B3545;
   color: white;
   font-size: 14px;
   font-weight: bold;
@@ -72,9 +67,9 @@ body{
 }
 
 .seat:hover:not(.empty) {
-  background-color: #555;
+  background-color: #A847C8;
   transform: scale(1.05);
-  border-color: #555;
+  border-color: #A847C8;
 }
 
 .seat.empty {
@@ -83,21 +78,21 @@ body{
 }
 
 .seat.selected {
-  background-color: #e9207e; /* orangy */
-  border-color: #e9207e;
+  background-color: #e64747; ; /* orangy */
+  border-color: #e64747; ;
   cursor: pointer;
 }
 
 .screen-arc {
   width: 650px;
   height: 50px;
-  border-top: 4px solid #e9207e;
+  border-top: 4px solid #A847C8;
   border-radius: 800px / 80px;
   position: relative;
 
   background: transparent;
   box-shadow: none; 
-  filter: drop-shadow(0 0 6px #e9207e);
+  filter: drop-shadow(0 0 6px #A847C8);
 }
 
 .screen-wrapper {
@@ -128,12 +123,12 @@ body{
   cursor: pointer;
   background: none;
   border: none;
-  color: #ed4895;
+  color: #A847C8;
   transition: color 0.2s;
 }
 
 .arrow-btn:hover {
-  color: #ae185e;
+  color: #e64747;
 }
 
 .days-row {
@@ -159,7 +154,7 @@ body{
 }
 
 .day.selected {
-  background-color: #7b4178;
+  background: linear-gradient(135deg, #e64747, #A847C8);
   color: white;
   font-weight: bold;
   border-color: #333;
@@ -182,7 +177,7 @@ body{
   justify-content: space-between;
   margin: 10px;   
   padding: 0 0 15px 0;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #3B3545;
 }
 
 .form-group {
@@ -200,10 +195,10 @@ body{
 } 
 
 .form-group-cinema label {
-  font-weight: 600;
-  margin-left: 12px;
+  font-weight: 500;
+  margin-left: 8px;
   font-size: 1rem;
-  color: #e9207e; 
+  color: #e64747; 
 }
 
 .select-wrapper {
@@ -215,10 +210,10 @@ body{
   width: 100%;
   padding: 8px 32px 8px 12px; 
   border-radius: 25px;
-  background-color: #33223d;
-  border-width: 0;
-  color: #fff;
-  font-size: 1rem;
+  border: 1.9px solid #F0EEF5; 
+  background: transparent; 
+  color: #F0EEF5; 
+  font-size: 1.05rem;
   box-sizing: border-box;
   appearance: none;
   -webkit-appearance: none;
@@ -229,8 +224,7 @@ body{
 }
 
 .select-wrapper select:focus {
-  border-color: #e94f20;
-  box-shadow: 0 0 5px rgba(233, 79, 32, 0.4);
+  border-color: #A847C8;
 }
 
 .select-wrapper select:disabled {
@@ -249,15 +243,15 @@ body{
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 6px solid #e9207e; /* arrow color */
+  border-top: 6px solid #F0EEF5; /* arrow color */
   transform: translateY(-50%);
 }
 
 .form-group label {
-  font-weight: 600;
-  margin-left: 12px;
+  font-weight: 500;
+  margin-left: 8px;
   font-size: 1rem;
-  color: #e9207e; 
+  color: #e64747; 
 }
 
 .popup button {
@@ -266,7 +260,7 @@ body{
   padding: 12px;
   font-weight: bold;
   font-size: 1.2rem;
-  background-color: #e9207e;
+  background-color: #A847C8;
   border: none;
   border-radius: 10px;
   color: white;
@@ -274,10 +268,10 @@ body{
   transition: background-color 0.25s ease;
 }
 .popup button:hover:not(:disabled) {
-  background-color: #b81768;
+  background-color: #8738A2;
 }
 .popup button:disabled {
-  background-color: #555;
+  background-color: #8738A2;
   cursor: not-allowed;
 }
 
@@ -345,13 +339,13 @@ body{
 }
 
 .seat-list li {
-  background-color: #493157;
+  background-color: #3B3545;
   border-radius: 5px;
   padding: 0.7rem 0.4rem;
   text-align: center;
   font-weight: bold;
   font-size: 0.9rem;
-  color: #ff5623;
+  color: #e64747;
 }
 
 .seat-list li:last-child {
@@ -361,15 +355,14 @@ body{
 /* Divider */
 hr {
   border: none;
-  border-top: 1px solid #fff;
+  border-top: 1px solid #3B3545;
   margin: 0.5rem 0;
 }
 
 /* Payment section */
-.payment-summary {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-  background-color: #33223d;
+.payment-summary { 
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  background-color: #24182B;
   padding: 1rem;
   border-radius: 15px;
   display: flex;
@@ -389,7 +382,7 @@ hr {
   margin: auto 50px;
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  background-color: #ff5623;
+  background-color: #e64747;
   border: none;
   border-radius: 25px;
   color: white;
@@ -402,7 +395,7 @@ hr {
 }
 
 .payment-summary button:not(:disabled):hover {
-  background-color: #3e294b;
+  background-color: #A847C8;
 }
 
 @media (max-width: 768px) {
@@ -427,7 +420,7 @@ hr {
   left: 55%;
   transform: translate(-50%, -50%);
   
-  background: rgba(30, 33, 54, 1);
+  background: #141116;
   border-radius: 15px;
   color: #fff;
   padding: 2rem;
@@ -466,7 +459,7 @@ hr {
 }
 
 .card {
-  background: linear-gradient(to bottom, #e84c3d 0%, #e84c3d 26%, #fff 26%, #fff 100%);
+  background: linear-gradient(to bottom, #e64747 0%, #A847C8 26%, #ecedef 26%, #ecedef 100%);
   height: 11em;
   width: 25.5em;
   float: left;
@@ -474,6 +467,14 @@ hr {
   padding: 1em;
   margin-top: 10px;
 }
+
+.gradient-word {
+  background: linear-gradient(90deg, #e64747, #A847C8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
 
 .cardLeft {
   border-top-left-radius: 8px;
@@ -675,5 +676,5 @@ h2 {
   pointer-events: none;
   width: 30px;
   height: 40px;
-  border: 2px solid #ccc;
+  border: 2px solid #3B3545;
 }

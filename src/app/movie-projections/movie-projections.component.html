@@ -34,7 +34,7 @@
 
       <!-- Cinema selector -->
       <div class="form-group-cinema">
-        <label for="cinemaSelect">Cinema</label>
+        <label for="cinemaSelect">CINEMA</label>
         <div class="select-wrapper">
         <select id="cinemaSelect" [(ngModel)]="selectedCinemaId" (change)="onCinemaChange()">
           <option *ngFor="let cinema of cinemasWithProjections" [ngValue]="cinema.cinemaId">
@@ -46,7 +46,7 @@
 
       <!-- Projection selector -->
       <div class="form-group">
-        <label for="projectionSelect">Time</label>
+        <label for="projectionSelect">TIME</label>
         <div class="select-wrapper">
         <select
           id="projectionSelect"
@@ -148,7 +148,9 @@
     <!-- Ticket Popup -->
     <div class="overlay" *ngIf="showTicketPopup"></div>
     <div class="popup" *ngIf="showTicketPopup">
-      <h2 class="popup-header">Congratulations! Your tickets are reserved!</h2>
+      <h2 class="popup-header">
+        Congratulations! Your <span class="gradient-word">tickets</span> are reserved!
+      </h2>
 
       <div *ngFor="let seat of reservedSeats" class="cardWrap">
         <div class="card cardLeft">

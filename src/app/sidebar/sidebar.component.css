@@ -1,13 +1,12 @@
 body {
-  margin: 0;
-  background-color: #1E2136;
+  margin: 0; 
   font-family: "Tahoma", sans-serif;
 }
 
 .sidebar {
   width: 230px;
   height: 100%;
-  background-color: #7b4178;
+  background-color: #141116;
   color: #f5f6fa;
   display: flex;
   flex-direction: column;
@@ -19,9 +18,16 @@ body {
   padding: 0px 10px;
   text-align: center;
   font-size: 0.9rem;
-  background-color: #7b4178;
+  background-color: #141116;
   color: #f5f6fa;
   font-family: "Tahoma", sans-serif;
+}
+
+.sidebar-logo {
+  display: block;
+  max-width: 150px;  /* adjust size as needed */
+  margin: 10px auto; /* center the logo */
+  height: auto;
 }
 
 .sidebar-menu {
@@ -52,10 +58,13 @@ body {
   margin-right: 5px;
 }
 
-.sidebar-menu li a:hover,
+.sidebar-menu li a:hover{
+  background-color: #b061ca  ;
+  color: #F0EEF5;
+}
 .sidebar-menu li a.active {
-  background-color: #9277f0;
-  color: #fff;
+  background-color: #A847C8   ;
+  color: #F0EEF5;
 }
 
 /* === NEW: Logout styling === */
@@ -89,6 +98,6 @@ body {
 }
 
 .sidebar-logout li a:hover {
-  background-color: #6a798a;
+  background-color: #b061ca;
   color: #fff;
 }

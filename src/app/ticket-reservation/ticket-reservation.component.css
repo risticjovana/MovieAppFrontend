@@ -43,19 +43,24 @@
   left: 0;
   right: 0;
   padding: 10px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
   color: white;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   text-align: center;
   opacity: 0;
   transform: translateY(100%);
-  transition: all 0.3s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .movie-card:hover::after {
   opacity: 1;
   transform: translateY(0);
+} 
+
+.movie-card:focus-visible {
+  outline: 3px solid #FE5F55;  
+  outline-offset: 4px;
 }
 
 .section-label {
@@ -73,7 +78,7 @@
   display: block;
   width: 60px;
   height: 4px;
-  background-color: #7751ff;
+  background-color: #A847C8;
   margin: 0.5rem auto 0;
   border-radius: 2px;
 }

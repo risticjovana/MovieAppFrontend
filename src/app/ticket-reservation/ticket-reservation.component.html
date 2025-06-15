@@ -2,6 +2,7 @@
 <div class="movie-card-container">
   <div
     class="movie-card"
+    tabindex="0"
     *ngFor="let movie of movies"
     [attr.data-title]="movie.name"
     (click)="goToProjections(movie.contentId)"
