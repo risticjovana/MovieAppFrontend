@@ -7,7 +7,7 @@ body, html {
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;     
-  gap: 15px;  
+  gap: 8px;  
   justify-content: center; 
   max-width: 100%;
   box-sizing: border-box;  
@@ -164,7 +164,7 @@ h2 {
   text-align: center;
   font-size: 1.1rem;
   font-weight: bold;
-  margin: 12px 0 12px;
+  margin: 84px 0 12px;
   color: #fff;
   letter-spacing: 1px;
   text-transform: uppercase; 

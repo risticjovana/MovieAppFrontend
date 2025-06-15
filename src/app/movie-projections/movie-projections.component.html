@@ -1,6 +1,6 @@
 <div *ngIf="!isLoading && !errorMsg">
   <!-- Show only if movieInfo is available -->
-   <div class="movie-info-container" [ngStyle]="{'background-image': 'url(' + backdropUrl + ')', 'background-position': 'center calc(10% - 20px)'}">>
+   <div class="movie-info-container" [ngStyle]="{'background-image': 'url(' + backdropUrl + ')', 'background-position': 'center calc(10% - 20px)'}">
     <div class="movie-info-content">
       <h1 class="movie-title">{{ movieInfo?.name }}</h1>
       

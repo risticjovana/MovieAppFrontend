@@ -629,6 +629,7 @@ h2 {
   position: relative; /* above overlay */
   max-width: 85%; /* left half */
   z-index: 1;
+  margin-left: 20px;
 }
 
 .movie-title {
@@ -638,7 +639,7 @@ h2 {
 
 .movie-details-row {
   display: flex;
-  gap: 2rem;          /* space between items */
+  gap: 2rem;        
   font-size: 1rem;
   margin-bottom: 1rem;
 }
@@ -651,7 +652,7 @@ h2 {
   margin-top: 1rem;
   font-size: 1.05rem;
   line-height: 1.5;
-  width: 70%;
+  width: 70%; 
 }
 
 .seat-legend {

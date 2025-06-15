@@ -1,11 +1,16 @@
 /* Center the form on the screen */
 .form-wrapper {
     display: flex;
-    height: 287px;
-    width: 621px;
-    margin-top: 249px;  
-    margin-left: 33.5%;
+    height: 289px;
+    width: 581px;
+    margin-top: 182px;  
+    margin-left: 36.95%;
     position: fixed;
+}
+
+.form-wrapper:hover form {
+    background-color: rgba(0, 0, 0, 0.5); 
+    transition: background-color 0.3s ease-in-out;
 }
 
 form {
@@ -15,7 +20,7 @@ form {
     width: 100%;
     max-width: 620px; 
     padding: 4rem; 
-    background-color: rgba(0, 0, 0, 0.3);  
+    background-color: rgba(0, 0, 0, 0.1);  
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: width 0.3s ease-in-out;
 }

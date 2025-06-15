@@ -23,6 +23,12 @@ export class OutdoorCinemaComponent implements OnInit {
   }
 
   loadReservedSpots() {
+    if (typeof localStorage === 'undefined') {
+      console.warn('localStorage is not defined in this environment.');
+      this.reservedSpotsMap = {};
+      return;
+    }
+    
     const key = this.getStorageKey(); // your localStorage key
     console.log('Loading reserved spots from localStorage with key:', key);
 
