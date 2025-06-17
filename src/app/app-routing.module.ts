@@ -7,6 +7,7 @@ import { AuthGuard } from './auth.guard';
 import { TicketReservationComponent } from './ticket-reservation/ticket-reservation.component';
 import { MovieProjectionsComponent } from './movie-projections/movie-projections.component';
 import { MyReservationsComponent } from './my-reservations/my-reservations.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'ticket-reservation', component: TicketReservationComponent },
   { path: 'my-reservations', component: MyReservationsComponent },
   { path: 'movies/:contentId/projections', component: MovieProjectionsComponent },
+  { path: 'user-profile', component: UserProfileComponent },
   { path: '**', redirectTo: 'login' }, // move this to the end
 ];
 @NgModule({

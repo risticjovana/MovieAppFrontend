@@ -7,6 +7,12 @@ interface LoginPayload {
     password: string;
 }
 
+interface ChangePasswordModel {
+    userId: number;
+    currentPassword: string;
+    newPassword: string;
+}
+
 @Injectable({
 providedIn: 'root'
 })
@@ -24,6 +30,14 @@ export class AuthService {
     }
 
     logout(): void {
-        localStorage.removeItem('token'); // or any user-related storage item
+        localStorage.removeItem('token'); 
+    }
+
+    getUserById(id: number): Observable<any> {
+        return this.http.get<any>(`${this.apiUrl}/user/${id}`);
+    }
+
+    changePassword(payload: ChangePasswordModel): Observable<string> {
+        return this.http.post(`${this.apiUrl}/change-password`, payload, { responseType: 'text' });
     }
 }
