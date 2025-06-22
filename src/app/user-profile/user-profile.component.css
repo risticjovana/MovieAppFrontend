@@ -3,8 +3,16 @@
   grid-template-columns: 400px 1fr; /* profile fixed width, rest flexible */
   gap: 20px;
   padding: 20px;
-  min-height: 100vh;
-  background-color: #1e1b23; /* or whatever background you want */
+  min-height: 700px;
+  padding: 80px;
+  max-height: 90%;
+  background-color: #1e1b23; 
+}
+
+.profile-section {
+  display: flex;
+  gap: 30px;
+  flex-direction: column; 
 }
 
 .profile-container {
@@ -23,15 +31,45 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+.profile-avatar {
+  position: relative;
+  width: 185px; /* 165px + 2x padding (10px) */
+  height: 185px;
+  margin-bottom: 30px;
+}
+
 .profile-avatar img {
-  width: 165px; 
+  width: 165px;
   height: 165px;
-  padding: 10px; /* border thickness */
+  padding: 10px;
   border-radius: 50%;
   background: linear-gradient(180deg, #e64747, #A847C8);
-  display: inline-block;
   box-sizing: content-box;
-  margin-bottom: 30px;
+  display: block;
+  margin: 0 auto;
+}
+
+.edit-avatar-icon {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  height: 30px;
+  width: 30px;
+  font-size: 14px;
+  background-color: #F0EEF5;
+  color: #A847C8;
+  border: 2px solid #A847C8; 
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.edit-avatar-icon:hover {
+  background-color: #A847C8;
+  color: #F0EEF5;
 }
 
 .profile-details {
@@ -58,15 +96,13 @@
   transition: background-color 0.3s ease;
 }
 
-.profile-details input:focus {
-  background-color: #5a4a4a; /* slightly lighter on focus */
+.profile-details input:focus { 
   outline: none;
 }
 
 .button-group {
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  justify-content: space-between; 
   gap: 15px;
   width: 100%;
 }
@@ -150,4 +186,52 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
+} 
+
+.role-request-container { 
+  width: 380px;
+  margin: auto;
+  background-color: #e64747;
+  padding: 25px 40px;
+  border-radius: 20px;
+  color: #F0EEF5;
+  box-shadow: 0 0 20px #000000aa;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;
+}  
+
+.role-request-title {
+  font-size: 20px;
+  font-weight: 750;
+  text-align: center;
+  color: #F0EEF5; 
+  margin-top: 0px;
+}
+
+.request-role select {
+  width: 100%;
+  padding: 10px; 
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #F0EEF5;
+  background-color: #e64747;
+  color: #F0EEF5;
+}
+
+.current-role{
+  margin-top: 7px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.request-role button {
+  width: 100%;
+  background-color: #F0EEF5;
+  color: #A847C8;
+}
+
+.request-role button:hover{ 
+  color: #e64747;
+  font-weight: 300;
 }

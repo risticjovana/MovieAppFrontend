@@ -40,4 +40,8 @@ export class AuthService {
     changePassword(payload: ChangePasswordModel): Observable<string> {
         return this.http.post(`${this.apiUrl}/change-password`, payload, { responseType: 'text' });
     }
+
+    requestRoleChange(payload: { userId: number; requestedRole: string }): Observable<string> {
+        return this.http.post(`${this.apiUrl}/request-role`, payload, { responseType: 'text' });
+    }
 }

@@ -18,6 +18,8 @@ export class UserProfileComponent implements OnInit {
     currentPassword: '',
     newPassword: ''
   };
+  availableRoles: string[] = ['MODERATOR', 'ADMINISTRATOR', 'CRITIC', 'EDITOR'];  
+  selectedRole: string = '';
 
   constructor(private movieService: MovieService, private authService: AuthService, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -72,4 +74,20 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  requestRoleChange() {
+    if (!this.selectedRole || !this.user) return;
+
+    this.authService.requestRoleChange({
+      userId: this.user.id,
+      requestedRole: this.selectedRole.toLowerCase()
+    }).subscribe({
+      next: (res) => {
+        alert('Role change request sent successfully.');
+        this.selectedRole = '';
+      },
+      error: (err) => {
+        alert('Failed to send role request: ' + err.error);
+      }
+    });
+  }
 }

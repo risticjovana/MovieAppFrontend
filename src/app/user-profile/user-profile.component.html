@@ -1,41 +1,65 @@
  <div class="page-grid"> 
-    <div class="profile-container">
-        <div class="profile-avatar">
-            <img src="assets/woman.png" alt="User Avatar" />
-        </div>
-
-        <div class="profile-details" *ngIf="user">
-            <label>Email</label>
-            <input type="email" [(ngModel)]="user.email" readonly />
-
-            <label>Date of Birth</label>
-            <input type="text" value="16/01/2002" readonly />
-
-            <div class="button-group">
-            <button class="btn btn-primary" (click)="openChangePassword()">Change Password</button>
-            <button class="btn btn-primary">Submit edits</button>
+    <!-- left side-->
+    <div class="profile-section">
+        <div class="profile-container">
+            <div class="profile-avatar">
+                <img src="assets/woman.png" alt="User Avatar" />
+                <button class="edit-avatar-icon">
+                    <i class="fas fa-pen"></i>
+                </button>
             </div>
-            <button class="btn btn-secondary" (click)="logout()">
-            <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
-        </div>
 
-        <!-- Password Change Modal -->
-        <div class="modal-overlay" *ngIf="showModal">
-            <div class="modal"> 
-            <form (submit)="changePassword()">
-                <label>Current Password</label>
-                <input type="password" [(ngModel)]="passwordModel.currentPassword" name="currentPassword" required />
+            <div class="profile-details" *ngIf="user">
+                <label>Email</label>
+                <input type="email" [(ngModel)]="user.email" readonly />
 
-                <label>New Password</label>
-                <input type="password" [(ngModel)]="passwordModel.newPassword" name="newPassword" required />
+                <label>Date of Birth</label>
+                <input type="text" value="16/01/2002" readonly />
 
-                <div class="modal-actions">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-secondary" (click)="closeChangePassword()">Cancel</button>
+                <div class="button-group">
+                <button class="btn btn-primary" (click)="openChangePassword()">Change Password</button>
+                <button class="btn btn-primary">Submit edits</button>
                 </div>
-            </form>
+                <button class="btn btn-secondary" (click)="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </div>
-        </div>
+
+            <!-- Password Change Modal -->
+            <div class="modal-overlay" *ngIf="showModal">
+                <div class="modal"> 
+                <form (submit)="changePassword()">
+                    <label>Current Password</label>
+                    <input type="password" [(ngModel)]="passwordModel.currentPassword" name="currentPassword" required />
+
+                    <label>New Password</label>
+                    <input type="password" [(ngModel)]="passwordModel.newPassword" name="newPassword" required />
+
+                    <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" (click)="closeChangePassword()">Cancel</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div> 
+        <div class="role-request-container"> 
+            <p class="role-request-title">REQUEST A NEW ROLE</p>
+            <div class="request-role">
+                <select [(ngModel)]="selectedRole" name="newRole" id="newRole">
+                <option disabled selected value="">Select Role</option>
+                <option *ngFor="let role of availableRoles" [value]="role">{{ role }}</option>
+                </select>
+            <div class="current-role">
+                <strong>Current Role:</strong> {{ user?.role || 'N/A' }}
+            </div>
+
+                <button class="btn btn-primary" (click)="requestRoleChange()" [disabled]="!selectedRole">
+                Send Request
+                </button>
+            </div>
+        </div>    
     </div>
-</div>
+    <!-- right side-->
+    <div></div>  
+ </div>

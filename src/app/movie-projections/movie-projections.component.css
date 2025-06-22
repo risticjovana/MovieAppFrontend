@@ -208,10 +208,10 @@
 
 .select-wrapper select {
   width: 100%;
-  padding: 8px 32px 8px 12px; 
-  border-radius: 25px;
-  border: 1.9px solid #F0EEF5; 
-  background: transparent; 
+  padding: 8px 32px 8px 12px;  
+  border: none;
+  border-bottom: 2px solid #F0EEF5;
+  background: #141116; 
   color: #F0EEF5; 
   font-size: 1.05rem;
   box-sizing: border-box;
@@ -221,16 +221,7 @@
   cursor: pointer;
   outline: none;
   transition: box-shadow 0.2s;
-}
-
-.select-wrapper select:focus {
-  border-color: #A847C8;
-}
-
-.select-wrapper select:disabled {
-  color: #aaa;
-  cursor: not-allowed;
-}
+} 
 
 /* Custom arrow */
 .select-wrapper::after {
