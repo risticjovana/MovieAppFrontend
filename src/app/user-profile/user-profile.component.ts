@@ -82,7 +82,6 @@ export class UserProfileComponent implements OnInit {
       requestedRole: this.selectedRole.toLowerCase()
     }).subscribe({
       next: (res) => {
-        alert('Role change request sent successfully.');
         this.selectedRole = '';
       },
       error: (err) => {

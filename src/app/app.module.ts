@@ -14,7 +14,8 @@ import { MovieProjectionsComponent } from './movie-projections/movie-projections
 import { MyReservationsComponent } from './my-reservations/my-reservations.component';
 import { OutdoorCinemaComponent } from './outdoor-cinema/outdoor-cinema.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { UserProfileComponent } from './user-profile/user-profile.component'; 
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component'; 
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MyReservationsComponent,
     OutdoorCinemaComponent,
     UserProfileComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,

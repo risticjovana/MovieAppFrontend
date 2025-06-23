@@ -8,6 +8,7 @@ import { TicketReservationComponent } from './ticket-reservation/ticket-reservat
 import { MovieProjectionsComponent } from './movie-projections/movie-projections.component';
 import { MyReservationsComponent } from './my-reservations/my-reservations.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'my-reservations', component: MyReservationsComponent },
   { path: 'movies/:contentId/projections', component: MovieProjectionsComponent },
   { path: 'user-profile', component: UserProfileComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent},
   { path: '**', redirectTo: 'login' }, // move this to the end
 ];
 @NgModule({

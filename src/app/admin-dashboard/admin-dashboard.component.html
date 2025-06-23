@@ -1,0 +1,34 @@
+<div class="admin-dashboard">
+  <h2>User Role Requests</h2>
+
+  <div class="request-table">
+    <div class="request-header">
+      <div>Name</div>
+      <div>Email</div> 
+      <div>Requested Role</div> 
+      <div>Requested At</div>
+      <div>Status</div>
+      <div>Actions</div>
+    </div>
+
+    <div class="request-row" *ngFor="let request of requests">
+      <div>{{ request.user.firstName }} {{ request.user.lastName }}</div>
+      <div>{{ request.user.email }}</div> 
+      <div>{{ request.requestedRoleEnglish }}</div> 
+      <div>{{ request.createdAt | date: 'medium' }}</div>
+      <div>
+        <span [ngClass]="{
+          'status-pending': request.status === 'pending',
+          'status-approved': request.status === 'approved',
+          'status-declined': request.status === 'declined'
+        }">
+          {{ request.status }}
+        </span>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-success" (click)="verifyRequest(request.id)">Verify</button>
+        <button class="btn btn-danger" (click)="declineRequest(request.id)">Decline</button>
+      </div>
+    </div>
+  </div>
+</div>

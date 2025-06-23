@@ -3,21 +3,28 @@
     <img src="assets/logo.png" alt="App Logo" class="sidebar-logo" />
   </div>
   <ul class="sidebar-menu">
+    <!--Guest-only--> 
     <li>
       <a routerLink="/home" routerLinkActive="active">
         <i class="fas fa-home" style="color: #FFF;"></i> Home
       </a>
     </li>
-    <li>
+    <li *ngIf="isGuest()">
       <a routerLink="/ticket-reservation" routerLinkActive="active">
         <i class="fa-solid fa-ticket" style="color: #FFF;"></i> Ticket Reservation
       </a>
     </li>
-    <li>
+    <li *ngIf="isGuest()">
       <a routerLink="/my-reservations" routerLinkActive="active">
         <i class="fas fa-ticket-alt" style="color: #FFF;"></i> My Reservations
       </a>
     </li>
+    <!--Admin-only--> 
+    <li *ngIf="isAdmin()">
+      <a routerLink="/admin-dashboard" routerLinkActive="active">
+        <i class="fas fa-cogs" style="color: #FFF;"></i> Admin Dashboard
+      </a>
+    </li> 
   </ul>
   <!-- Bottom logout section -->
   <div class="sidebar-logout">

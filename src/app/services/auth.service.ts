@@ -44,4 +44,16 @@ export class AuthService {
     requestRoleChange(payload: { userId: number; requestedRole: string }): Observable<string> {
         return this.http.post(`${this.apiUrl}/request-role`, payload, { responseType: 'text' });
     }
+
+    getAllRoleRequests(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/role-requests`);
+    }
+
+    verifyRoleRequest(id: number): Observable<string> {
+        return this.http.post(`${this.apiUrl}/verify-role/${id}`, {}, { responseType: 'text' });
+    }
+
+    declineRoleRequest(id: number): Observable<string> {
+        return this.http.post(`${this.apiUrl}/decline-role/${id}`, {}, { responseType: 'text' });
+    }
 }

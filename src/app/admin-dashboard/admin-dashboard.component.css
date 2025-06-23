@@ -1,0 +1,107 @@
+.request-table {
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column; 
+  font-size: 14px;
+}
+
+h2{
+    margin-top: 85px;
+    text-align: center;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #A847C8;
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+.request-header, .request-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.5fr 1fr 2fr 0.7fr 1.5fr;
+  align-items:center;
+  text-align: center;
+  padding: 14px 18px; 
+}
+
+.request-header {
+  background-color: #A847C8;
+  font-weight: bold;
+  font-size: large;
+  color: #F0EEF5;
+}
+
+.request-row {
+  background-color: #2A2530;
+  color: #F0EEF5;
+  transition: background-color 0.2s;
+}
+
+.request-row:hover {
+  background-color: #3B3545;
+}
+
+.status-pending {
+  background-color: #ffe186;
+  color: #3B3545;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.status-approved {
+  background-color: #7efd9c;
+  color: #3B3545;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.status-declined {
+  background-color: #fe6f6f;
+  color: #3B3545;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.card-actions .btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  transition: all 0.2s ease-in-out;
+}
+ 
+.card-actions .btn-success {
+  background: linear-gradient(135deg, #A847C8, #e64747);
+  color: white;
+}
+
+.card-actions .btn-success:hover {
+  opacity: 0.9;
+}
+ 
+.card-actions .btn-danger {
+  background-color: #e64747;
+  color: white;
+}
+
+.card-actions .btn-danger:hover {
+  background-color: #ff5e5e;
+}
