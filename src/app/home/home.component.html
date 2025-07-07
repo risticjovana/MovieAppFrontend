@@ -8,10 +8,30 @@
       </div>
     </div>
   </div>
-
-  <!-- Navigation buttons -->
   <div class="swiper-button-prev"></div>
   <div class="swiper-button-next"></div>
 </div>
 
+<div class="genre-tags">
+  <span 
+    *ngFor="let genre of genres" 
+    class="genre-tag"
+    [class.selected]="genre === selectedGenre"
+    (click)="selectGenre(genre)">
+    {{ genre }}
+  </span>
+</div>
+<!-- Genre movie cards -->
+<div class="genre-movies-container">
+  <div class="genre-movie-card" *ngFor="let movie of moviesByGenre">
+    <img
+      [src]="posterMap[movie.contentId] || 'assets/default-movie.jpg'"
+      [alt]="movie.name"
+      class="movie-poster"
+    />
+    <div class="genre-movie-info">
+      <h3>{{ movie.name }}</h3>
+    </div>
+  </div>
+</div>
 </div>

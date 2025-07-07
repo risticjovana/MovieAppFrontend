@@ -3,14 +3,14 @@
 }
 
 .movie-card {
-  position: relative; /* enable positioning inside */
+  position: relative;  
   width: 85%;
   height: 540px;
   background: #111;
   color: #fff;
   border-radius: 16px;
   overflow: hidden;
-  text-align: left; /* align text left */
+  text-align: left;  
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
   margin: auto;
@@ -26,9 +26,9 @@
   color: #fff; 
   background: linear-gradient(
     to right, 
-    rgba(25, 25, 25, 0.7) 70%,   /* solid-ish almost until 60% */
-    rgba(25, 25, 25, 0.4) 85%,   /* start fading */
-    rgba(25, 25, 25, 0) 100%     /* fully transparent at right edge */
+    rgba(25, 25, 25, 0.7) 70%,    
+    rgba(25, 25, 25, 0.4) 85%,    
+    rgba(25, 25, 25, 0) 100%   
   );
 }
 
@@ -57,10 +57,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: transparent; /* hide default font icon */
+  color: transparent;  
 }
-
-/* Position arrows horizontally closer to the card */
+ 
 .swiper-button-prev {
   left: calc(50% - 35% - 200px);
 }
@@ -68,8 +67,7 @@
 .swiper-button-next {
   right: calc(50% - 35% - 200px);
 }
-
-/* The two thick lines forming the < and > */
+ 
 
 /* Common styles for all lines */
 .swiper-button-prev::before,
@@ -78,8 +76,8 @@
 .swiper-button-next::after {
   content: '';
   position: absolute;
-  width: 16px;        /* thickness */
-  height: 48px;      /* length */
+  width: 16px;        
+  height: 48px;  
   background: linear-gradient(45deg, #e64747, #A847C8);
   border-radius: 8px;
   transition: transform 0.3s ease;
@@ -96,8 +94,7 @@
   top: 34px;
   transform: rotate(-45deg);
 }
-
-/* Right arrow: two lines rotated to form > */
+ 
 .swiper-button-next::before {
   right: 32px;
   transform: rotate(135deg);
@@ -108,8 +105,7 @@
   top: 34px;
   transform: rotate(45deg);
 }
-
-/* Hover scale effect: keep correct rotation + scale */
+ 
 .swiper-button-prev:hover::before {
   transform: rotate(-135deg) scale(1.05);
 }
@@ -122,3 +118,79 @@
 .swiper-button-next:hover::after {
   transform: rotate(45deg) scale(1.05);
 }
+
+.genre-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; 
+}
+
+.genre-tag {
+  background: rgba(255, 255, 255, 0.1); 
+  border-radius: 25px;
+  padding: 14px 16px;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.genre-tag:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.genre-tag.selected {
+  background: linear-gradient(
+    135deg,
+    rgba(230, 71, 71, 1),
+    rgba(168, 71, 200, 1)
+  );
+  font-weight: 590; 
+  transform: scale(1.08);
+  color: #fff; 
+}
+
+.genre-movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.genre-movie-card {
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 180px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.genre-movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+.genre-movie-info {
+  padding: 10px;
+  color: #fff;
+  text-align: center;
+}
+
+.genre-movie-info h3 {
+  margin: 0;
+  font-size: 1rem;
+  align-items: center;
+} 
+
+.movie-poster {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  border-bottom: 2px solid #A847C8;
+}
+
