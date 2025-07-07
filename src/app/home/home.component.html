@@ -1,2 +1,17 @@
 <div class="content">
+<div class="swiper movie-slider">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide" *ngFor="let movieName  of movies">
+      <div class="movie-card">
+        <h3>{{ movieName }}</h3>
+        <img [src]="backdropUrls[movieName]" [alt]="movieName" class="movie-backdrop">
+      </div>
+    </div>
   </div>
+
+  <!-- Navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+</div>
