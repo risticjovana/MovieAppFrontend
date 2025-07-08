@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   user: any = null;
   selectedGenre: string = 'Trending';
   moviesByGenre: VisualContent[] = [];
+  seriesByGenre: VisualContent[] = [];
   posterMap: { [contentId: number]: string } = {};
 
 
@@ -92,7 +93,7 @@ export class HomeComponent implements OnInit {
   selectGenre(genre: string) {
     this.selectedGenre = genre;
     console.log(`Selected genre: ${genre}`);
-
+    //get movies
     this.contentService.getMoviesByGenre(genre).subscribe({
       next: (contents) => {
         this.moviesByGenre = contents;
@@ -114,6 +115,29 @@ export class HomeComponent implements OnInit {
         console.error('Error fetching movies by genre', err);
       }
     });
+    //get series
+    this.contentService.getSeriesByGenre(genre).subscribe({
+      next: (contents) => {
+        this.seriesByGenre = contents;
+        console.log(this.seriesByGenre);
+
+        // Fetch posters for each series
+        for (const movie of this.seriesByGenre) {
+          this.movieService.getSeriesPoster(movie.name).subscribe({
+            next: (posterUrl) => {
+              this.posterMap[movie.contentId] = posterUrl;
+            },
+            error: () => {
+              this.posterMap[movie.contentId] = 'assets/default-movie.jpg';
+            }
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching series by genre', err);
+      }
+    });
+
   }
 
 

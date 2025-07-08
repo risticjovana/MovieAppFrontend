@@ -55,6 +55,21 @@ export class MovieService {
       })
     );
   }
+
+  getSeriesPoster(title: string): Observable<string> {
+    const apiKey = 'd3328071';
+    const url = `https://www.omdbapi.com/?t=${encodeURIComponent(title)}&type=series&apikey=${apiKey}`;
+
+    return this.http.get<any>(url).pipe(
+      map(response => {
+        if (response && response.Poster && response.Poster !== 'N/A') {
+          return response.Poster;
+        }
+        return 'assets/default-movie.jpg';
+      })
+    );
+  }
+
   getBackdrop(title: string): Observable<string> {
     const apiKey = '162c3a034e5d753ea69686ec9c50494b';
     const baseUrl = 'https://api.themoviedb.org/3';

@@ -16,6 +16,8 @@ import { OutdoorCinemaComponent } from './outdoor-cinema/outdoor-cinema.componen
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component'; 
+import Swiper from 'swiper';
+import { MovieInfoComponent } from './movie-info/movie-info.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     OutdoorCinemaComponent,
     UserProfileComponent,
     AdminDashboardComponent,
+    MovieInfoComponent
   ],
   imports: [
     BrowserModule,

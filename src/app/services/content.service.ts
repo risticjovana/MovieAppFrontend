@@ -15,4 +15,8 @@ export class ContentService {
   getMoviesByGenre(genreName: string): Observable<VisualContent[]> {
     return this.http.get<VisualContent[]>(`${this.baseUrl}/by-genre/${encodeURIComponent(genreName)}`);
   }
+
+  getSeriesByGenre(genreName: string): Observable<VisualContent[]> {
+    return this.http.get<VisualContent[]>(`${this.baseUrl}/series-by-genre/${encodeURIComponent(genreName)}`);
+  }
 }
