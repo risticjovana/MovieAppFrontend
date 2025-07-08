@@ -18,6 +18,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component'; 
 import Swiper from 'swiper';
 import { MovieInfoComponent } from './movie-info/movie-info.component';
+import { SeriesInfoComponent } from './series-info/series-info.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MovieInfoComponent } from './movie-info/movie-info.component';
     OutdoorCinemaComponent,
     UserProfileComponent,
     AdminDashboardComponent,
-    MovieInfoComponent
+    MovieInfoComponent,
+    SeriesInfoComponent
   ],
   imports: [
     BrowserModule,

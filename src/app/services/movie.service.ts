@@ -6,6 +6,7 @@ import { CinemaWithProjectionsDTO } from '../model/cinema-with-projections';
 import { Ticket } from '../model/ticket';
 import { ProjectionDTO } from '../model/projection';
 import { Cinema } from '../model/cinema';
+import { SeriesDTO } from '../model/series';
 
 
 @Injectable({
@@ -32,6 +33,10 @@ export class MovieService {
 
   getMovieById(contentId: number): Observable<MovieDTO> {
     return this.http.get<MovieDTO>(`${this.baseUrl}/getmoviebyid/${contentId}`);
+  }
+
+  getSeriesById(contentId: number): Observable<SeriesDTO> {
+    return this.http.get<SeriesDTO>(`${this.baseUrl}/getseriesbyid/${contentId}`);
   }
 
   getCinemaById(cinemaId: number): Observable<Cinema> {
@@ -74,6 +79,23 @@ export class MovieService {
     const apiKey = '162c3a034e5d753ea69686ec9c50494b';
     const baseUrl = 'https://api.themoviedb.org/3';
     const searchUrl = `${baseUrl}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(title)}`;
+
+    return this.http.get<any>(searchUrl).pipe(
+      map(response => {
+        const movie = response.results?.[0];
+        if (movie?.backdrop_path) {
+          return `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
+        }
+        return 'assets/default-backdrop.jpg'; // fallback image
+      }),
+      catchError(() => of('assets/default-backdrop.jpg')) // fallback on error
+    );
+  }
+
+  getSeriesBackdrop(title: string): Observable<string> {
+    const apiKey = '162c3a034e5d753ea69686ec9c50494b';
+    const baseUrl = 'https://api.themoviedb.org/3';
+    const searchUrl = `${baseUrl}/search/tv?api_key=${apiKey}&query=${encodeURIComponent(title)}`;
 
     return this.http.get<any>(searchUrl).pipe(
       map(response => {

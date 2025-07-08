@@ -1,0 +1,13 @@
+<div class="series-info-container" [ngStyle]="{'background-image': 'url(' + backdropUrl + ')', 'background-position': 'center calc(10% - 20px)'}">
+    <div class="series-info-content">
+      <h1 class="series-title">{{ series?.name }}</h1>
+      
+      <div class="series-details-row">
+        <p><strong>Year:</strong> {{ series?.year }}</p>
+        <p><strong>Duration:</strong> {{ series?.duration }} mins</p>
+        <p><strong>Rating:</strong> {{ series?.rating }}</p>
+      </div>
+
+      <p class="series-description">{{ series?.description }}</p>
+    </div>
+  </div>

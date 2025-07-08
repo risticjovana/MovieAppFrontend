@@ -1,1 +1,13 @@
-<p>movie-info works!</p>
+<div class="movie-info-container" [ngStyle]="{'background-image': 'url(' + backdropUrl + ')', 'background-position': 'center calc(10% - 20px)'}">
+    <div class="movie-info-content">
+      <h1 class="movie-title">{{ movie?.name }}</h1>
+      
+      <div class="movie-details-row">
+        <p><strong>Year:</strong> {{ movie?.year }}</p>
+        <p><strong>Duration:</strong> {{ movie?.duration }} mins</p>
+        <p><strong>Rating:</strong> {{ movie?.rating }}</p>
+      </div>
+
+      <p class="movie-description">{{ movie?.description }}</p>
+    </div>
+  </div>

@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../services/movie.service';
 
 @Component({
-  selector: 'app-movie-info',
-  templateUrl: './movie-info.component.html',
-  styleUrl: './movie-info.component.css'
+  selector: 'app-series-info',
+  templateUrl: './series-info.component.html',
+  styleUrl: './series-info.component.css'
 })
-export class MovieInfoComponent {
-  contentId!: number;
-  movie: any;
+export class SeriesInfoComponent {
+contentId!: number;
+  series: any;
   backdropUrl: string = 'assets/default-backdrop.jpg';
 
   constructor(private route: ActivatedRoute, private movieService: MovieService){}
@@ -21,20 +21,21 @@ export class MovieInfoComponent {
           this.contentId = +id;
         }
       });
-      this.loadMovieInfo(this.contentId);
+      this.loadSeriesInfo(this.contentId);
     }
 
-    loadMovieInfo(id: number) {
-    this.movieService.getMovieById(this.contentId).subscribe({
+    loadSeriesInfo(id: number) {
+    this.movieService.getSeriesById(this.contentId).subscribe({
       next: (movies) => {
-        this.movie = movies;
-        if (!this.movie) {
-          console.warn('Movie not found with ID:', id);
+        this.series = movies;
+        console.log(this.series)
+        if (!this.series) {
+          console.warn('Series not found with ID:', id);
           return;
         }
 
         // Fetch backdrop based on movie title (TMDb)
-        this.movieService.getBackdrop(this.movie.name).subscribe({
+        this.movieService.getSeriesBackdrop(this.series.name).subscribe({
           next: (backdrop) => this.backdropUrl = backdrop,
           error: () => {
             console.warn('Failed to load backdrop, using default.');
@@ -43,7 +44,7 @@ export class MovieInfoComponent {
         });
       },
       error: (err) => {
-        console.error('Failed to load movies', err);
+        console.error('Failed to load series', err);
       }
     });
   }

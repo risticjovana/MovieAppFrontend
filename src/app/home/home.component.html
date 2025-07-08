@@ -33,6 +33,7 @@
         [src]="posterMap[movie.contentId] || 'assets/default-movie.jpg'"
         [alt]="movie.name"
         class="movie-poster"
+        (click)="goToMovieInfo(movie.contentId)"
       />
       <div class="genre-movie-info">
         <h3>{{ movie.name }}</h3>
@@ -48,6 +49,7 @@
         [src]="posterMap[series.contentId] || 'assets/default-movie.jpg'"
         [alt]="series.name"
         class="movie-poster"
+        (click)="goToSeriesInfo(series.contentId)"
       />
       <div class="genre-movie-info">
         <h3>{{ series.name }}</h3>

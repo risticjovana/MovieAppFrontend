@@ -5,6 +5,7 @@ import 'swiper/css/bundle';
 import { MovieService } from '../services/movie.service';
 import { ContentService } from '../services/content.service';
 import { VisualContent } from '../model/visual-content';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -46,7 +47,7 @@ export class HomeComponent implements OnInit {
   backdropUrls: { [movieName: string]: string } = {};
 
 
-  constructor(private movieService: MovieService, private contentService: ContentService) {}
+  constructor(private movieService: MovieService, private contentService: ContentService, private router: Router) {}
 
   ngAfterViewInit(): void {
     new Swiper('.movie-slider', {
@@ -140,10 +141,18 @@ export class HomeComponent implements OnInit {
 
   }
 
-
-
   toggleSidebar() {
     const sidebar = document.querySelector('.sidebar') as HTMLElement;
     sidebar.classList.toggle('close');
+  }
+
+  goToMovieInfo(contentId: number) {
+    this.router.navigate(['/movie-info', contentId]);
+
+  }
+
+  goToSeriesInfo(contentId: number) {
+    this.router.navigate(['/series-info', contentId]);
+
   }
 }

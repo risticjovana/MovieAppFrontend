@@ -1,4 +1,4 @@
-.movie-info-container {
+.series-info-container {
   position: relative; 
   height: 615px; /* adjust as you want */ 
   background-size: cover;
@@ -10,7 +10,7 @@
   overflow: hidden; 
 }
 
-.movie-info-container::before {
+.series-info-container::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -18,30 +18,30 @@
   z-index: 0;
 }
 
-.movie-info-content {
+.series-info-content {
   position: relative; /* above overlay */
   max-width: 85%; /* left half */
   z-index: 1;
   margin-left: 20px;
 }
 
-.movie-title {
+.series-title {
   font-size: 3rem; /* big title */
   margin-bottom: 1rem;
 }
 
-.movie-details-row {
+.series-details-row {
   display: flex;
   gap: 2rem;        
   font-size: 1rem;
   margin-bottom: 1rem;
 }
 
-.movie-details-row p {
+.series-details-row p {
   margin: 0;
 }
 
-.movie-description {
+.series-description {
   margin-top: 1rem;
   font-size: 1.05rem;
   line-height: 1.5;
