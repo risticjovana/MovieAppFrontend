@@ -11,6 +11,7 @@ export class MovieInfoComponent {
   contentId!: number;
   movie: any;
   backdropUrl: string = 'assets/default-backdrop.jpg';
+  cast: any[] = [];
 
   constructor(private route: ActivatedRoute, private movieService: MovieService){}
 
@@ -40,6 +41,10 @@ export class MovieInfoComponent {
             console.warn('Failed to load backdrop, using default.');
             this.backdropUrl = 'assets/default-backdrop.jpg';
           }
+        });
+        this.movieService.getMovieCastByName(this.movie.name).subscribe({
+          next: (castData) => this.cast = castData.slice(0, 11),
+          error: (err) => console.error('Failed to fetch cast:', err)
         });
       },
       error: (err) => {

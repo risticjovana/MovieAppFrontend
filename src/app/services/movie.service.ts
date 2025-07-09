@@ -134,6 +134,31 @@ export class MovieService {
     );
   }
 
+  getMovieCastByName(movieName: string): Observable<any[]> {
+    const apiKey = '162c3a034e5d753ea69686ec9c50494b';
+    const baseUrl = 'https://api.themoviedb.org/3';
+
+    // Step 1: Search series by name
+    const searchUrl = `${baseUrl}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(movieName)}`;
+
+    return this.http.get<any>(searchUrl).pipe(
+      switchMap(response => {
+        const movie = response.results?.[0];
+        if (!movie) return of([]); // not found
+
+        const movieId = movie.id;
+        const creditsUrl = `${baseUrl}/movie/${movieId}/credits?api_key=${apiKey}&language=en-US`;
+
+        // Step 2: Use the movie ID to get cast
+        return this.http.get<any>(creditsUrl).pipe(
+          map(credits => credits.cast || []),
+          catchError(() => of([]))
+        );
+      }),
+      catchError(() => of([]))
+    );
+  }
+
   getSeasonsBySeriesName(seriesName: string): Observable<any[]> {
     const apiKey = '162c3a034e5d753ea69686ec9c50494b';
     const baseUrl = 'https://api.themoviedb.org/3';

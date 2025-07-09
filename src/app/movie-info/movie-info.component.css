@@ -8,6 +8,9 @@
   display: flex;
   align-items: flex-end; /* align content to bottom */
   overflow: hidden; 
+  margin: 40px auto 0px auto;
+  border-radius: 16px;
+  width: 95%;
 }
 
 .movie-info-container::before {
@@ -46,4 +49,74 @@
   font-size: 1.05rem;
   line-height: 1.5;
   width: 70%; 
+}
+
+.cast-section { 
+  bottom: 10px; 
+  z-index: 1;
+  color: white;
+  max-width: 95%;
+  margin-top: 50px;
+  margin: 0 auto;
+}
+
+.cast-section h3 {
+  display: block;    
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-left: 0px;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;  
+  margin-top: 40px;
+}
+
+.cast-section h3::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #A847C8;
+  margin: 0.3rem 0px;
+  border-radius: 2px; 
+}
+
+.cast-list {
+  display: flex;
+  margin-top: 20px;
+  gap: 3rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+  margin-left: 8px;
+}
+
+.cast-member {
+  flex: 0 0 auto;
+  width: 100px;
+  scroll-snap-align: start;
+  text-align: center;
+}
+
+.cast-member img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: center 40%; /* <-- shift image down */
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.3rem; 
+}
+
+.cast-name {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0.3rem 0 0 0;
+}
+
+.cast-role {
+  font-size: 0.75rem;
+  color: #ccc;
+  margin: 0;
 }

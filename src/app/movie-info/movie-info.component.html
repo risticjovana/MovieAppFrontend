@@ -11,3 +11,20 @@
       <p class="movie-description">{{ movie?.description }}</p>
     </div>
   </div>
+
+  <div class="cast-section" *ngIf="cast.length > 0">
+  <h3>Cast</h3>
+  <div class="cast-list">
+    <div class="cast-member" *ngFor="let member of cast">
+      <div class="cast-image-wrapper">
+        <img
+          [src]="member.profile_path ? 'https://image.tmdb.org/t/p/w185' + member.profile_path : 'assets/default-profile.jpg'"
+          [alt]="member.name" />
+      </div>
+      <div>
+        <p class="cast-name">{{ member.name }}</p>
+        <p class="cast-role">{{ member.character }}</p>
+      </div>
+    </div>
+  </div>
+</div>
