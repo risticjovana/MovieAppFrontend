@@ -1,4 +1,4 @@
-<div class="series-info-container" [ngStyle]="{'background-image': 'url(' + backdropUrl + ')', 'background-position': 'center calc(10% - 20px)'}">
+<div class="series-info-container" [ngStyle]="{'background-image': 'url(' + backdropUrl + ')', 'background-position': 'center calc(10% - 260px)'}">
     <div class="series-info-content">
       <h1 class="series-title">{{ series?.name }}</h1>
       
@@ -7,7 +7,60 @@
         <p><strong>Duration:</strong> {{ series?.duration }} mins</p>
         <p><strong>Rating:</strong> {{ series?.rating }}</p>
       </div>
-
       <p class="series-description">{{ series?.description }}</p>
     </div>
+</div>
+
+<!-- Cast Section -->
+<div class="cast-section" *ngIf="cast.length > 0">
+  <h3>Cast</h3>
+  <div class="cast-list">
+    <div class="cast-member" *ngFor="let member of cast">
+      <div class="cast-image-wrapper">
+        <img
+          [src]="member.profile_path ? 'https://image.tmdb.org/t/p/w185' + member.profile_path : 'assets/default-profile.jpg'"
+          [alt]="member.name" />
+      </div>
+      <div>
+        <p class="cast-name">{{ member.name }}</p>
+        <p class="cast-role">{{ member.character }}</p>
+      </div>
+    </div>
   </div>
+</div>
+
+<!-- Season Selector -->
+<div class="season-section" *ngIf="seasons.length > 0">
+  <select
+    id="seasonSelect"
+    [(ngModel)]="selectedSeason"
+    (change)="onSeasonChange(selectedSeason)">
+    <option *ngFor="let season of seasons" [value]="season.season_number">
+      Season {{ season.season_number }}
+    </option>
+  </select>
+
+  <!-- Episodes List -->
+    <div class="episodes-section" *ngIf="episodes.length > 0"> 
+      <div class="swiper episode-slider">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" *ngFor="let episode of episodes">
+            <div class="episode-card">
+              <img [src]="episode.still_path ? 'https://image.tmdb.org/t/p/w300' + episode.still_path : 'assets/default-poster.jpg'"
+                  [alt]="episode.name">
+              <div class="episode-info">
+                <h4>Episode {{ episode.episode_number }}: {{ episode.name }}</h4>
+                <p class="rating">
+                  <i class="fa-solid fa-star"></i> {{ episode.vote_average | number: '1.1-1' }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+
+</div>

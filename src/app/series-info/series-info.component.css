@@ -8,13 +8,15 @@
   display: flex;
   align-items: flex-end; /* align content to bottom */
   overflow: hidden; 
+  width: 95%;
+  margin: 40px auto 0px auto;
+  border-radius: 16px;
 }
 
 .series-info-container::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5); /* dark overlay on backdrop */
   z-index: 0;
 }
 
@@ -46,4 +48,188 @@
   font-size: 1.05rem;
   line-height: 1.5;
   width: 70%; 
+}
+
+.cast-section { 
+  bottom: 10px; 
+  z-index: 1;
+  color: white;
+  max-width: 95%;
+  margin-top: 50px;
+  margin: 0 auto;
+}
+
+.cast-section h3 {
+  display: block;    
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-left: 0px;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;  
+  margin-top: 40px;
+}
+
+.cast-section h3::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #A847C8;
+  margin: 0.3rem 0px;
+  border-radius: 2px; 
+}
+
+.cast-list {
+  display: flex;
+  margin-top: 20px;
+  gap: 3rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+  margin-left: 8px;
+}
+
+.cast-member {
+  flex: 0 0 auto;
+  width: 100px;
+  scroll-snap-align: start;
+  text-align: center;
+}
+
+.cast-member img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: center 40%; /* <-- shift image down */
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.3rem; 
+}
+
+.cast-name {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0.3rem 0 0 0;
+}
+
+.cast-role {
+  font-size: 0.75rem;
+  color: #ccc;
+  margin: 0;
+}
+
+.season-section {
+  margin: 20px 0 10px 40px; 
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: block; 
+}
+
+.season-section label {
+  font-weight: 600;
+  font-size: 1rem;
+  display: block; /* label on its own line */
+  margin-bottom: 6px; /* space between label and select */
+}
+
+.season-section select {
+  background-color: transparent; /* keep background clean */
+  color: white; 
+  border: none;
+  border-bottom: 4px solid #A847C8; /* bottom border only */
+  border-radius: 0; /* remove corner rounding */
+  padding: 6px 0px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  outline: none;
+  min-width: 140px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+
+.season-section select:hover,
+.season-section select:focus {
+  border-color: #A847C8; /* Dodger blue highlight */
+  background-color: #141116;
+}
+
+
+/* Swiper container */
+.episode-slider {
+  width: 1600px;
+  padding: 10px 0;
+  box-sizing: border-box;
+  margin: 0 12px;
+}
+
+/* Swiper wrapper & slides */
+.swiper-wrapper {
+  display: flex;
+}
+
+.swiper-slide {
+  flex: 0 0 auto; /* prevent slide from stretching */
+  width: 301px;    /* width of each episode card */
+  margin-right: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: white;
+  cursor: pointer;
+  height: 250px;
+}
+
+/* Episode image */
+.swiper-slide img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 0 6px rgba(0,0,0,0.5);
+}
+
+/* Episode info */
+.episode-info {
+  padding: 8px;
+}
+
+.episode-info h4 {
+  font-size: 0.9rem;
+  margin: 0 0 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rating {
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.rating i {
+  color: #A847C8;
+  font-size: 1rem;
+}
+
+/* Navigation arrows */
+.swiper-button-next {
+  color: white;
+  top: 45%;
+  width: 30px;
+  height: 30px;
+}
+
+.swiper-button-prev{
+  left: -2px;
+  color: white;
+  top: 45%;
+  width: 30px;
+  height: 30px;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { MovieDTO } from '../model/movie';
 import { CinemaWithProjectionsDTO } from '../model/cinema-with-projections';
 import { Ticket } from '../model/ticket';
@@ -106,6 +106,75 @@ export class MovieService {
         return 'assets/default-backdrop.jpg'; // fallback image
       }),
       catchError(() => of('assets/default-backdrop.jpg')) // fallback on error
+    );
+  }
+
+  getSeriesCastByName(seriesName: string): Observable<any[]> {
+    const apiKey = '162c3a034e5d753ea69686ec9c50494b';
+    const baseUrl = 'https://api.themoviedb.org/3';
+
+    // Step 1: Search series by name
+    const searchUrl = `${baseUrl}/search/tv?api_key=${apiKey}&query=${encodeURIComponent(seriesName)}`;
+
+    return this.http.get<any>(searchUrl).pipe(
+      switchMap(response => {
+        const series = response.results?.[0];
+        if (!series) return of([]); // not found
+
+        const seriesId = series.id;
+        const creditsUrl = `${baseUrl}/tv/${seriesId}/credits?api_key=${apiKey}&language=en-US`;
+
+        // Step 2: Use the series ID to get cast
+        return this.http.get<any>(creditsUrl).pipe(
+          map(credits => credits.cast || []),
+          catchError(() => of([]))
+        );
+      }),
+      catchError(() => of([]))
+    );
+  }
+
+  getSeasonsBySeriesName(seriesName: string): Observable<any[]> {
+    const apiKey = '162c3a034e5d753ea69686ec9c50494b';
+    const baseUrl = 'https://api.themoviedb.org/3';
+    const searchUrl = `${baseUrl}/search/tv?api_key=${apiKey}&query=${encodeURIComponent(seriesName)}`;
+
+    return this.http.get<any>(searchUrl).pipe(
+      switchMap(response => {
+        const series = response.results?.[0];
+        if (!series) return of([]);
+
+        const seriesId = series.id;
+        const detailsUrl = `${baseUrl}/tv/${seriesId}?api_key=${apiKey}&language=en-US`;
+
+        return this.http.get<any>(detailsUrl).pipe(
+          map(details => details.seasons || []),
+          catchError(() => of([]))
+        );
+      }),
+      catchError(() => of([]))
+    );
+  }
+
+  getEpisodesBySeriesNameAndSeason(seriesName: string, seasonNumber: number): Observable<any[]> {
+    const apiKey = '162c3a034e5d753ea69686ec9c50494b';
+    const baseUrl = 'https://api.themoviedb.org/3';
+    const searchUrl = `${baseUrl}/search/tv?api_key=${apiKey}&query=${encodeURIComponent(seriesName)}`;
+
+    return this.http.get<any>(searchUrl).pipe(
+      switchMap(response => {
+        const series = response.results?.[0];
+        if (!series) return of([]);
+
+        const seriesId = series.id;
+        const seasonUrl = `${baseUrl}/tv/${seriesId}/season/${seasonNumber}?api_key=${apiKey}&language=en-US`;
+
+        return this.http.get<any>(seasonUrl).pipe(
+          map(seasonData => seasonData.episodes || []),
+          catchError(() => of([]))
+        );
+      }),
+      catchError(() => of([]))
     );
   }
 

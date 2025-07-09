@@ -16,7 +16,7 @@ export class AppComponent{
       if (event instanceof NavigationEnd) {
         const currentUrl = event.urlAfterRedirects;
         this.showSidebar = currentUrl !== '/login' && currentUrl !== '/register';
-        this.showTopbar = currentUrl !== '/login' && currentUrl !== '/register';
+        this.showTopbar = currentUrl === '/home';
         this.isAuthPage = currentUrl.includes('/login') || currentUrl.includes('/register');
       }
     });
