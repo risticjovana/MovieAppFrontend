@@ -17,6 +17,11 @@ export class SeriesInfoComponent implements OnDestroy {
   seasons: any[] = [];
   episodes: any[] = [];
   selectedSeason!: number;
+  showReviewPopup = false;
+  reviewRating = 0;
+  hoverRating = 0;
+  reviewText = '';
+  stars = Array(10);
 
   private swiperInstance?: Swiper;
 
@@ -125,5 +130,24 @@ export class SeriesInfoComponent implements OnDestroy {
       this.swiperInstance.destroy(true, true);
       this.swiperInstance = undefined;
     }
+  }
+
+  setRating(rating: number) {
+    this.reviewRating = rating;
+  }
+
+  submitReview() {
+    if (this.reviewRating === 0) {
+      alert('Please select a star rating before submitting!');
+      return;
+    }
+    // Your submit logic here (e.g., Firestore call)
+    console.log('Rating:', this.reviewRating);
+    console.log('Review:', this.reviewText);
+    
+    // After submission, close popup and reset
+    this.showReviewPopup = false;
+    this.reviewRating = 0;
+    this.reviewText = '';
   }
 }
