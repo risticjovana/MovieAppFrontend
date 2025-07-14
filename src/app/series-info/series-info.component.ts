@@ -1,8 +1,12 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../services/movie.service';
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
+import { ContentService } from '../services/content.service';
+import { Review } from '../model/review';
+import { isPlatformBrowser } from '@angular/common';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-series-info',
@@ -21,11 +25,18 @@ export class SeriesInfoComponent implements OnDestroy {
   reviewRating = 0;
   hoverRating = 0;
   reviewText = '';
+  reviews: Review[] = [];
   stars = Array(10);
+  user: any;
 
   private swiperInstance?: Swiper;
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService) {}
+  constructor(
+    private route: ActivatedRoute, 
+    private movieService: MovieService, 
+    private contentService: ContentService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -33,6 +44,8 @@ export class SeriesInfoComponent implements OnDestroy {
       if (id) {
         this.contentId = +id;
         this.loadSeriesInfo(this.contentId);
+        this.loadUserFromToken();
+        this.loadReviews(this.contentId);
       }
     });
   }
@@ -97,6 +110,33 @@ export class SeriesInfoComponent implements OnDestroy {
     });
   }
 
+  loadUserFromToken() {
+      if (!isPlatformBrowser(this.platformId)) return;
+      
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          this.user = jwtDecode(token);
+          console.log('Decoded user:', this.user);
+        } catch {
+          this.user = null;
+      }
+    }
+  }
+
+  loadReviews(contentId: number) {
+    this.contentService.getReviewsByContentId(contentId).subscribe({
+      next: (reviews) => {
+        this.reviews = reviews;
+      },
+      error: (err) => {
+        console.error('Failed to load reviews:', err);
+        this.reviews = [];  
+      }
+    });
+  }
+
+
   onSeasonChange(seasonNumber: number) {
     this.selectedSeason = seasonNumber;
     if (this.series?.name) {
@@ -141,13 +181,29 @@ export class SeriesInfoComponent implements OnDestroy {
       alert('Please select a star rating before submitting!');
       return;
     }
-    // Your submit logic here (e.g., Firestore call)
-    console.log('Rating:', this.reviewRating);
-    console.log('Review:', this.reviewText);
-    
-    // After submission, close popup and reset
-    this.showReviewPopup = false;
-    this.reviewRating = 0;
-    this.reviewText = '';
+    if (!this.reviewText.trim()) {
+      alert('Please write a review before submitting!');
+      return;
+    }
+
+    const review: Omit<Review, 'contentId' | 'date' | 'reviewId'> = {
+      description: this.reviewText,
+      rating: this.reviewRating,
+      userId: this.user.id
+    };
+
+    this.contentService.addReview(this.contentId, review).subscribe({
+      next: (createdReview) => {
+        console.log('Review submitted:', createdReview); 
+ 
+        this.showReviewPopup = false;
+        this.reviewRating = 0;
+        this.reviewText = '';
+      },
+      error: (err) => {
+        console.error('Failed to submit review:', err);
+        alert('Failed to submit review. Please try again later.');
+      }
+    });
   }
 }
