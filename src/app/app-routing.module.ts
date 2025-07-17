@@ -11,6 +11,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MovieInfoComponent } from './movie-info/movie-info.component';
 import { SeriesInfoComponent } from './series-info/series-info.component';
+import { MyCollectionsComponent } from './my-collections/my-collections.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent},
   { path: 'movie-info/:contentId', component: MovieInfoComponent},
   { path: 'series-info/:contentId', component: SeriesInfoComponent},
+  { path: 'my-collections', component: MyCollectionsComponent },
   { path: '**', redirectTo: 'login' }, // move this to the end
 ];
 @NgModule({

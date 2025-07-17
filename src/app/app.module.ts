@@ -20,6 +20,7 @@ import Swiper from 'swiper';
 import { MovieInfoComponent } from './movie-info/movie-info.component';
 import { SeriesInfoComponent } from './series-info/series-info.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MyCollectionsComponent } from './my-collections/my-collections.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     UserProfileComponent,
     AdminDashboardComponent,
     MovieInfoComponent,
-    SeriesInfoComponent
+    SeriesInfoComponent,
+    MyCollectionsComponent
   ],
   imports: [
     BrowserModule,
