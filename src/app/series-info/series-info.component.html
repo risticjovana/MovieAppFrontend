@@ -9,11 +9,44 @@
       </div>
       <p class="series-description">{{ series?.description }}</p>
 
-      <!-- Rate button -->
-      <button class="rate-button" (click)="showReviewPopup = true">
-        LEAVE A REVIEW
-      </button>
     </div>
+</div>
+<div class="main-content-row">
+  <!-- Cast Section -->
+  <div class="cast-section" *ngIf="cast.length > 0">
+    <h3>Cast</h3>
+    <div class="cast-list">
+      <div class="cast-member" *ngFor="let member of cast">
+        <div class="cast-image-wrapper">
+          <img
+            [src]="member.profile_path ? 'https://image.tmdb.org/t/p/w185' + member.profile_path : 'assets/default-profile.jpg'"
+            [alt]="member.name" />
+        </div>
+        <div>
+          <p class="cast-name">{{ member.name }}</p>
+          <p class="cast-role">{{ member.character }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Function Panel -->
+  <div class="function-panel">
+    <div class="season-section">
+        <select [(ngModel)]="selectedCollectionId" (change)="onCollectionChange()">
+      <option [ngValue]="null" disabled hidden>Add to Collection</option> 
+      <option *ngFor="let col of collections" [ngValue]="col.id">
+        {{ col.name }}
+      </option> 
+      <option [ngValue]="0">
+        + New Collection
+      </option>
+    </select>
+    </div>
+    <!-- Rate button -->
+    <button class="rate-button" (click)="showReviewPopup = true">
+      LEAVE A REVIEW
+    </button>
+  </div>
 </div>
 
 <!-- Popup Modal -->
@@ -49,24 +82,6 @@
       <button class="close-button" (click)="showReviewPopup = false">&times;</button>
     </div>
   </div>
-
-<!-- Cast Section -->
-<div class="cast-section" *ngIf="cast.length > 0">
-  <h3>Cast</h3>
-  <div class="cast-list">
-    <div class="cast-member" *ngFor="let member of cast">
-      <div class="cast-image-wrapper">
-        <img
-          [src]="member.profile_path ? 'https://image.tmdb.org/t/p/w185' + member.profile_path : 'assets/default-profile.jpg'"
-          [alt]="member.name" />
-      </div>
-      <div>
-        <p class="cast-name">{{ member.name }}</p>
-        <p class="cast-role">{{ member.character }}</p>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Season Selector -->
 <div class="season-section" *ngIf="seasons.length > 0">

@@ -19,6 +19,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import Swiper from 'swiper';
 import { MovieInfoComponent } from './movie-info/movie-info.component';
 import { SeriesInfoComponent } from './series-info/series-info.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SeriesInfoComponent } from './series-info/series-info.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSnackBarModule
   ],
   providers: [
     provideHttpClient(withFetch()),

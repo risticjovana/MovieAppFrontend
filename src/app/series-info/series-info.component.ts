@@ -7,6 +7,8 @@ import { ContentService } from '../services/content.service';
 import { Review } from '../model/review';
 import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
+import { CollectionService } from '../services/collection.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-series-info',
@@ -28,6 +30,8 @@ export class SeriesInfoComponent implements OnDestroy {
   reviews: Review[] = [];
   stars = Array(10);
   user: any;
+  collections: any[] = [];
+  selectedCollectionId: number | null = null;
 
   private swiperInstance?: Swiper;
 
@@ -35,6 +39,8 @@ export class SeriesInfoComponent implements OnDestroy {
     private route: ActivatedRoute, 
     private movieService: MovieService, 
     private contentService: ContentService,
+    private collectionService: CollectionService,
+    private snackBar: MatSnackBar,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -82,7 +88,7 @@ export class SeriesInfoComponent implements OnDestroy {
 
   loadCast(name: string) {
     this.movieService.getSeriesCastByName(name).subscribe({
-      next: (castData) => this.cast = castData.slice(0, 11),
+      next: (castData) => this.cast = castData.slice(0, 7),
       error: (err) => console.error('Failed to fetch cast:', err)
     });
   }
@@ -117,6 +123,7 @@ export class SeriesInfoComponent implements OnDestroy {
       if (token) {
         try {
           this.user = jwtDecode(token);
+          this.loadUserCollections(this.user.id);
           console.log('Decoded user:', this.user);
         } catch {
           this.user = null;
@@ -130,7 +137,7 @@ export class SeriesInfoComponent implements OnDestroy {
         this.reviews = reviews;
       },
       error: (err) => {
-        console.error('Failed to load reviews:', err);
+        console.log('Failed to load reviews:', err);
         this.reviews = [];  
       }
     });
@@ -145,8 +152,7 @@ export class SeriesInfoComponent implements OnDestroy {
   }
 
   private initSwiper() {
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
-      // Skip initialization in non-browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') { 
       return;
     }
 
@@ -178,11 +184,11 @@ export class SeriesInfoComponent implements OnDestroy {
 
   submitReview() {
     if (this.reviewRating === 0) {
-      alert('Please select a star rating before submitting!');
+      console.error('Please select a star rating before submitting!');
       return;
     }
     if (!this.reviewText.trim()) {
-      alert('Please write a review before submitting!');
+      console.error('Please write a review before submitting!');
       return;
     }
 
@@ -201,9 +207,46 @@ export class SeriesInfoComponent implements OnDestroy {
         this.reviewText = '';
       },
       error: (err) => {
-        console.error('Failed to submit review:', err);
-        alert('Failed to submit review. Please try again later.');
+        console.error('Failed to submit review:', err); 
       }
     });
+  }
+
+  loadUserCollections(userId: number) {
+    this.collectionService.getUserCollections(userId).subscribe({
+      next: (collections) => {
+        this.collections = collections;
+      },
+      error: (err) => {
+        console.error('Failed to load user collections:', err);
+      }
+    });
+  }
+
+  addSeriesToCollection() {
+    if (!this.selectedCollectionId) {
+      console.error('Please select a collection.');
+      return;
+    }
+  }
+  
+  onCollectionChange() {
+    if (!this.selectedCollectionId) return;
+
+    this.collectionService
+      .addContentToCollection(this.contentId, this.selectedCollectionId, this.user.id)
+      .subscribe({
+        next: (success) => {
+          if (success) {
+            this.snackBar.open('Content added to collection!', 'Close', { duration: 3000 });
+          } else {
+            this.snackBar.open('Failed to add content.', 'Close', { duration: 3000 });
+          }  
+        },
+        error: (err) => {
+          console.error('Failed to add series to collection:', err);
+          this.selectedCollectionId = null;
+        }
+      });
   }
 }
