@@ -1,0 +1,39 @@
+<div *ngIf="collectionInfo" class="collection-info-container">
+  <h1 class="collection-title">{{ collectionInfo.name }}</h1>
+  <p class="collection-description">{{ collectionInfo.description }}</p>
+  <div class="collection-meta">
+    <span class="collection-type">
+      {{
+        collectionInfo.typeString === 'Licna' ? 'Personal' :
+        collectionInfo.typeString === 'Urednicka' ? 'Editorial' :
+        collectionInfo.typeString
+      }}
+    </span>
+    <span class="created-at">Created: {{ collectionInfo.createdAt | date:'mediumDate' }}</span>
+    <span class="save-count">
+      <i class="fas fa-bookmark"></i> {{ collectionInfo.saveCount }}
+    </span>
+  </div>
+</div>
+
+
+<h2 class="section-label">Collection Contents</h2>
+
+<div *ngIf="!loading && contents.length === 0" class="empty-text">
+  This collection currently has no contents.
+</div>
+
+<div class="genre-movies-container">
+  <div class="genre-movie-card" *ngFor="let content of contents">
+    <img
+      [src]="posterMap[content.contentId] || 'assets/default-movie.jpg'"
+      [alt]="content.name"
+      class="movie-poster"
+      (click)="goToContentInfo(content)"
+    />
+    <div class="genre-movie-info">
+      <h3>{{ content.name }}</h3>
+    </div>
+  </div>
+</div>
+

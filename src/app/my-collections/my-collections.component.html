@@ -9,7 +9,8 @@
   </div>
 
   <div class="collections-grid" *ngIf="userCollections.length > 0">
-    <div class="collection-card" *ngFor="let collection of userCollections">
+    <div class="collection-card" *ngFor="let collection of userCollections" 
+     (click)="openCollectionContents(collection.id)" style="cursor: pointer;">
       <div class="collection-header">
         <h3>{{ collection.name }}</h3>
         <span class="badge">

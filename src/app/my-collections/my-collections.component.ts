@@ -2,7 +2,8 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CollectionService } from '../services/collection.service';
 import { AuthService } from '../services/auth.service';
 import { isPlatformBrowser } from '@angular/common';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-collections',
@@ -17,6 +18,7 @@ export class MyCollectionsComponent implements OnInit {
 
   constructor(
     private collectionService: CollectionService,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -58,4 +60,9 @@ export class MyCollectionsComponent implements OnInit {
     catch{ 
     }
   }
+
+  openCollectionContents(collectionId: number) {
+    this.router.navigate(['/collections', collectionId, 'contents']);
+  }
+
 }

@@ -18,4 +18,13 @@ export class CollectionService {
   getUserCollections(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/personal/user/${userId}`);
   }
+
+  getCollectionContents(collectionId: number): Observable<any[]> {
+    const url = `${this.baseUrl}/${collectionId}/contents`;
+    return this.http.get<any[]>(url);
+  }
+
+  getCollectionInfo(collectionId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${collectionId}`);
+  }
 }
