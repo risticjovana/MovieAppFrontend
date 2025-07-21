@@ -27,4 +27,21 @@ export class CollectionService {
   getCollectionInfo(collectionId: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${collectionId}`);
   }
+
+  createPersonalCollection(
+    name: string,
+    description: string,
+    userId: number
+  ): Observable<any> {
+    const url = `${this.baseUrl}/create-personal`;
+    const body = { name, description, userId };
+    return this.http.post<any>(url, body);
+  }
+
+  getAvailableContentNotInCollection(collectionId: number): Observable<any[]> {
+    const url = `${this.baseUrl}/${collectionId}/available-content`;
+    return this.http.get<any[]>(url);
+  }
+
+
 }

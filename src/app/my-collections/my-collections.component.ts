@@ -15,6 +15,13 @@ export class MyCollectionsComponent implements OnInit {
   userCollections: any[] = [];
   loading: boolean = true;
   error: string | null = null;
+  showCreateModal = false;
+
+  newCollection = {
+    name: '',
+    description: ''
+  };
+
 
   constructor(
     private collectionService: CollectionService,
@@ -64,5 +71,40 @@ export class MyCollectionsComponent implements OnInit {
   openCollectionContents(collectionId: number) {
     this.router.navigate(['/collections', collectionId, 'contents']);
   }
+
+  openCreateCollectionModal() {
+  this.showCreateModal = true;
+}
+
+closeModal() {
+  this.showCreateModal = false;
+}
+
+createCollection() {
+  if (!this.newCollection.name.trim() || !this.user?.id) return;
+
+  this.collectionService.createPersonalCollection(
+    this.newCollection.name,
+    this.newCollection.description,
+    this.user.id
+  ).subscribe({
+    next: (collection) => {
+      this.userCollections.unshift(collection);
+      this.closeModal();
+
+      // Reset the form
+      this.newCollection.name = '';
+      this.newCollection.description = '';
+
+      // Navigate to the collection's contents page
+      this.router.navigate(['/collections', collection.id, 'contents']);
+    },
+    error: (err) => {
+      console.error('Failed to create collection', err);
+    }
+  });
+}
+
+
 
 }

@@ -29,5 +29,20 @@
         <span class="save-count"><i class="fas fa-bookmark"></i> {{ collection.saveCount }}</span>
       </div>
     </div>
+    <div class="collection-card add-card" (click)="openCreateCollectionModal()" style="cursor: pointer;">
+      <div class="plus-icon">+</div>
+    </div>
   </div>
 </div>
+
+<div class="modal-backdrop" *ngIf="showCreateModal" (click)="closeModal()"></div>
+<div class="modal" *ngIf="showCreateModal">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Create New Collection</h3>
+    <input type="text" [(ngModel)]="newCollection.name" placeholder="Collection Name" />
+    <textarea [(ngModel)]="newCollection.description" placeholder="Description"></textarea>
+    <button (click)="createCollection()">Create</button>
+    <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+  </div>
+</div>
+
