@@ -1,0 +1,35 @@
+<h2 class="section-label">Explore collections</h2>
+
+<div class="collections-container">
+  <div *ngIf="loading" class="loading-text">Loading collections...</div>
+  <div *ngIf="error" class="error-text">{{ error }}</div>
+
+  <div *ngIf="!loading && collections.length === 0" class="empty-text">
+    You have no collections yet.
+  </div>
+
+  <div class="collections-grid">
+  <div class="collection-card" *ngFor="let collection of collections" (click)="openCollectionContents(collection.id)">
+    <div class="collection-header">
+      <h3>{{ collection.name }}</h3>
+      <span class="badge">{{ collection.typeString }}</span>
+    </div>
+
+    <div class="collection-description">
+      {{ collection.description }}
+    </div>
+
+    <div class="collection-footer">
+      <span class="created">
+        <i class="fas fa-calendar-alt"></i>
+        Created: {{ collection.createdAt | date: 'mediumDate' }}
+      </span>
+      <span class="save-count">
+        <i class="fas fa-bookmark"></i>
+        {{ collection.saveCount }}
+      </span>
+    </div>
+  </div>
+</div>
+
+</div>

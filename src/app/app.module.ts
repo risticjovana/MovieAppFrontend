@@ -22,6 +22,7 @@ import { SeriesInfoComponent } from './series-info/series-info.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MyCollectionsComponent } from './my-collections/my-collections.component';
 import { CollectionContentsComponent } from './collection-contents/collection-contents.component';
+import { ExploreCollectionsComponent } from './explore-collections/explore-collections.component'; 
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CollectionContentsComponent } from './collection-contents/collection-co
     MovieInfoComponent,
     SeriesInfoComponent,
     MyCollectionsComponent,
-    CollectionContentsComponent
+    CollectionContentsComponent,
+    ExploreCollectionsComponent 
   ],
   imports: [
     BrowserModule,
