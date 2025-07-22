@@ -126,4 +126,16 @@ export class CollectionContentsComponent implements OnInit {
       }
     });
   }
+
+  removeContentFromCollection(contentId: number) {
+    if (!this.collectionInfo) return;
+ 
+    this.collectionService.removeContentFromCollection(this.collectionInfo.id, contentId).subscribe({
+      next: () => { 
+        this.contents = this.contents.filter(c => c.contentId !== contentId);
+      },
+      error: (err) => { 
+      }
+    });
+  }
 }

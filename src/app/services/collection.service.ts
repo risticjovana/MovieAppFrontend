@@ -51,4 +51,9 @@ export class CollectionService {
     const url = `${this.baseUrl}/${collectionId}/content/${contentId}`;
     return this.http.delete<any>(url);
   }
+
+  getAllCollectionsExceptUser(userId: number): Observable<any[]> {
+    const url = `${this.baseUrl}/except-user/${userId}`;
+    return this.http.get<any[]>(url);
+  }
 }

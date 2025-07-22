@@ -16,7 +16,6 @@
   </div>
 </div>
 
-
 <h2 class="section-label">Collection Contents</h2>
 
 <div *ngIf="!loading && contents.length === 0" class="empty-text">
@@ -31,6 +30,14 @@
       class="movie-poster"
       (click)="goToContentInfo(content)"
     />
+    
+    <!-- Remove button -->
+    <button class="remove-btn" 
+            (click)="removeContentFromCollection(content.contentId); $event.stopPropagation()" 
+            title="Remove from collection">
+      &times;
+    </button>
+
     <div class="genre-movie-info">
       <h3>{{ content.name }}</h3>
     </div>
@@ -40,7 +47,10 @@
   </div>
 </div>
 
+<!-- Modal Backdrop -->
 <div class="modal-backdrop" *ngIf="showAddContentModal" (click)="closeAddContentModal()"></div>
+
+<!-- Modal for Adding Content -->
 <div class="modal" *ngIf="showAddContentModal">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <h3>Select Content to Add</h3>
@@ -48,12 +58,9 @@
     <div *ngIf="availableContents.length === 0" class="empty-text">No content available to add.</div>
 
     <div class="genre-movies-container modal-grid">
-      <div
-        class="genre-movie-card"
-        *ngFor="let content of availableContents"
-        [class.selected]="content.selected"
-        (click)="content.selected = !content.selected"
-      >
+      <div class="genre-movie-card" *ngFor="let content of availableContents" 
+           [class.selected]="content.selected"
+           (click)="content.selected = !content.selected">
         <img
           [src]="posterMap[content.contentId] || 'assets/default-movie.jpg'"
           [alt]="content.name"
@@ -65,7 +72,6 @@
         </div>
       </div>
     </div>
-
 
     <button (click)="addSelectedContents()">Add Selected</button>
     <button class="cancel-btn" (click)="closeAddContentModal()">Cancel</button>
