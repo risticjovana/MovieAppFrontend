@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CollectionService } from '../services/collection.service';
 import { AuthService } from '../services/auth.service';
 import { isPlatformBrowser } from '@angular/common';
@@ -16,6 +16,7 @@ export class MyCollectionsComponent implements OnInit {
   loading: boolean = true;
   error: string | null = null;
   showCreateModal = false;
+  dropdownOpenId: number | null = null;
 
   newCollection = {
     name: '',
@@ -105,6 +106,24 @@ createCollection() {
   });
 }
 
+toggleDropdown(event: MouseEvent, collectionId: number): void {
+  event.stopPropagation();
+  this.dropdownOpenId = this.dropdownOpenId === collectionId ? null : collectionId;
+}
 
+@HostListener('document:click')
+closeDropdown(): void {
+  this.dropdownOpenId = null;
+}
+
+deleteCollection(collectionId: number): void {
+  this.collectionService.deleteCollection(collectionId).subscribe({
+    next: () => {
+      this.userCollections = this.userCollections.filter(c => c.id !== collectionId);
+    },
+    error: () => { 
+    }
+  });
+}
 
 }

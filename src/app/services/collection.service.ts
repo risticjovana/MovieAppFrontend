@@ -43,5 +43,12 @@ export class CollectionService {
     return this.http.get<any[]>(url);
   }
 
+  deleteCollection(collectionId: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${collectionId}`);
+  }
 
+  removeContentFromCollection(collectionId: number, contentId: number): Observable<any> {
+    const url = `${this.baseUrl}/${collectionId}/content/${contentId}`;
+    return this.http.delete<any>(url);
+  }
 }
