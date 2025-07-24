@@ -41,6 +41,7 @@ export class CollectionContentsComponent implements OnInit {
       error: () => this.error = 'Failed to load collection info.'
     });
 
+
     this.collectionService.getCollectionContents(this.collectionId).subscribe({
       next: (data) => {
         this.contents = data;
@@ -58,6 +59,8 @@ export class CollectionContentsComponent implements OnInit {
       }
     });
   }
+
+  
 
   loadUserFromToken() {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -138,4 +141,18 @@ export class CollectionContentsComponent implements OnInit {
       }
     });
   }
+
+  saveCollection(): void {
+    if (!this.user?.id || !this.collectionInfo?.id) return;
+
+    this.collectionService.saveCollection(this.user.id, this.collectionInfo.id).subscribe({
+      next: () => { 
+        this.collectionInfo.saveCount++; // Optional: visually update count
+      },
+      error: (err) => {
+        console.error('Failed to save collection', err); 
+      }
+    });
+  }
+
 }

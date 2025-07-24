@@ -56,4 +56,14 @@ export class CollectionService {
     const url = `${this.baseUrl}/except-user/${userId}`;
     return this.http.get<any[]>(url);
   }
+
+  saveCollection(userId: number, collectionId: number): Observable<string> {
+    const url = `${this.baseUrl}/save`;
+    return this.http.post(url, { userId, collectionId }, { responseType: 'text' });
+  }
+
+  getSavedCollections(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/saved/user/${userId}`);
+  }
+
 }
