@@ -29,6 +29,11 @@
         <i class="fas fa-ticket-alt" style="color: #FFF;"></i> My Reservations
       </a>
     </li>
+    <li>
+      <a routerLink="/other-users" routerLinkActive="active">
+        <i class="fas fa-users" style="color: #FFF;"></i> People
+      </a>
+    </li>
     <!--Admin-only--> 
     <li *ngIf="isAdmin()">
       <a routerLink="/admin-dashboard" routerLinkActive="active">

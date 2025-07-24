@@ -56,4 +56,12 @@ export class AuthService {
     declineRoleRequest(id: number): Observable<string> {
         return this.http.post(`${this.apiUrl}/decline-role/${id}`, {}, { responseType: 'text' });
     }
+
+    getAllUsersExcept(id: number): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/all-except/${id}`);
+    }
+
+    followUser(followerId: number, followeeId: number): Observable<string> {
+        return this.http.post(`${this.apiUrl}/follow`, { FollowerId: followerId, FolloweeId: followeeId }, { responseType: 'text' });
+    }
 }

@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
   availableRoles: string[] = ['MODERATOR', 'ADMINISTRATOR', 'CRITIC', 'EDITOR'];  
   selectedRole: string = '';
 
-  constructor(private movieService: MovieService, private authService: AuthService, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(private authService: AuthService, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
 
 
   ngOnInit() {
