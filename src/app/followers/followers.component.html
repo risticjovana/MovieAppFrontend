@@ -1,1 +1,10 @@
-<p>followers works!</p>
+<h2>People you follow</h2>
+<div class="user-grid">
+  <div class="user-card" *ngFor="let user of followers">
+    <img class="profile-pic" [src]="user.imageUrl" alt="User Avatar" />
+    <div class="user-info">
+      <div class="name">{{ user.firstName }} {{ user.lastName }}</div>
+      <div class="email">{{ user.email }}</div>
+    </div>
+  </div>
+</div>

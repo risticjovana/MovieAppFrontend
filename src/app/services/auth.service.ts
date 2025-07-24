@@ -64,4 +64,9 @@ export class AuthService {
     followUser(followerId: number, followeeId: number): Observable<string> {
         return this.http.post(`${this.apiUrl}/follow`, { FollowerId: followerId, FolloweeId: followeeId }, { responseType: 'text' });
     }
+    
+    getFollowers(userId: number): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/followers/${userId}`);
+    }
+
 }

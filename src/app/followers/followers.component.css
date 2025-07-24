@@ -1,0 +1,46 @@
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  background-color: #1e1e2f;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.user-card:hover {
+  transform: scale(1.02);
+}
+
+.profile-pic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+  border: 3px solid white;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.email {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-top: 0.2rem;
+}
