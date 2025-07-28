@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CommentDto } from '../model/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +71,11 @@ export class CollectionService {
     const url = `${this.baseUrl}/add-comment`;
     const body = { collectionId, moderatorId, text };
     return this.http.post(url, body, { responseType: 'text' });
+  }
+
+  getCommentsForCollection(collectionId: number): Observable<CommentDto[]> {
+    const url = `${this.baseUrl}/${collectionId}/comments`;
+    return this.http.get<CommentDto[]>(url);
   }
 
 }

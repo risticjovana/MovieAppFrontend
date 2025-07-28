@@ -6,6 +6,7 @@ import { VisualContent } from '../model/visual-content';
 import { forkJoin } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common'; 
 import { jwtDecode } from 'jwt-decode';
+import { CommentDto } from '../model/comment';
 
 @Component({
   selector: 'app-collection-contents',
@@ -24,6 +25,7 @@ export class CollectionContentsComponent implements OnInit {
   user: any = null;
   showCommentPopup = false;
   commentText: string = '';
+  comments: CommentDto[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -39,9 +41,12 @@ export class CollectionContentsComponent implements OnInit {
     this.collectionId = Number(this.route.snapshot.paramMap.get('id'));
 
     this.collectionService.getCollectionInfo(this.collectionId).subscribe({
-      next: (info) => this.collectionInfo = info,
-      error: () => this.error = 'Failed to load collection info.'
-    });
+        next: (info) => {
+          this.collectionInfo = info;
+          this.loadComments();   
+        },
+        error: () => this.error = 'Failed to load collection info.'
+      });
 
 
     this.collectionService.getCollectionContents(this.collectionId).subscribe({
@@ -176,13 +181,32 @@ export class CollectionContentsComponent implements OnInit {
     ).subscribe({
       next: () => {
         console.log("Comment submitted successfully");
+        this.commentText = '';
         this.closeCommentPopup();
+        this.loadComments(); // reload comments list
       },
+
       error: (err) => {
         console.error("Failed to submit comment", err);
       }
     });
   }
+
+  loadComments() {
+  if (!this.collectionInfo?.id) {
+    console.log('No collectionInfo.id available');
+    return;
+  }
+
+  this.collectionService.getCommentsForCollection(this.collectionInfo.id)
+    .subscribe({
+      next: (data) => {
+        this.comments = data;
+        console.log('Loaded comments:', this.comments);
+      },
+      error: (err) => console.error('Failed to load comments', err)
+    });
+}
 
 
 }
