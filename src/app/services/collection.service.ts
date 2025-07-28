@@ -66,4 +66,10 @@ export class CollectionService {
     return this.http.get<any[]>(`${this.baseUrl}/saved/user/${userId}`);
   }
 
+  addCommentToCollection(collectionId: number, moderatorId: number, text: string): Observable<string> {
+    const url = `${this.baseUrl}/add-comment`;
+    const body = { collectionId, moderatorId, text };
+    return this.http.post(url, body, { responseType: 'text' });
+  }
+
 }

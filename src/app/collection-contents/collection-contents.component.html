@@ -3,6 +3,9 @@
   <div *ngIf="collectionInfo?.typeString === 'Urednicka'" class="save-button-container">
     <button class="save-btn" (click)="saveCollection()">Save Collection</button>
   </div>
+  <div class="comment-button-container">
+    <button class="comment-btn" (click)="openCommentPopup()">Leave a Comment</button>
+  </div>
   <p class="collection-description">{{ collectionInfo.description }}</p>
   <div class="collection-meta">
     <span class="collection-type">
@@ -78,5 +81,17 @@
 
     <button (click)="addSelectedContents()">Add Selected</button>
     <button class="cancel-btn" (click)="closeAddContentModal()">Cancel</button>
+  </div>
+</div>
+
+<!-- Comment Popup -->
+<div class="popup-overlay" *ngIf="showCommentPopup">
+  <div class="popup-content" (click)="$event.stopPropagation()">
+    <h2>Leave a comment for "{{ collectionInfo.name }}"</h2>
+    <textarea [(ngModel)]="commentText" placeholder="Type your comment..."></textarea>
+    <div class="popup-actions">
+      <button (click)="submitComment()">Submit</button>
+      <button (click)="closeCommentPopup()">Cancel</button>
+    </div>
   </div>
 </div>

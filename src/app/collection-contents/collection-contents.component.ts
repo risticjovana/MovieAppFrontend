@@ -22,6 +22,8 @@ export class CollectionContentsComponent implements OnInit {
   showAddContentModal = false;
   availableContents: any[] = [];
   user: any = null;
+  showCommentPopup = false;
+  commentText: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -154,5 +156,33 @@ export class CollectionContentsComponent implements OnInit {
       }
     });
   }
+
+  openCommentPopup() {
+    this.commentText = '';
+    this.showCommentPopup = true;
+  }
+
+  closeCommentPopup() {
+    this.showCommentPopup = false;
+  }
+
+  submitComment() {
+    if (!this.commentText.trim() || !this.collectionInfo?.id || !this.user?.id) return;
+
+    this.collectionService.addCommentToCollection(
+      this.collectionInfo.id,
+      this.user.id, 
+      this.commentText.trim()
+    ).subscribe({
+      next: () => {
+        console.log("Comment submitted successfully");
+        this.closeCommentPopup();
+      },
+      error: (err) => {
+        console.error("Failed to submit comment", err);
+      }
+    });
+  }
+
 
 }
