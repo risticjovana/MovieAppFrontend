@@ -51,8 +51,8 @@
 }
 
 .season-section {
-  margin: 20px 10px 10px 0px; 
-  color: white;
+  margin: 20px 10px 10px 40px; 
+  color: #141116;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: block; 
 }
@@ -66,7 +66,7 @@
 
 .season-section select {
   background-color: transparent; 
-  color: white; 
+  color: #141116; 
   border: none;
   border-bottom: 4px solid #A847C8;  
   border-radius: 0;  
@@ -85,7 +85,7 @@
 .season-section select:hover,
 .season-section select:focus {
   border-color: #A847C8;  
-  background-color: #141116;
+  background-color: #F0EEF5;
 }
 
 
@@ -108,7 +108,7 @@
   margin-right: 15px;
   box-sizing: border-box;
   overflow: hidden;
-  color: white;
+  color: #141116;
   cursor: pointer;
   height: 250px;
 }
@@ -150,7 +150,7 @@
 
 /* Navigation arrows */
 .swiper-button-next {
-  color: white;
+  color: #A847C8;
   top: 45%;
   width: 30px;
   height: 30px;
@@ -158,7 +158,7 @@
 
 .swiper-button-prev{
   left: -2px;
-  color: white;
+  color: #A847C8;
   top: 45%;
   width: 30px;
   height: 30px;
@@ -166,7 +166,7 @@
 
 .main-content-row {
   display: flex;
-  gap: 230px;  
+  gap: 100px;  
   margin-top: 30px;
   align-items: center;  
 }
@@ -174,7 +174,7 @@
 .function-panel { 
   flex: 1 1 0;
   max-width: 500px; 
-  margin: 0px 0 0 12 px;
+  margin: 0 0 0 12px;
   bottom: 20px; 
   display: flex;
   gap: 15px;
@@ -188,7 +188,8 @@
   bottom: 10px; 
   z-index: 1;
   color: white;
-  max-width: 1000px;  
+  max-width: 1000px; 
+  margin-left: 40px; 
 }
 
 .cast-section h3 {
@@ -197,7 +198,7 @@
   font-size: 1.1rem;
   font-weight: bold;
   margin-left: 0px;
-  color: #fff;
+  color: #141116;
   letter-spacing: 1px;
   text-transform: uppercase;  
   margin-top: 10px; 
@@ -206,7 +207,7 @@
 .cast-section h3::after {
   content: '';
   display: block;
-  width: 60px;
+  width: 40px;
   height: 4px;
   background-color: #A847C8;
   margin: 0.3rem 0px;
@@ -244,11 +245,12 @@
   font-size: 0.9rem;
   font-weight: bold;
   margin: 0.3rem 0 0 0;
+  color: #141116;
 }
 
 .cast-role {
   font-size: 0.75rem;
-  color: #ccc;
+  color: #A847C8;
   margin: 0;
 }
 
@@ -257,16 +259,16 @@
   font-size: 1rem;
   font-weight: bold;
   color: white;
-  background: transparent;
-  border: 2px solid;
+  background: transparent; 
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
-  border-radius: 6px;
-  background: transparent; 
+  border-radius: 6px; 
+  border: none;
+  background: linear-gradient(135deg, #e64747, #A847C8);
 }
 
 .rate-button:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   border: none;
   background: linear-gradient(135deg, #e64747, #A847C8);
 }
@@ -366,12 +368,23 @@ textarea {
 
 .reviews-section {
   margin: 2rem 0.8rem;
+  margin-left: 10px; 
 }
 
 .reviews-section h3 {
   margin-bottom: 1rem;
   font-size: 1.5rem;
-  color: #fff;
+  color: #141116;
+}
+
+.reviews-section h3::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #A847C8;
+  margin: 0.3rem 0px;
+  border-radius: 2px; 
 }
 
 .reviews-row {
@@ -392,10 +405,10 @@ textarea {
 }
 
 .review-card {
-  min-width: 265px;
-  max-width: 265px;
+  min-width: 267px;
+  max-width: 267px;
   height: 170px;
-  background: #F0EEF5; 
+  background: #e64747; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   padding: 1rem;
@@ -403,14 +416,13 @@ textarea {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.review-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+.review-card:hover { 
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
 }
 
 .review-text {
   font-style: italic;
-  color: #333;
+  color: #F0EEF5;
   font-size: 1rem;
   margin-bottom: 0.5rem;
   line-height: 1.4;
@@ -426,12 +438,12 @@ textarea {
 .stars-inline span,
 .review-rating span {
   font-size: 1.2rem;
-  color: #ccc;
+  color: #F0EEF5;
 }
 
 .stars-inline span.filled,
 .review-rating span.filled {
-  color: #ffb400;
+  color: #3B3545;
 }
 
 .numeric-rating {
