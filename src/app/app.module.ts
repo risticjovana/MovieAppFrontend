@@ -25,7 +25,8 @@ import { CollectionContentsComponent } from './collection-contents/collection-co
 import { ExploreCollectionsComponent } from './explore-collections/explore-collections.component';
 import { OtherUsersComponent } from './other-users/other-users.component';
 import { FollowersComponent } from './followers/followers.component';
-import { SavedCollectionsComponent } from './saved-collections/saved-collections.component'; 
+import { SavedCollectionsComponent } from './saved-collections/saved-collections.component';
+import { EditorsCollectionsComponent } from './editors-collections/editors-collections.component'; 
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { SavedCollectionsComponent } from './saved-collections/saved-collections
     ExploreCollectionsComponent,
     OtherUsersComponent,
     FollowersComponent,
-    SavedCollectionsComponent 
+    SavedCollectionsComponent,
+    EditorsCollectionsComponent 
   ],
   imports: [
     BrowserModule,

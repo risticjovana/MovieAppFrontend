@@ -37,5 +37,9 @@ export class SidebarComponent implements OnInit {
   isGuest(): boolean {
     return this.userRole === 'obican_korisnik';
   }
+
+  isEditor(): boolean {
+    return this.userRole === 'urednik_sadrzaja';
+  }
   
 }

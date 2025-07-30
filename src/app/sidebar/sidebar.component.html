@@ -50,6 +50,12 @@
         <i class="fas fa-cogs" style="color: #FFF;"></i> Admin Dashboard
       </a>
     </li> 
+    
+    <li *ngIf="isEditor()">
+      <a routerLink="/editors-collections" routerLinkActive="active">
+        <i class="fa-solid fa-ticket" style="color: #FFF;"></i> My collections
+      </a>
+    </li>
   </ul>
   <!-- Bottom logout section -->
   <div class="sidebar-logout">

@@ -20,6 +20,10 @@ export class CollectionService {
     return this.http.get<any[]>(`${this.baseUrl}/personal/user/${userId}`);
   }
 
+  getEditorsCollections(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/editorial/user/${userId}`);
+  }
+
   getCollectionContents(collectionId: number): Observable<any[]> {
     const url = `${this.baseUrl}/${collectionId}/contents`;
     return this.http.get<any[]>(url);
@@ -36,6 +40,16 @@ export class CollectionService {
   ): Observable<any> {
     const url = `${this.baseUrl}/create-personal`;
     const body = { name, description, userId };
+    return this.http.post<any>(url, body);
+  }
+
+  createEditorialCollection(
+    name: string,
+    description: string,
+    editorId: number
+  ): Observable<any> {
+    const url = `${this.baseUrl}/create-editorial`;
+    const body = { name, description, editorId };
     return this.http.post<any>(url, body);
   }
 

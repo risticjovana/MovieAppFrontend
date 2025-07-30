@@ -17,6 +17,7 @@ import { ExploreCollectionsComponent } from './explore-collections/explore-colle
 import { OtherUsersComponent } from './other-users/other-users.component';
 import { FollowersComponent } from './followers/followers.component';
 import { SavedCollectionsComponent } from './saved-collections/saved-collections.component';
+import { EditorsCollectionsComponent } from './editors-collections/editors-collections.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'other-users', component: OtherUsersComponent },
   { path: 'followers', component: FollowersComponent },
   { path: 'saved-collections', component: SavedCollectionsComponent },
+  { path: 'editors-collections', component: EditorsCollectionsComponent},
   { path: '**', redirectTo: 'login' }, // move this to the end
 ];
 @NgModule({
