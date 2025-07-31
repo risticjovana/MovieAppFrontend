@@ -79,7 +79,7 @@
   text-align: center;
   font-size: 1.1rem;
   font-weight: bold;
-  color: #fff;
+  color: #141116;
   letter-spacing: 1px;
   text-transform: uppercase;
   margin: 40px auto 30px auto;
@@ -98,11 +98,13 @@
 }
 
 .collection-info-container {
+  background: linear-gradient(90deg, #e64747, #A847C8);
   text-align: center;
   color: #fff;
   margin: 40px auto 30px auto;
-  max-width: 800px;
-  padding: 0 20px;
+  max-width: 93%;
+  padding: 70px 20px;
+  border-radius: 16px;
 }
 
 .collection-title {

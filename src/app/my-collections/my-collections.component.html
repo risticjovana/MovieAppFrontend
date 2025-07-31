@@ -12,13 +12,7 @@
     <div class="collection-card" *ngFor="let collection of userCollections" (click)="openCollectionContents(collection.id)">
       <div class="collection-header">
         <h3 (click)="openCollectionContents(collection.id)">{{ collection.name }}</h3>
-        <span class="badge">
-          {{
-            collection.typeString === 'Licna' ? 'Personal' :
-            collection.typeString === 'Urednicka' ? 'Editorial' :
-            collection.typeString
-          }}
-        </span>
+        
 
         <!-- Ellipsis dropdown -->
         <div class="dropdown-container" (click)="toggleDropdown($event, collection.id)">
@@ -35,7 +29,15 @@
 
       <div class="collection-footer">
         <span class="created-at">Created: {{ collection.createdAt | date:'mediumDate' }}</span>
+        <span class="badge">
+          {{
+            collection.typeString === 'Licna' ? 'Personal' :
+            collection.typeString === 'Urednicka' ? 'Editorial' :
+            collection.typeString
+          }}
+        </span>
         <span class="save-count"><i class="fas fa-bookmark"></i> {{ collection.saveCount }}</span>
+        
       </div>
     </div>
 
@@ -49,7 +51,7 @@
 <div class="modal-backdrop" *ngIf="showCreateModal" (click)="closeModal()"></div>
 <div class="modal" *ngIf="showCreateModal">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <h3>Create New Collection</h3>
+    <h3>Create Your New Collection</h3>
     <input type="text" [(ngModel)]="newCollection.name" placeholder="Collection Name" />
     <textarea [(ngModel)]="newCollection.description" placeholder="Description"></textarea>
     <button (click)="createCollection()">Create</button>
