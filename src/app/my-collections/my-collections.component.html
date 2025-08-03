@@ -27,18 +27,23 @@
         {{ collection.description }}
       </p>
 
-      <div class="collection-footer">
-        <span class="created-at">Created: {{ collection.createdAt | date:'mediumDate' }}</span>
-        <span class="badge">
-          {{
-            collection.typeString === 'Licna' ? 'Personal' :
-            collection.typeString === 'Urednicka' ? 'Editorial' :
-            collection.typeString
-          }}
+        <div class="collection-footer">
+        <span class="created">
+          <i class="fas fa-calendar-alt"></i>
+          Created: {{ collection.createdAt | date: 'mediumDate' }}
         </span>
-        <span class="save-count"><i class="fas fa-bookmark"></i> {{ collection.saveCount }}</span>
-        
-      </div>
+        <span class="badge">
+            {{
+              collection.typeString === 'Licna' ? 'Personal' :
+              collection.typeString === 'Urednicka' ? 'Editorial' :
+              collection.typeString
+            }}
+          </span>
+        <span class="save-count">
+          <i class="fas fa-bookmark"></i>
+          {{ collection.saveCount }}
+        </span>
+      </div> 
     </div>
 
     <div class="collection-card add-card" (click)="openCreateCollectionModal()" style="cursor: pointer;">

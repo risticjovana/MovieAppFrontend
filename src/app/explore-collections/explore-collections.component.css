@@ -35,13 +35,13 @@
 
 .collections-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 1.5rem;
 }
- 
+
 .collection-card {
-  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-  border: 1px solid #444;
+  background: linear-gradient(135deg, #e64747, #141116);
+  border: none;
   border-radius: 12px;
   padding: 1rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
@@ -54,54 +54,49 @@
 
 .collection-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
 }
- 
+
 .collection-header {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.6rem;
+  margin-top: 10px;
 }
 
 .collection-header h3 {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   margin: 0;
-  color: #A847C8;
-  word-break: break-word;
+  color: #fff;
 }
 
 .badge {
-  background-color: #A847C8;
-  color: white;
-  padding: 0.2rem 0.6rem;
-  border-radius: 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  white-space: nowrap;
+  background: linear-gradient(135deg, #A847C8, #e64747);
+  color: #fff;
+  padding: 0.5rem 0.8rem;
+  border-radius: 19px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-left: 80px;
 }
- 
-.collection-description {
+
+.collection-description { 
+  align-content: center;
   font-size: 0.95rem;
   color: #ccc;
-  margin: 0.5rem 0;
   flex-grow: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.4;
 }
- 
+
 .collection-footer {
-  width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 0.85rem;
-  color: #aaa;
+  color: #fff;
 }
 
 .collection-footer i {
-  color: #A847C8;
+  color: #fff;
   margin-right: 0.3rem;
 }
 
@@ -109,13 +104,25 @@
   .collections-container {
     padding: 1rem;
   }
+}
 
-  .collection-card {
-    height: auto;
-    padding: 1rem;
-  }
+.add-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F0EEF5;
+  border: 2px dashed #A847C8;
+  color: #A847C8;
+  font-size: 3rem;
+  font-weight: bold;
+  transition: background-color 0.2s, transform 0.2s;
+  min-height: 200px;
+}
 
-  .collections-grid {
-    grid-template-columns: 1fr;
-  }
+.add-card:hover { 
+  transform: translateY(-4px);
+}
+
+.plus-icon {
+  user-select: none;
 }

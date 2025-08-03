@@ -1,32 +1,24 @@
-<div *ngIf="collectionInfo" class="collection-info-container">
+<div *ngIf="collectionInfo" class="collection-info-container" style="position: relative;">
+  
+  <button *ngIf="collectionInfo?.typeString === 'Urednicka'" class="save-flag-btn" (click)="saveCollection()" aria-label="Save Collection">
+    <i class="far fa-bookmark"></i>
+  </button>
+
   <h1 class="collection-title">{{ collectionInfo.name }}</h1>
-  <div *ngIf="collectionInfo?.typeString === 'Urednicka'" class="save-button-container">
-    <button class="save-btn" (click)="saveCollection()">Save Collection</button>
-  </div>
-  <div class="comment-button-container">
-    <button class="comment-btn" (click)="openCommentPopup()">Leave a Comment</button>
-  </div>
+  
   <p class="collection-description">{{ collectionInfo.description }}</p>
   <div class="collection-meta">
-    <span class="collection-type">
-      {{
-        collectionInfo.typeString === 'Licna' ? 'Personal' :
-        collectionInfo.typeString === 'Urednicka' ? 'Editorial' :
-        collectionInfo.typeString
-      }}
-    </span>
     <span class="created-at">Created: {{ collectionInfo.createdAt | date:'mediumDate' }}</span>
     <span class="save-count">
       <i class="fas fa-bookmark"></i> {{ collectionInfo.saveCount }}
     </span>
+    <div class="comment-button-container">
+      <button class="comment-btn" (click)="openCommentPopup()">Leave a Comment</button>
+    </div>
   </div>
 </div>
 
 <h2 class="section-label">Collection's Content</h2>
-
-<div *ngIf="!loading && contents.length === 0" class="empty-text">
-  This collection currently has no contents.
-</div>
 
 <div class="genre-movies-container">
   <div class="genre-movie-card" *ngFor="let content of contents">
@@ -87,7 +79,7 @@
 <!-- Comment Popup -->
 <div class="popup-overlay" *ngIf="showCommentPopup">
   <div class="popup-content" (click)="$event.stopPropagation()">
-    <h2>Leave a comment for "{{ collectionInfo.name }}"</h2>
+    <h2>Leave a comment</h2>
     <textarea [(ngModel)]="commentText" placeholder="Type your comment..."></textarea>
     <div class="popup-actions">
       <button (click)="submitComment()">Submit</button>
@@ -97,14 +89,17 @@
 </div>
 
 <div *ngIf="comments.length > 0" class="comments-section">
-  <h3>Comments</h3>
+  <h3 class="section-label">Comments</h3>
   <div class="comments-grid">
-    <div *ngFor="let comment of comments" class="comment-card">
-      <p class="moderator-name">{{ comment.moderatorName }}</p>
-      <p class="comment-date">{{ comment.createdAt | date:'short' }}</p>
+    <div *ngFor="let comment of comments; let i = index" class="comment-card"> 
       <p class="comment-text">{{ comment.text }}</p>
+      <div class="comment-footer">
+        <span class="moderator-name">{{ commentNameList[i] }}</span>
+        <span class="comment-date">{{ comment.createdAt | date:'short' }}</span>
+      </div>
     </div>
   </div>
 </div>
+
 
 

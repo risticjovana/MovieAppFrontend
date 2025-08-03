@@ -4,24 +4,30 @@
   <div class="collections-grid">
     <div class="collection-card" *ngFor="let collection of savedCollections" (click)="openCollectionContents(collection.id)">
         <div class="collection-header">
-        <h3>{{ collection.name }}</h3>
-        <span class="badge">{{ collection.typeString }}</span>
+        <h3>{{ collection.name }}</h3> 
         </div>
 
         <div class="collection-description">
         {{ collection.description }}
         </div>
 
-        <div class="collection-footer">
-        <span class="created">
-            <i class="fas fa-calendar-alt"></i>
-            Created: {{ collection.createdAt | date: 'mediumDate' }}
-        </span>
-        <span class="save-count">
-            <i class="fas fa-bookmark"></i>
-            {{ collection.saveCount }}
-        </span>
-        </div>
+       <div class="collection-footer">
+            <span class="created">
+                <i class="fas fa-calendar-alt"></i>
+                Created: {{ collection.createdAt | date: 'mediumDate' }}
+            </span>
+            <span class="badge">
+                {{
+                    collection.typeString === 'Licna' ? 'Personal' :
+                    collection.typeString === 'Urednicka' ? 'Editorial' :
+                    collection.typeString
+                }}
+                </span>
+            <span class="save-count">
+                <i class="fas fa-bookmark"></i>
+                {{ collection.saveCount }}
+            </span>
+        </div> 
     </div>
     </div> 
 </div>

@@ -26,6 +26,19 @@ export class CollectionContentsComponent implements OnInit {
   showCommentPopup = false;
   commentText: string = '';
   comments: CommentDto[] = [];
+  randomNames = [
+  'Alice Johnson',
+  'Ben Carter',
+  'Lily Thompson',
+  'James Lee',
+  'Emma Davis',
+  'Noah Wilson',
+  'Olivia Brown',
+  'Lucas Garcia',
+  'Ava Martinez',
+  'Ethan Anderson'
+];
+
 
   constructor(
     private route: ActivatedRoute,
@@ -192,21 +205,33 @@ export class CollectionContentsComponent implements OnInit {
     });
   }
 
-  loadComments() {
-  if (!this.collectionInfo?.id) {
-    console.log('No collectionInfo.id available');
-    return;
+  shuffleArray<T>(array: T[]): T[] {
+    return array
+      .map(value => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
   }
 
-  this.collectionService.getCommentsForCollection(this.collectionInfo.id)
-    .subscribe({
-      next: (data) => {
-        this.comments = data;
-        console.log('Loaded comments:', this.comments);
-      },
-      error: (err) => console.error('Failed to load comments', err)
-    });
-}
+  loadComments(): void {
+    this.collectionService.getCommentsForCollection(this.collectionInfo.id)
+      .subscribe({
+        next: (data) => {
+          this.comments = data;
 
+          const shuffled = this.shuffleArray(this.randomNames);
+          this.commentNameList = this.comments.map((_, index) =>
+            shuffled[index % shuffled.length]
+          );
+        },
+        error: (err) => console.error('Failed to load comments', err)
+      });
+  }
+
+  commentNameList: string[] = [];
+
+  getRandomName(): string {
+  const index = Math.floor(Math.random() * this.randomNames.length);
+  return this.randomNames[index];
+}
 
 }
