@@ -7,7 +7,7 @@
 }
 
 .genre-movie-card {
-  background: #111;
+  background: linear-gradient(45deg, #e64747, #A847C8);
   border-radius: 12px;
   overflow: hidden;
   width: 180px;
@@ -19,8 +19,25 @@
 }
 
 .genre-movie-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  transform: scale(1.05); 
+}
+
+
+/* optional checkmark overlay */
+.genre-movie-card.selected::after {
+  content: "✓";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
 .movie-poster {
@@ -28,7 +45,7 @@
   height: 270px;
   object-fit: cover;
   object-position: center 30%;
-  border-bottom: 2px solid #A847C8;
+  border-bottom: 2px solid #fff;
 }
 
 .genre-movie-info {
@@ -37,11 +54,13 @@
   text-align: center;
   position: relative;
 }
+ 
 
 .genre-movie-info h3 {
   margin: 0;
   font-size: 1rem;
   font-weight: 500;
+  color: #fff;
 }
 
 .genre-movie-info p {
@@ -209,15 +228,20 @@
 
 .modal h3 {
   margin-top: 0;
-  color: #A847C8;
+  color: #fff;
   font-size: 1.4rem;
   text-align: center;
 }
 
 .modal-content {
-  overflow-y: auto;
+  overflow-y: auto;   /* still scrollable */
+  scrollbar-width: none;
   max-height: 70vh;
   padding-right: 0.5rem; 
+}
+
+.modal-content::-webkit-scrollbar {
+  display: none;  
 }
 
 .modal-content input[type="text"],
@@ -314,7 +338,6 @@
   pointer-events: none; /* ensures icon itself doesn't capture clicks */
 }
 
-
 .comment-btn { 
   padding: 12px 28px;
   font-size: 1rem;
@@ -390,25 +413,40 @@
 }
 
 .comments-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  max-width: 1200px;
-  margin: 40px auto;  
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 40px auto;
   padding: 0 1rem;
 }
 
-.comment-card { 
-  border-radius: 6px;
-  padding: 1rem;
-  background-color: #e64747;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+.comment-card {
+  background-color: #f5f5f5; /* light gray background */
+  border: 1px solid #ddd;   
+  padding: 0.8rem 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 110px;
-  color: #fff;
+  gap: 0.5rem;
+  color: #333; /* dark text for readability */
 }
+
+.comment-card .moderator-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+}
+
+.comment-card .comment-date {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.comment-text {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
 
 .comment-footer {
   margin-top: auto;
@@ -432,3 +470,32 @@
   margin: 0;
   color: #fff;
 }
+
+.floating-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.add-btn,
+.cancel-btn {
+  background-color: rgba(0, 0, 0, 0.7) !important; /* dark transparent */
+  color: #fff !important;                         /* white letters */
+  border: none !important;
+  padding: 16px 28px !important;                  /* bigger size */
+  border-radius: 10px !important;
+  font-size: 1.1rem !important;                   /* larger text */
+  font-weight: bold !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease !important;
+}
+
+.add-btn:hover,
+.cancel-btn:hover {
+  background-color: rgba(0, 0, 0, 0.85) !important; /* slightly darker on hover */
+}
+
+

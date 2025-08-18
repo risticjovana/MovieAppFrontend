@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CommentDto } from '../model/comment';
 
 @Injectable({
@@ -92,4 +92,10 @@ export class CollectionService {
     return this.http.get<CommentDto[]>(url);
   }
 
+  getRandomMovieBackdrop() {
+    // Unsplash source API for random image
+    return this.http.get('https://source.unsplash.com/1600x900/?cinema,movies', { responseType: 'text' }).pipe(
+      map((url) => url) // returns direct image URL
+    );
+  }
 }

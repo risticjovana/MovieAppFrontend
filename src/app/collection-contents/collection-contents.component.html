@@ -1,7 +1,8 @@
 <div *ngIf="collectionInfo" class="collection-info-container" style="position: relative;">
   
-  <button *ngIf="collectionInfo?.typeString === 'Urednicka'" class="save-flag-btn" (click)="saveCollection()" aria-label="Save Collection">
-    <i class="far fa-bookmark"></i>
+  <button 
+  [ngClass]="{ 'saved': isSaved }" *ngIf="collectionInfo?.typeString === 'Urednicka'" class="save-flag-btn" (click)="saveCollection()" aria-label="Save Collection">
+    <i [ngClass]="isSaved ? 'fa-solid fa-bookmark' : 'far fa-bookmark'"></i>
   </button>
 
   <h1 class="collection-title">{{ collectionInfo.name }}</h1>
@@ -65,14 +66,17 @@
           class="movie-poster"
         />
         <div class="genre-movie-info">
-          <h3>{{ content.name }}</h3>
+          <h3 class="genre-movie-info-name">{{ content.name }}</h3>
           <input type="checkbox" [(ngModel)]="content.selected" hidden />
         </div>
       </div>
     </div>
+    
+    <div class="floating-buttons">
+      <button (click)="addSelectedContents()" class="add-btn">Add Selected</button>
+      <button (click)="closeAddContentModal()" class="cancel-btn">Cancel</button>
+    </div>
 
-    <button (click)="addSelectedContents()">Add Selected</button>
-    <button class="cancel-btn" (click)="closeAddContentModal()">Cancel</button>
   </div>
 </div>
 

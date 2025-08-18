@@ -4,7 +4,7 @@
   font-size: 1.1rem;
   font-weight: bold;
   margin: 30px 0 12px;
-  color: #fff;
+  color: #141116;
   letter-spacing: 1px;
   text-transform: uppercase; 
   margin-bottom: 1rem;
@@ -36,13 +36,13 @@
 
 .collections-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 1.5rem;
 }
 
 .collection-card {
-  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-  border: 1px solid #444;
+  background: linear-gradient(135deg, #A847C8, #141116);
+  border: none;
   border-radius: 12px;
   padding: 1rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
@@ -50,6 +50,7 @@
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 200px;
 }
 
 .collection-card:hover {
@@ -61,25 +62,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
 }
 
 .collection-header h3 {
   font-size: 1.2rem;
   margin: 0;
-  color: #A847C8;
+  color: #fff;
 }
 
 .badge {
-  background-color: #A847C8;
-  color: white;
-  padding: 0.2rem 0.5rem;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #A847C8, #e64747);
+  color: #fff;
+  padding: 0.5rem 0.8rem;
+  border-radius: 19px;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 400;
+  margin-left: 80px;
 }
 
 .collection-description {
-  margin: 0.8rem 0;
+  align-content: center; 
   font-size: 0.95rem;
   color: #ccc;
   flex-grow: 1;
@@ -90,11 +93,11 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.85rem;
-  color: #aaa;
+  color: #fff;
 }
 
 .collection-footer i {
-  color: #A847C8;
+  color: #fff;
   margin-right: 0.3rem;
 }
 

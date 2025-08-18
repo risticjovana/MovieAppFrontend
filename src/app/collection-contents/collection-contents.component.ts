@@ -3,10 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CollectionService } from '../services/collection.service';
 import { MovieService } from '../services/movie.service';
 import { VisualContent } from '../model/visual-content';
-import { forkJoin } from 'rxjs';
+import { catchError, finalize, forkJoin, of } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common'; 
 import { jwtDecode } from 'jwt-decode';
 import { CommentDto } from '../model/comment';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-collection-contents',
@@ -38,19 +39,20 @@ export class CollectionContentsComponent implements OnInit {
   'Ava Martinez',
   'Ethan Anderson'
 ];
-
+  isSaved = false; 
 
   constructor(
     private route: ActivatedRoute,
     private collectionService: CollectionService,
     private movieService: MovieService,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private cdr: ChangeDetectorRef 
   ) {}
 
   ngOnInit(): void { 
     this.loadUserFromToken();
-
+ 
     this.collectionId = Number(this.route.snapshot.paramMap.get('id'));
 
     this.collectionService.getCollectionInfo(this.collectionId).subscribe({
@@ -128,6 +130,7 @@ export class CollectionContentsComponent implements OnInit {
     this.showAddContentModal = false;
   }
 
+
   addSelectedContents() {
     if (!this.availableContents || !this.user) return;
 
@@ -136,38 +139,69 @@ export class CollectionContentsComponent implements OnInit {
 
     const addRequests = selectedContents.map(content =>
       this.collectionService.addContentToCollection(content.contentId, this.collectionId, this.user.id)
+        .pipe(
+          catchError(err => {
+            console.error(`Failed to add content ${content.contentId}`, err);
+            return of(null); // continue even if this request fails
+          })
+        )
     );
 
-    forkJoin(addRequests).subscribe({
-      next: () => {
+    forkJoin(addRequests)
+      .pipe(
+        finalize(() => {
+          // always close modal and navigate
+          this.closeAddContentModal();
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate([`/collections/${this.collectionId}/contents`]);
+          });
+        })
+      )
+      .subscribe(results => {
+        console.log('All requests completed', results);
+        // optional: update local arrays if you want
         this.contents.push(...selectedContents);
         this.availableContents = this.availableContents.filter(c => !c.selected);
-        this.closeAddContentModal();
-      },
-      error: (err) => {
-        console.error('Failed to add some contents', err);
-      }
-    });
+      });
   }
 
   removeContentFromCollection(contentId: number) {
-    if (!this.collectionInfo) return;
- 
-    this.collectionService.removeContentFromCollection(this.collectionInfo.id, contentId).subscribe({
-      next: () => { 
-        this.contents = this.contents.filter(c => c.contentId !== contentId);
-      },
-      error: (err) => { 
-      }
-    });
-  }
+  if (!this.collectionInfo) return;
+
+  this.collectionService.removeContentFromCollection(this.collectionInfo.id, contentId).subscribe({
+    next: () => { 
+      // After successful deletion, reload the collection contents
+      this.collectionService.getCollectionContents(this.collectionInfo.id).subscribe({
+        next: (data) => {
+          this.contents = data;
+
+          // Refresh posters for each content
+          for (const movie of this.contents) {
+            this.movieService.getSeriesPoster(movie.name).subscribe({
+              next: (posterUrl) => this.posterMap[movie.contentId] = posterUrl,
+              error: () => this.posterMap[movie.contentId] = 'assets/default-movie.jpg'
+            });
+          }
+        },
+        error: () => {
+          console.error('Failed to reload collection contents after deletion');
+        }
+      });
+    },
+    error: (err) => { 
+      console.error('Failed to remove content', err);
+    }
+  });
+}
+
 
   saveCollection(): void {
     if (!this.user?.id || !this.collectionInfo?.id) return;
 
     this.collectionService.saveCollection(this.user.id, this.collectionInfo.id).subscribe({
       next: () => { 
-        this.collectionInfo.saveCount++; // Optional: visually update count
+        this.collectionInfo.saveCount++;  
+        this.isSaved = true;
       },
       error: (err) => {
         console.error('Failed to save collection', err); 
