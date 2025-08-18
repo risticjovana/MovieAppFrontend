@@ -135,6 +135,7 @@ export class SeriesInfoComponent implements OnDestroy {
     this.contentService.getReviewsByContentId(contentId).subscribe({
       next: (reviews) => {
         this.reviews = reviews;
+        console.log('Loaded reviews:', this.reviews);
       },
       error: (err) => {
         console.log('Failed to load reviews:', err);
@@ -248,5 +249,18 @@ export class SeriesInfoComponent implements OnDestroy {
           this.selectedCollectionId = null;
         }
       });
+  }
+
+  deleteReview(reviewId: number) {
+    this.contentService.deleteReview(reviewId).subscribe({
+      next: () => {
+        this.reviews = this.reviews.filter(r => r.reviewId !== reviewId);
+        this.snackBar.open('Review deleted', 'Close', { duration: 2000 });
+      },
+      error: (err) => {
+        console.error('Failed to delete review:', err);
+        this.snackBar.open('Failed to delete review', 'Close', { duration: 2000 });
+      }
+    });
   }
 }

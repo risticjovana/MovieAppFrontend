@@ -123,21 +123,24 @@
       <h3>Reviews</h3>
       <div class="reviews-row">
         <div *ngFor="let review of reviews | slice:0:5" class="review-card">
+
+          <!-- Delete Button -->
+          <button *ngIf="user?.id == review.userId"
+                  (click)="deleteReview(review.reviewId!)"
+                  class="delete-review-btn">
+            &times;
+          </button>
           <p class="review-text">"{{ review.description }}"</p>
+          
           <p class="review-rating">
             <ng-container *ngFor="let star of stars; let i = index">
               <span [class.filled]="i < review.rating">&#9733;</span>
             </ng-container>
             <span class="numeric-rating">{{ review.rating }}/10</span>
-          </p>
-          <p class="review-meta">
-            <small>
-              Joka, {{ review.date | date:'mediumDate' }}
-            </small>
-          </p>
-        </div>
+          </p>          
       </div>
     </div>
+
 
 
 

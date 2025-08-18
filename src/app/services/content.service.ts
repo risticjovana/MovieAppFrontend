@@ -28,4 +28,8 @@ export class ContentService {
   getReviewsByContentId(contentId: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${this.baseUrl}/${contentId}/content-reviews`);
   }
+
+  deleteReview(reviewId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${reviewId}/delete-review`);
+  }
 }

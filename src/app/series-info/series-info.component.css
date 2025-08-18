@@ -405,15 +405,28 @@ textarea {
 }
 
 .review-card {
+  position: relative; /* added */
   min-width: 267px;
   max-width: 267px;
-  height: 170px;
+  height: 140px;
   background: #e64747; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   padding: 1rem;
   flex-shrink: 0;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.delete-review-btn {
+  position: absolute; /* make absolute */
+  top: 8px;           /* adjust distance from top */
+  right: 8px;         /* adjust distance from right */
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
 }
 
 .review-card:hover { 
@@ -450,11 +463,5 @@ textarea {
   margin-left: 0.3rem;
   color: #333;
   font-size: 0.95rem;
-}
-
-.review-meta {
-  font-size: 0.8rem;
-  color: #555;
-  margin-top: 0.5rem;
-}
-
+} 
+ 
