@@ -56,10 +56,10 @@
 <div class="modal-backdrop" *ngIf="showCreateModal" (click)="closeModal()"></div>
 <div class="modal" *ngIf="showCreateModal">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <h3>Create Your New Collection</h3>
+    <h3>Create Your <span class="gradient">New </span> Collection!</h3>
     <input type="text" [(ngModel)]="newCollection.name" placeholder="Collection Name" />
     <textarea [(ngModel)]="newCollection.description" placeholder="Description"></textarea>
-    <button (click)="createCollection()">Create</button>
+    <button class="create-btn"(click)="createCollection()">Create</button>
     <button class="cancel-btn" (click)="closeModal()">Cancel</button>
   </div>
 </div>

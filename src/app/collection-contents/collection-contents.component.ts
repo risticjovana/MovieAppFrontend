@@ -40,6 +40,7 @@ export class CollectionContentsComponent implements OnInit {
   'Ethan Anderson'
 ];
   isSaved = false; 
+  commentAvatars: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -80,9 +81,7 @@ export class CollectionContentsComponent implements OnInit {
         this.loading = false;
       }
     });
-  }
-
-  
+  } 
 
   loadUserFromToken() {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -252,10 +251,15 @@ export class CollectionContentsComponent implements OnInit {
         next: (data) => {
           this.comments = data;
 
+          this.commentAvatars = this.comments.map(() =>
+            this.randomAvatars[Math.floor(Math.random() * this.randomAvatars.length)]
+          );
+
           const shuffled = this.shuffleArray(this.randomNames);
           this.commentNameList = this.comments.map((_, index) =>
             shuffled[index % shuffled.length]
           );
+
         },
         error: (err) => console.error('Failed to load comments', err)
       });
@@ -264,8 +268,27 @@ export class CollectionContentsComponent implements OnInit {
   commentNameList: string[] = [];
 
   getRandomName(): string {
-  const index = Math.floor(Math.random() * this.randomNames.length);
-  return this.randomNames[index];
-}
+    const index = Math.floor(Math.random() * this.randomNames.length);
+    return this.randomNames[index];
+  }
+
+  randomAvatars = [
+    'https://i.pravatar.cc/50?img=1',
+    'https://i.pravatar.cc/50?img=2',
+    'https://i.pravatar.cc/50?img=3',
+    'https://i.pravatar.cc/50?img=4',
+    'https://i.pravatar.cc/50?img=5',
+    'https://i.pravatar.cc/50?img=6',
+    'https://i.pravatar.cc/50?img=7',
+    'https://i.pravatar.cc/50?img=8',
+    'https://i.pravatar.cc/50?img=9',
+    'https://i.pravatar.cc/50?img=10',
+  ];
+
+  // Function to get a random avatar
+  getRandomAvatar() {
+    const index = Math.floor(Math.random() * this.randomAvatars.length);
+    return this.randomAvatars[index];
+  }
 
 }

@@ -361,7 +361,7 @@
   background: transparent; 
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
-  border-radius: 6px; 
+  border-radius: 10px; 
   border: none;
   margin-left: 325px;
   background: linear-gradient(135deg, #e64747, #A847C8);
@@ -459,7 +459,7 @@
 }
 
 .comment-card .moderator-name {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.95rem;
   color: #1a1a1a;
 }
@@ -472,18 +472,27 @@
 .comment-text {
   font-size: 1rem;
   line-height: 1.4;
+  margin-top: -10px;
 }
 
 
 .comment-footer {
-  margin-top: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* avatar+name left, date or actions right */
+  align-items: center; 
+}
+
+.comment-footer-left {
+  display: flex;
   align-items: center;
-  font-size: 0.85rem;
-  color: #fff;
-  border-top: 1px solid #eee;
-  padding-top: 0.5rem;
+  gap: 0.6rem; /* space between avatar and name */
+}
+
+.comment-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .moderator-name {

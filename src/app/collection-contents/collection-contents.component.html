@@ -98,11 +98,14 @@
   <h3 class="section-label">Comments</h3>
   <div class="comments-grid">
     <div *ngFor="let comment of comments; let i = index" class="comment-card"> 
-      <p class="comment-text">{{ comment.text }}</p>
       <div class="comment-footer">
-        <span class="moderator-name">{{ commentNameList[i] }}</span>
+        <div class="comment-footer-left">
+          <img class="comment-avatar" [src]="commentAvatars[i]" alt="Avatar">
+          <span class="moderator-name">{{ commentNameList[i] }}</span>
+        </div>
         <span class="comment-date">{{ comment.createdAt | date:'short' }}</span>
       </div>
+      <p class="comment-text">{{ comment.text }}</p>
     </div>
   </div>
 </div>

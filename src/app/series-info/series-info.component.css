@@ -363,17 +363,27 @@
   align-items: center;   
   left: 20%;
   height: 40%;   
-  background: white;
+  background: #141116;
   padding: 2rem;
   border-radius: 12px;
-  width: 400px; 
+  width: 470px; 
   box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
   padding-right: 50px;
 }
 
 .popup-content h2{
-  margin-bottom: 2rem;
-  color: #A847C8;
+  margin-bottom: 3rem;
+  margin-left: 20px;
+  color: #fff;
+  font-size: 1.7rem;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #A847C8, #e64747);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; 
+  font-size: 1.8rem;
 }
 
 .stars {
@@ -407,12 +417,13 @@ textarea {
   border-radius: 6px;
   border: 1px solid #ccc;
   margin: 0 auto;
+  background-color: #141116;
 }
 
 .submit-button {  
   bottom: 20px;
   right: 20px;
-  padding: 16px 32px;
+  padding: 10px 32px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); 
   border: none;
   background: linear-gradient(135deg, #e64747, #A847C8);
@@ -420,11 +431,13 @@ textarea {
   font-size: 1rem;
   font-weight: bold;
   color: white;
+  border-radius: 10px;
+  margin-left: 25px;
 }
 
 .close-button {
   position: absolute;
-  top: 240px; right: 620px;
+  top: 260px; right: 600px;
   font-size: 1.5rem;
   background: none;
   border: none;
