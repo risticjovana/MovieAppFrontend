@@ -10,6 +10,26 @@
       <p class="series-description">{{ series?.description }}</p>
 
     </div>
+    <!-- Function Panel -->
+  <div class="function-panel">
+    <div class="select-collection custom-dropdown" [class.open]="isDropdownOpen">
+      <div class="selected" (click)="toggleDropdown()">
+        {{ getSelectedCollectionName() || 'ADD TO COLLECTION' }}
+        <span class="arrow"></span>
+      </div>
+      <ul class="options" *ngIf="isDropdownOpen">
+        <li (click)="selectCollection(null)" class="placeholder">ADD TO COLLECTION</li>
+        <li *ngFor="let col of collections" (click)="selectCollection(col.id)">
+          {{ col.name }}
+        </li> 
+      </ul>
+    </div>
+
+    <!-- Rate button -->
+    <button class="rate-button" (click)="showReviewPopup = true">
+      LEAVE A REVIEW
+    </button>
+  </div>
 </div>
 
 <div class="main-content-row">
@@ -30,24 +50,7 @@
       </div>
     </div>
   </div>
-  <!-- Function Panel -->
-  <div class="function-panel">
-    <div class="season-section">
-        <select [(ngModel)]="selectedCollectionId" (change)="onCollectionChange()">
-      <option [ngValue]="null" disabled hidden>Add to Collection</option> 
-      <option *ngFor="let col of collections" [ngValue]="col.id">
-        {{ col.name }}
-      </option> 
-      <option [ngValue]="0">
-        + New Collection
-      </option>
-    </select>
-    </div>
-    <!-- Rate button -->
-    <button class="rate-button" (click)="showReviewPopup = true">
-      LEAVE A REVIEW
-    </button>
-  </div>
+  
 </div>
 
 <!-- Popup Modal -->

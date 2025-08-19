@@ -17,11 +17,11 @@
   position: relative;
   cursor: pointer;
 }
+ 
 
-.genre-movie-card:hover {
-  transform: scale(1.05); 
+.genre-movie-card.selected { 
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.7); 
 }
-
 
 /* optional checkmark overlay */
 .genre-movie-card.selected::after {
@@ -176,7 +176,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #333;
+  background: #F0EEF5;
   border: 2px dashed #A847C8;
   color: #A847C8;
   font-size: 3rem;
@@ -208,17 +208,17 @@
 .modal {
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: 55%;
   transform: translate(-50%, -50%);
-  background: #1f1f1f;
+  background: #141116;
   padding: 2rem;
   border-radius: 16px;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
   width: 90%;
   max-width: 1200px;
-  max-height: 1000px;
+  max-height: 1600px;
   z-index: 1000;
-  color: #fff;
+  color: #141116;
   animation: fadeInScale 0.3s ease-out;
   
   overflow: hidden;
@@ -229,14 +229,29 @@
 .modal h3 {
   margin-top: 0;
   color: #fff;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #A847C8, #e64747);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; 
+  font-size: 1.8rem;
+}
+
+.genre-movie-info p {
+  margin-top: 0;
+  color: #fff;
+  font-size: 1rem;
   text-align: center;
 }
 
 .modal-content {
   overflow-y: auto;   /* still scrollable */
   scrollbar-width: none;
-  max-height: 70vh;
+  max-height: 85vh;
   padding-right: 0.5rem; 
 }
 
@@ -382,11 +397,16 @@
 }
 
 .popup-content textarea {
-  width: 100%;
+  width: 95%;
   height: 100px;
   margin-top: 1rem;
   padding: 0.5rem;
-  font-size: 1rem;
+  font-size: 1rem; 
+}
+ 
+.popup-content h2 { 
+  font-size: 1.5rem; 
+  text-align: center;
 }
 
 .popup-actions {
@@ -395,9 +415,16 @@
 }
 
 .popup-actions button {
-  margin-left: 10px;
-  padding: 6px 12px;
-  font-size: 0.9rem;
+  background: linear-gradient(135deg, #e64747, #A847C8); /* dark transparent */
+  color: #fff !important;                         /* white letters */
+  border: none !important;
+  padding: 7px 28px !important;                  /* bigger size */
+  border-radius: 15px !important;
+  font-size: 1.1rem !important;                   /* larger text */
+  font-weight: bold !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease !important;
+  margin: 7px;
 }
 
 .comments-section {
@@ -473,29 +500,43 @@
 
 .floating-buttons {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 30px;
+  right: 27px;
   display: flex;
   gap: 12px;
   z-index: 1000;
 }
 
-.add-btn,
-.cancel-btn {
-  background-color: rgba(0, 0, 0, 0.7) !important; /* dark transparent */
-  color: #fff !important;                         /* white letters */
+.add-btn {
+  background-color: #fff !important; /* dark transparent */
+  color: #141116 !important;                         /* white letters */
   border: none !important;
-  padding: 16px 28px !important;                  /* bigger size */
-  border-radius: 10px !important;
+  padding: 11px 28px !important;                  /* bigger size */
+  border-radius: 15px !important;
   font-size: 1.1rem !important;                   /* larger text */
   font-weight: bold !important;
   cursor: pointer !important;
   transition: background 0.2s ease !important;
 }
 
+.cancel-btn{
+  background-color: #fff !important; /* dark transparent */
+  color: #141116 !important;                         /* white letters */
+  border: none !important;
+  padding: 9px 15px !important;                  /* bigger size */
+  border-radius: 15px !important;
+  font-size: 1rem !important;                   /* larger text */
+  font-weight: bold !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease !important;
+  height: 35px;
+  margin: auto 0;
+}
+
 .add-btn:hover,
 .cancel-btn:hover {
-  background-color: rgba(0, 0, 0, 0.85) !important; /* slightly darker on hover */
+  background-color: #fff !important; /* slightly darker on hover */
+  color: #A847C8 !important;
 }
 
 

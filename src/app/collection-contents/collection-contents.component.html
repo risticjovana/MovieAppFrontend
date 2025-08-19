@@ -52,7 +52,9 @@
 <!-- Modal for Adding Content -->
 <div class="modal" *ngIf="showAddContentModal">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <h3>Select Content to Add</h3>
+    <h3>
+      <span class="gradient-text">Choose Content</span> for Your Collection!
+    </h3>
 
     <div *ngIf="availableContents.length === 0" class="empty-text">No content available to add.</div>
 
@@ -66,7 +68,7 @@
           class="movie-poster"
         />
         <div class="genre-movie-info">
-          <h3 class="genre-movie-info-name">{{ content.name }}</h3>
+          <p class="genre-movie-info-name">{{ content.name }}</p>
           <input type="checkbox" [(ngModel)]="content.selected" hidden />
         </div>
       </div>

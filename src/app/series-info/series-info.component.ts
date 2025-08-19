@@ -32,6 +32,7 @@ export class SeriesInfoComponent implements OnDestroy {
   user: any;
   collections: any[] = [];
   selectedCollectionId: number | null = null;
+  isDropdownOpen = false;
 
   private swiperInstance?: Swiper;
 
@@ -88,7 +89,7 @@ export class SeriesInfoComponent implements OnDestroy {
 
   loadCast(name: string) {
     this.movieService.getSeriesCastByName(name).subscribe({
-      next: (castData) => this.cast = castData.slice(0, 7),
+      next: (castData) => this.cast = castData.slice(0, 11),
       error: (err) => console.error('Failed to fetch cast:', err)
     });
   }
@@ -262,5 +263,22 @@ export class SeriesInfoComponent implements OnDestroy {
         this.snackBar.open('Failed to delete review', 'Close', { duration: 2000 });
       }
     });
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  selectCollection(id: number | null) {
+    this.selectedCollectionId = id;
+    this.isDropdownOpen = false;
+    this.onCollectionChange();  
+  }
+
+  getSelectedCollectionName(): string | null {
+    if (this.selectedCollectionId === null) return null;
+    if (this.selectedCollectionId === 0) return '+ New Collection';
+    const col = this.collections.find(c => c.id === this.selectedCollectionId);
+    return col ? col.name : null;
   }
 }

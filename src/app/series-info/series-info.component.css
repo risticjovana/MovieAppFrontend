@@ -10,7 +10,8 @@
   overflow: hidden; 
   width: 95%;
   margin: 40px auto 0px auto;
-  border-radius: 16px;
+  border-radius: 16px; 
+  overflow: visible;
 }
 
 .series-info-container::before {
@@ -22,9 +23,10 @@
 
 .series-info-content {
   position: relative; /* above overlay */
-  max-width: 100%; /* left half */
+  max-width: 67%; /* left half */
   z-index: 1;
-  margin-left: 20px;
+  margin-left: 40px;
+  margin-bottom: 20px;
 }
 
 .series-title {
@@ -44,18 +46,20 @@
 }
 
 .series-description {
-  margin-top: 1rem;
+  margin-top: 1rem; 
+  margin-right: 8rem;
   font-size: 1.05rem;
   line-height: 1.5;
-  width: 60%; 
+  width: 1000px; 
 }
 
 .season-section {
-  margin: 20px 10px 10px 40px; 
+  margin: 20px 15px 10px 50px; 
   color: #141116;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: block; 
 }
+ 
 
 .season-section label {
   font-weight: 600;
@@ -120,6 +124,7 @@
   object-fit: cover;
   display: block;
   box-shadow: 0 0 6px rgba(0,0,0,0.5);
+  border-radius: 10px;
 }
 
 /* Episode info */
@@ -150,18 +155,25 @@
 
 /* Navigation arrows */
 .swiper-button-next {
-  color: #A847C8;
+  right: 20px;
+  color: #fff;
   top: 45%;
   width: 30px;
   height: 30px;
 }
 
 .swiper-button-prev{
-  left: -2px;
-  color: #A847C8;
+  left: 7px;
+  color: #fff;
   top: 45%;
   width: 30px;
   height: 30px;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 28px;   /* default is 20px → increase for thicker look */
+  font-weight: 2000;  /* makes arrow visually bolder */
 }
 
 .main-content-row {
@@ -174,22 +186,82 @@
 .function-panel { 
   flex: 1 1 0;
   max-width: 500px; 
-  margin: 0 0 0 12px;
+  margin: 0 0 37px 12px;
   bottom: 20px; 
   display: flex;
   gap: 15px;
   align-items: center;
-  align-content: end; 
+  align-content: start; 
   z-index: 10;
+  overflow: visible;
 }
+
+.custom-dropdown {
+  position: relative;
+  width: 217px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.custom-dropdown .selected {
+  background: transparent;
+  color: #F0EEF5;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.custom-dropdown .arrow {
+  border: solid  #e64747;
+  border-width: 0 4px 4px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(45deg);
+  transition: transform 0.2s;
+}
+
+.custom-dropdown .options {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #e64747, #A847C8);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  list-style: none;
+  padding: 6px 0;
+  margin: 0;
+  z-index: 10000 ;
+  font-weight: 500;
+}
+
+.custom-dropdown .options li {
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.custom-dropdown .options li:hover {
+  background: rgba(0,0,0,0.35);
+}
+
+.custom-dropdown .options .placeholder {
+  color: #777;
+  color: #F0EEF5;
+}
+
 
 .cast-section { 
   flex: 3 1 0;
   bottom: 10px; 
   z-index: 1;
-  color: white;
-  max-width: 1000px; 
-  margin-left: 40px; 
+  color: white; 
+  margin-left: 50px; 
 }
 
 .cast-section h3 {
@@ -242,7 +314,7 @@
 }
 
 .cast-name {
-  font-size: 0.9rem;
+  font-size: 0.9rem; 
   font-weight: bold;
   margin: 0.3rem 0 0 0;
   color: #141116;
@@ -262,7 +334,7 @@
   background: transparent; 
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
-  border-radius: 6px; 
+  border-radius: 10px; 
   border: none;
   background: linear-gradient(135deg, #e64747, #A847C8);
 }
@@ -409,7 +481,7 @@ textarea {
   min-width: 267px;
   max-width: 267px;
   height: 140px;
-  background: #e64747; 
+  background: #141116; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   padding: 1rem;
@@ -456,7 +528,7 @@ textarea {
 
 .stars-inline span.filled,
 .review-rating span.filled {
-  color: #3B3545;
+  color: #A847C8;
 }
 
 .numeric-rating {
