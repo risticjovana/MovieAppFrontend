@@ -104,9 +104,8 @@ app-sidebar {
 }
 
 .auth-background {
-  background-image: url('/assets/bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh; 
+  background-image: url('/assets/BG.jpg');
+  background-size: contain;
+  background-position: start ;
+  background-repeat: no-repeat;    
 }

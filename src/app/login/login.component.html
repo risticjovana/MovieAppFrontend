@@ -1,27 +1,31 @@
-<div class="form-wrapper">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="input-group">
-          <input type="email" formControlName="email" placeholder="Email"/>
-          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-            <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
-            <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
-          </div>
-        </div>
-      
-        <div class="input-group">
-          <input type="password" formControlName="password" placeholder="Password"/>
-          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-            <small>Password is required.</small>
-          </div>
-        </div>
+<div class="page-wrapper">
+    <div class="left-panel"></div> 
+    <div class="right-panel">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <h2>Welcome!</h2>
+            <div class="input-group">
+              <input type="email" formControlName="email" placeholder="Email"/>
+              <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+                <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
+              </div>
+            </div>
+          
+            <div class="input-group">
+              <input type="password" formControlName="password" placeholder="Password"/>
+              <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                <small>Password is required.</small>
+              </div>
+            </div>
 
-        <div class="forgot-password">
-            <a href="#">Forgot Password?</a>
-          </div>
-      
-          <div class="button-group">
-            <button type="submit" [disabled]="loginForm.invalid">Sign In</button>
-            <button type="button" (click)="onSignUp()">Sign Up</button>
-          </div>
-    </form>
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+        
+            <div class="button-group">
+              <button type="submit" [disabled]="loginForm.invalid">Sign In</button>
+              <button type="button" (click)="onSignUp()">Sign Up</button>
+            </div>
+        </form>
+    </div>
 </div>

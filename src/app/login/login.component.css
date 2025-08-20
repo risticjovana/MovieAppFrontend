@@ -1,48 +1,61 @@
-/* Center the form on the screen */
-.form-wrapper {
+/* Full page wrapper */
+.page-wrapper {
     display: flex;
-    height: 289px;
-    width: 581px;
-    margin-top: 182px;  
-    margin-left: 36.95%;
-    position: fixed;
+    height: 100vh;
+    width: 100%;
 }
 
-.form-wrapper:hover form {
-    background-color: rgba(0, 0, 0, 0.5); 
-    transition: background-color 0.3s ease-in-out;
+/* Left panel with background image */
+.left-panel {
+    width: 66.66%; /* Two-thirds of screen */
+    background-image: url('https://your-image-url.jpg'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
 }
 
+/* Right panel (white) */
+.right-panel {
+  width: 40%;
+  background: #24182B;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem; 
+}
+
+/* Form styling */
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
-    max-width: 620px; 
-    padding: 4rem; 
-    background-color: rgba(0, 0, 0, 0.1);  
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: width 0.3s ease-in-out;
+    max-width: 400px; 
+    padding: 2rem;
+    background-color: #24182B; 
+    border-radius: 10px;
+    margin-bottom: 2rem;
 }
 
 input {
     width: 100%;
     padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #bbb;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    border-radius: 18px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #fff;
+    background-color: #24182B; 
+    border-radius: 20px;
     font-size: 1rem;
     box-sizing: border-box;
+    height: 40px;
+    color: #fff;
 }
 
-.input-group {
-    width: 80%; /* or 90%, depending on your desired size */
+input::placeholder {
+    color: #fff;
+    opacity: 0.7; /* optional: slightly transparent */
 }
 
 small {
-    width: 80%;
-    text-align: left;
     color: #d9534f;
     font-size: 0.85rem;
     margin-top: -0.5rem;
@@ -52,12 +65,12 @@ small {
 
 .forgot-password {
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.6rem;
 }
 
 .forgot-password a {
-    color: #fff;
-    font-weight: bold;
+    color: #fff; 
     text-decoration: none;
 }
 
@@ -68,52 +81,48 @@ small {
 .button-group {
     display: flex;
     justify-content: space-around;
-    margin-top: 0.7rem;
-    width: 50%;
+    margin-top: 0.7rem; 
 }
 
 .button-group button {
-    width: 45%;  /* Both buttons take up almost the full width */
-    padding: 0.75rem; /* Adjust padding for smaller height */
+    width: 30%;
     height: 40px;
+    font-size: large; 
+    display: flex;               
+    justify-content: center;    
+    align-items: center;         
+    text-align: center;          
+    padding: 0 0.75rem;          
 }
 
-button {
-    display: block;
-    margin: 1rem auto 0 auto;  
-    width: 100%; 
-    padding: 0.75rem;
-    background-color: #e64747;
+button[type="submit"] {
+  background: linear-gradient(135deg, #e64747, #A847C8);
+    color: white;
     border: none;
     border-radius: 35px;
-    color: white;
-    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-}
-
-button:disabled {
-    background-color: #e64747;
-    cursor: not-allowed;
-}
-
-button:hover:not(:disabled) {
-    background-color: #c43a2d;
 }
 
 button[type="button"] {
-    display: block; 
-    width: 100%;
-    background-color: #ffffff;    
-    transition: background-color 0.2s ease-in-out;
+    background-color: #24182B;
+    border: 1px solid #e64747;
     color: #e64747;
-    padding: 0.75rem;
-    transition: background-color 0.2s ease-in-out;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 35px;
+    cursor: pointer;
 }
+
+button:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+h2 { font-family: 'Roboto Slab', serif;
+  font-weight: 900; /* bold */
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 3rem;
   
-button[type="button"]:hover {
-background-color: #e65447;
-color: white;
+  /* gradient text */
+  background: linear-gradient(90deg, #e64747, #A847C8); /* red to purple */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
