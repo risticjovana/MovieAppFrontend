@@ -291,4 +291,8 @@ export class CollectionContentsComponent implements OnInit {
     return this.randomAvatars[index];
   }
 
+  get userRole(): string {
+    return this.user?.role || 'Unknown';
+  }
+
 }

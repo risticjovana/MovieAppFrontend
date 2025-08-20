@@ -13,9 +13,6 @@
     <span class="save-count">
       <i class="fas fa-bookmark"></i> {{ collectionInfo.saveCount }}
     </span>
-    <div class="comment-button-container">
-      <button class="comment-btn" (click)="openCommentPopup()">Leave a Comment</button>
-    </div>
   </div>
 </div>
 
@@ -82,21 +79,23 @@
   </div>
 </div>
 
-<!-- Comment Popup -->
-<div class="popup-overlay" *ngIf="showCommentPopup">
-  <div class="popup-content" (click)="$event.stopPropagation()">
-    <h2>Leave a comment</h2>
-    <textarea [(ngModel)]="commentText" placeholder="Type your comment..."></textarea>
-    <div class="popup-actions">
-      <button (click)="submitComment()">Submit</button>
-      <button (click)="closeCommentPopup()">Cancel</button>
-    </div>
-  </div>
-</div>
-
 <div *ngIf="comments.length > 0" class="comments-section">
   <h3 class="section-label">Comments</h3>
   <div class="comments-grid">
+      <div class="comment-input-container" *ngIf="userRole === 'obican_korisnik'">
+    <textarea [(ngModel)]="commentText" placeholder="Add comment..."></textarea>
+    
+    <div class="comment-actions">
+      <div class="comment-actions-left">
+        <i class="fas fa-bold"></i>
+        <i class="fas fa-italic"></i>
+        <i class="fas fa-link"></i>
+        <i class="fas fa-smile"></i>
+      </div>
+      <!-- Submit button -->
+      <button class="submit-btn" (click)="submitComment()">Submit</button>
+    </div>
+  </div>
     <div *ngFor="let comment of comments; let i = index" class="comment-card"> 
       <div class="comment-footer">
         <div class="comment-footer-left">

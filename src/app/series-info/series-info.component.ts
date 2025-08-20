@@ -33,6 +33,7 @@ export class SeriesInfoComponent implements OnDestroy {
   collections: any[] = [];
   selectedCollectionId: number | null = null;
   isDropdownOpen = false;
+  isSeasonDropdownOpen = false;
 
   private swiperInstance?: Swiper;
 
@@ -280,5 +281,23 @@ export class SeriesInfoComponent implements OnDestroy {
     if (this.selectedCollectionId === 0) return '+ New Collection';
     const col = this.collections.find(c => c.id === this.selectedCollectionId);
     return col ? col.name : null;
+  }
+
+  toggleSeasonDropdown() {
+    this.isSeasonDropdownOpen = !this.isSeasonDropdownOpen;
+  }
+
+  // Select a season
+  selectSeason(seasonNumber: number) {
+    this.selectedSeason = seasonNumber;
+    this.isSeasonDropdownOpen = false;
+    this.onSeasonChange(seasonNumber);
+  }
+
+  // Show selected season name
+  getSelectedSeasonName(): string | null {
+    if (!this.selectedSeason) return null;
+    const season = this.seasons.find(s => s.season_number === this.selectedSeason);
+    return season ? `Season ${season.season_number}` : null;
   }
 }

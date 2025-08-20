@@ -8,7 +8,7 @@
 .user-card {
   display: flex;
   align-items: center;
-  background-color: #1e1e2f;
+  background: #141116;
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
@@ -60,12 +60,14 @@
 }
 
 .modal-content {
-  background-color: #1e1e2f;
+  background-color: #141116;
+  color: #fff;
   padding: 25px;
   border-radius: 12px;
   width: 320px;
   position: relative;
   text-align: center;
+  margin-left: 230px;
 }
 
 .close-btn {
@@ -91,7 +93,7 @@ button {
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
-  background-color: #007bff;
+  background: linear-gradient(135deg, #e64747, #A847C8);
   color: white;
   cursor: pointer;
   font-size: 16px;
@@ -115,18 +117,20 @@ button:hover {
 }
 
 .popup-content {
-  background-color: #222;
-  color: #fff;
+  background-color: #F0EEF5;
+  color: #141116;
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0,0,0,0.7);
-  max-width: 300px;
+  max-width: 500px;
   text-align: center;
+  margin-left: 230px;
 }
 
 .popup-content p {
   margin-bottom: 20px;
   font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .popup-content button {
@@ -138,6 +142,7 @@ button:hover {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-right: 20px !important;
 }
 
 .popup-content button:hover {

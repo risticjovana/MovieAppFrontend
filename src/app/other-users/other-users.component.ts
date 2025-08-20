@@ -2,7 +2,8 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http'; 
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-other-users',
@@ -19,7 +20,8 @@ export class OtherUsersComponent implements OnInit {
   constructor(
     private authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -96,7 +98,7 @@ export class OtherUsersComponent implements OnInit {
   }
 
   viewFollowers(){
-    
+    this.router.navigate(['/followers']);
   }
 
   getRandomFollowers(): number {
