@@ -38,7 +38,7 @@
 }
 
 .seat.booked {
-  background-color: #3B3545;
+  background-color: #afadb5;
   cursor: not-allowed;
   pointer-events: none;
 }
@@ -57,7 +57,7 @@
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   justify-content: center;
-  border: 2px solid #3B3545;
+  border: 2px solid #afadb5;
   color: white;
   font-size: 14px;
   font-weight: bold;
@@ -67,9 +67,9 @@
 }
 
 .seat:hover:not(.empty) {
-  background-color: #A847C8;
+  background-color: #afadb5;
   transform: scale(1.05);
-  border-color: #A847C8;
+  border-color: #afadb5;
 }
 
 .seat.empty {
@@ -78,9 +78,9 @@
 }
 
 .seat.selected {
-  background-color: #e64747; ; /* orangy */
-  border-color: #e64747; ;
-  cursor: pointer;
+  background-color: #433f48; ;  
+  border-color: #433f48; 
+  cursor: pointer; 
 }
 
 .screen-arc {
@@ -104,7 +104,7 @@
 .screen-label {
   font-weight: bold;
   font-family: Arial, sans-serif;
-  color: #fff;
+  color: #423f44;
   font-size: 14px;
   margin-top: -30px;
 }
@@ -119,6 +119,7 @@
 
 .arrow-btn {
   font-size: 24px;
+  font-weight: 600;
   padding: 0px 12px;
   cursor: pointer;
   background: none;
@@ -144,7 +145,7 @@
   text-align: center;
   user-select: none;
   transition: background-color 0.3s, color 0.3s; 
-  color: #fff; 
+  color: #141116; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -175,8 +176,9 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  margin: 10px;   
+  margin: 0px auto;   
   padding: 0 0 15px 0;
+  width: 95%;
   border-bottom: 1px solid #3B3545;
 }
 
@@ -198,7 +200,7 @@
   font-weight: 500;
   margin-left: 8px;
   font-size: 1rem;
-  color: #e64747; 
+  color: #141116; 
 }
 
 .select-wrapper {
@@ -208,12 +210,13 @@
 
 .select-wrapper select {
   width: 100%;
-  padding: 8px 32px 8px 12px;  
+  padding: 8px 32px 8px 5px;  
   border: none;
   border-bottom: 2px solid #F0EEF5;
-  background: #141116; 
-  color: #F0EEF5; 
+  background: #F0EEF5; 
+  color: #A847C8; 
   font-size: 1.05rem;
+  font-weight: 550;
   box-sizing: border-box;
   appearance: none;
   -webkit-appearance: none;
@@ -234,7 +237,7 @@
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 6px solid #F0EEF5; /* arrow color */
+  border-top: 6px solid #141116; /* arrow color */
   transform: translateY(-50%);
 }
 
@@ -242,7 +245,7 @@
   font-weight: 500;
   margin-left: 8px;
   font-size: 1rem;
-  color: #e64747; 
+  color: #141116; 
 }
 
 .popup button {
@@ -271,8 +274,9 @@
   flex-direction: row;    /* make children align horizontally */
   justify-content: space-between;
   align-items: flex-start;
-  margin: 18px 12px;
-  border-radius: 25px;
+  margin: 18px auto;
+  border-radius: 16px; 
+  width: 95%;
 }
 
 .seat-main-content {
@@ -282,6 +286,7 @@
   margin-top: 12px; 
   margin-left: 175px;
   width: 50%;
+  
 }
 
 .seat-legend {
@@ -294,6 +299,7 @@
   padding: 1rem;
   border-radius: 25px; 
 }
+  
 
 .seat-summary {
   display: flex;
@@ -301,42 +307,50 @@
   gap: 1rem;
   padding: 1.5rem;
   border-radius: 12px;
-  color: #ffffff; 
-  width: 300px; 
-  margin-top: 4rem; 
-  margin-right: 240px;
+  color: #141116;  
+  height:400px;
+  margin-top: 7rem; 
+  margin-right: 200px; 
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); 
 }
 
 /* Title and Summary Text */
-.seat-summary h3,
-.seat-summary h4 {
+.seat-summary h3{
+  margin: 10px 0 0 0px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.seat-summary h4{
   margin: 0;
   font-size: 1.5rem;
+  text-align: center;
 }
 
 .seat-summary p {
-  margin: 0.25rem 0;
+  margin: 0.25rem 0 0.25rem 0px;
   font-size: 0.95rem;
+  text-align: center;
 }
 
 .seat-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 0.40rem;
   list-style: none;
   padding: 0;
-  margin-top: 0px;
-  min-height: 30px; /* reserve space even when empty */
+  margin-top: 0px;  
+  min-height: 30px;   
 }
 
 .seat-list li {
-  background-color: #3B3545;
+  background: linear-gradient(135deg, #e64747, #A847C8);
   border-radius: 5px;
-  padding: 0.7rem 0.4rem;
+  padding: 0.7rem  1rem;
   text-align: center;
   font-weight: bold;
   font-size: 0.9rem;
-  color: #e64747;
+  color: #fff;
 }
 
 .seat-list li:last-child {
@@ -352,28 +366,27 @@ hr {
 
 /* Payment section */
 .payment-summary { 
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-  background-color: #24182B;
-  padding: 1rem;
+  color: #141116; 
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  margin-top: -2rem;
-  width: 300px;
+  margin-top: -2rem;  
+  width: 330px;
 }
 
 .payment-summary p {
   font-size: 0.9rem;
+  margin-left: -10px;
 }
 
 /* Reserve Button */
 .payment-summary button { 
-  margin-top: 0.75rem;
-  margin: auto 50px;
+  margin-top: 2rem;
+  margin: auto 0;
   padding: 0.5rem 1rem;
-  font-size: 1rem;
-  background-color: #e64747;
+  font-size: 1rem; 
+  background: linear-gradient(135deg, #e64747, #A847C8);;
   border: none;
   border-radius: 25px;
   color: white;
@@ -599,33 +612,38 @@ h2 {
 
 .movie-info-container {
   position: relative; 
-  height: 615px; /* adjust as you want */ 
+  height: 540px;
+  width: 95%;
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
   color: white;
   display: flex;
-  align-items: flex-end; /* align content to bottom */
+  align-items: flex-end;  
   overflow: hidden; 
+  border-radius: 16px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5); 
+  margin: 40px auto;
 }
+ 
 
 .movie-info-container::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5); /* dark overlay on backdrop */
+  background: rgba(0, 0, 0, 0.5);  
   z-index: 0;
 }
 
 .movie-info-content {
-  position: relative; /* above overlay */
-  max-width: 85%; /* left half */
+  position: relative;  
+  max-width: 85%; 
   z-index: 1;
   margin-left: 20px;
 }
 
 .movie-title {
-  font-size: 3rem; /* big title */
+  font-size: 3rem; 
   margin-bottom: 1rem;
 }
 
@@ -653,19 +671,20 @@ h2 {
   gap: 30px;
   margin-bottom: 20px;
   margin-left: 30px;
+  border: none;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.95rem;
-  color: #fff;
+  font-size: 0.95rem; 
+  color: #141116;
 }
 
-.seat.example {
+.seat.example selected {
   pointer-events: none;
   width: 30px;
   height: 40px;
-  border: 2px solid #3B3545;
+  border: 2px solid #afadb5;
 }

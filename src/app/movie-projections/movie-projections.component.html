@@ -36,7 +36,7 @@
       <div class="form-group-cinema">
         <label for="cinemaSelect">CINEMA</label>
         <div class="select-wrapper">
-        <select id="cinemaSelect" [(ngModel)]="selectedCinemaId" (change)="onCinemaChange()">
+        <select class="select-wrapper" id="cinemaSelect" [(ngModel)]="selectedCinemaId" (change)="onCinemaChange()">
           <option *ngFor="let cinema of cinemasWithProjections" [ngValue]="cinema.cinemaId">
             {{ cinema.cinemaName }}
           </option>
@@ -115,36 +115,39 @@
           </div>
         </div>
 
-        <!-- Seat Summary Panel (RIGHT) -->
-        <div class="seat-summary">
-          <!-- Part 1: Reservation Summary -->
-          <h3>Your selected seats</h3>
-          <p class="seats-label">{{ getReservedSeatCount() }} seats</p>
-          
-          <ul class="seat-list">
-            <li *ngFor="let seat of selectedSeats">
-              {{ seat }}
-            </li>
-          </ul> 
-          <p> </p>
+        <div class="summary">
+            <!-- Seat Summary Panel (RIGHT) -->
+              <div class="seat-summary">
+                <!-- Part 1: Reservation Summary -->
+                <h3>Your selected seats</h3>
+                <p class="seats-label">{{ getReservedSeatCount() }} seats</p>
+                
+                <ul class="seat-list">
+                  <li *ngFor="let seat of selectedSeats">
+                    {{ seat }}
+                  </li>
+                </ul> 
+                <p> </p>
 
-          <!-- Part 2: Payment Details -->
-          <div class="payment-summary">
-            <h4>Payment Details</h4>
-            <p>Tax (10%): ${{ getReservedSeatCount() * 20 * 0.1 }}</p>
-            <p>Discount: $5</p> 
-            <hr/>
-            <p><strong>Total Price: ${{(getReservedSeatCount() * 20 * 1.1 - 5) | number : '1.2-2' }}</strong></p>
+                <!-- Part 2: Payment Details -->
+                <div class="payment-summary">
+                  <h4>Payment Details</h4>
+                  <p>Tax (10%): ${{ getReservedSeatCount() * 20 * 0.1 }}</p>
+                  <p>Discount: $5</p> 
+                  <hr/>
+                  <p><strong>Total Price: ${{(getReservedSeatCount() * 20 * 1.1 - 5) | number : '1.2-2' }}</strong></p>
 
-            <button 
-              (click)="submitReservation()" 
-              [disabled]="selectedSeats.size === 0">
-              Reserve tickets
-            </button>
+                  <button 
+                    (click)="submitReservation()" 
+                    [disabled]="selectedSeats.size === 0">
+                    Reserve tickets
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+        
     <!-- Ticket Popup -->
     <div class="overlay" *ngIf="showTicketPopup"></div>
     <div class="popup" *ngIf="showTicketPopup">
