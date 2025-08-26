@@ -204,7 +204,10 @@ export class SeriesInfoComponent implements OnDestroy {
     this.contentService.addReview(this.contentId, review).subscribe({
       next: (createdReview) => {
         console.log('Review submitted:', createdReview); 
- 
+
+        // reload reviews so the new one appears
+        this.loadReviews(this.contentId);
+
         this.showReviewPopup = false;
         this.reviewRating = 0;
         this.reviewText = '';

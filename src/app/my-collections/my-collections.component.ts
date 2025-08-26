@@ -114,15 +114,18 @@ toggleDropdown(event: MouseEvent, collectionId: number): void {
 closeDropdown(): void {
   this.dropdownOpenId = null;
 }
+ 
 
-deleteCollection(collectionId: number): void {
+deleteCollection(collectionId: number): void { 
   this.collectionService.deleteCollection(collectionId).subscribe({
-    next: () => {
-      this.userCollections = this.userCollections.filter(c => c.id !== collectionId);
+    next: () => { 
+      this.getUserCollections();
     },
-    error: () => { 
+    error: (err) => { 
+      this.getUserCollections();
     }
   });
 }
+
 
 }

@@ -126,3 +126,10 @@ h2 { font-family: 'Roboto Slab', serif;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.error-message {
+  color: #e64747; 
+  margin-top: -10px;
+  font-size: 14px;
+  text-align: center;
+}

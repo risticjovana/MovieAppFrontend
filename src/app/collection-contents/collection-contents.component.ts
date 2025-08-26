@@ -169,29 +169,18 @@ export class CollectionContentsComponent implements OnInit {
 
   this.collectionService.removeContentFromCollection(this.collectionInfo.id, contentId).subscribe({
     next: () => { 
-      // After successful deletion, reload the collection contents
-      this.collectionService.getCollectionContents(this.collectionInfo.id).subscribe({
-        next: (data) => {
-          this.contents = data;
+      this.contents = this.contents.filter(c => c.contentId !== contentId);
 
-          // Refresh posters for each content
-          for (const movie of this.contents) {
-            this.movieService.getSeriesPoster(movie.name).subscribe({
-              next: (posterUrl) => this.posterMap[movie.contentId] = posterUrl,
-              error: () => this.posterMap[movie.contentId] = 'assets/default-movie.jpg'
-            });
-          }
-        },
-        error: () => {
-          console.error('Failed to reload collection contents after deletion');
-        }
-      });
+      delete this.posterMap[contentId];
+ 
+      this.cdr.detectChanges();
     },
     error: (err) => { 
       console.error('Failed to remove content', err);
     }
   });
 }
+
 
 
   saveCollection(): void {

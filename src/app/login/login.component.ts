@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit{
   showSidebar: boolean = false;
   loginForm!: FormGroup;
+  loginError: string | null = null;
+
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
@@ -23,7 +25,7 @@ export class LoginComponent implements OnInit{
 
   onSubmit() {
     if (this.loginForm.invalid) return;
-  
+
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         const token = response.token;
@@ -31,14 +33,19 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('token', token);
           this.router.navigate(['/home']);
         } else {
-          console.error('Token missing in response.');
+          this.loginError = "Login failed. Please try again.";
         }
       },
       error: (error) => {
-        console.error('Login failed:', error);
+        if (error.status === 401) {
+          this.loginError = "Invalid email or password."; 
+        } else {
+          this.loginError = "An unexpected error occurred. Please try again later.";
+        }
       }
     });
   }
+
 
   onSignUp(): void {
     this.router.navigate(['/register']);
