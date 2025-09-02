@@ -98,4 +98,10 @@ export class CollectionService {
       map((url) => url) // returns direct image URL
     );
   }
+
+  deleteCommentFromCollection(collectionId: number, commentId: number): Observable<string> {
+    const url = `${this.baseUrl}/${collectionId}/comments/${commentId}`;
+    return this.http.delete(url, { responseType: 'text' });
+  }
+
 }

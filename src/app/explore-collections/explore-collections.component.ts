@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
 import { CollectionService } from '../services/collection.service'; 
 import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode'; 
@@ -14,11 +14,13 @@ export class ExploreCollectionsComponent implements OnInit {
   loading = false;
   error: string | null = null;
   userId: number | null = null;
+  userRole: string | null = null;
 
   constructor(
     private collectionService: CollectionService,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+  private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -45,13 +47,14 @@ export class ExploreCollectionsComponent implements OnInit {
     try {
       const decoded: any = jwtDecode(token);
       this.userId = decoded.id || decoded.sub || null;
+      this.userRole = decoded.role || null;
     } catch {
       this.error = 'Failed to decode token.';
       this.userId = null;
     }
   }
 
-  private loadCollections(): void {
+   private loadCollections(): void {
     this.loading = true;
     this.error = null;
 
@@ -69,5 +72,19 @@ export class ExploreCollectionsComponent implements OnInit {
 
   openCollectionContents(collectionId: number) {
     this.router.navigate(['/collections', collectionId, 'contents']);
+  }
+
+  deleteCollection(collectionId: number) {
+    if (!confirm('Are you sure you want to delete this collection?')) return;
+
+    this.collectionService.deleteCollection(collectionId).subscribe({
+      next: () => {
+        this.collections = this.collections.filter(c => c.id !== collectionId);
+        location.reload();
+      },
+      error: () => {
+        location.reload();
+      }
+    }); 
   }
 }

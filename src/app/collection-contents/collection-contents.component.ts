@@ -284,4 +284,17 @@ export class CollectionContentsComponent implements OnInit {
     return this.user?.role || 'Unknown';
   }
 
+  deleteComment(commentId: number): void {
+      if (!this.collectionInfo?.id) return;
+
+      this.collectionService.deleteCommentFromCollection(this.collectionInfo.id, commentId).subscribe({
+        next: () => {
+          this.comments = this.comments.filter(c => c.id !== commentId);
+          console.log(`Comment ${commentId} deleted successfully`);
+        },
+        error: (err) => {
+          console.error(`Failed to delete comment ${commentId}`, err);
+        }
+      });
+    }
 }

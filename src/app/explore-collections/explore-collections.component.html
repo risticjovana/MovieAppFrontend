@@ -12,6 +12,13 @@
   <div class="collection-card" *ngFor="let collection of collections" (click)="openCollectionContents(collection.id)">
     <div class="collection-header">
       <h3>{{ collection.name }}</h3> 
+      
+      <button 
+        *ngIf="collection.typeString === 'Urednicka' && userRole === 'moderator'"
+        (click)="deleteCollection(collection.id); $event.stopPropagation()"
+        class="delete-btn">
+        <i class="fas fa-trash"></i>
+      </button>
     </div>
 
     <div class="collection-description">
