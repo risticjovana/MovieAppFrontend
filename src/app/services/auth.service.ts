@@ -61,6 +61,10 @@ export class AuthService {
         return this.http.get<any[]>(`${this.apiUrl}/all-except/${id}`);
     }
 
+    getAllUsers(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/all-users`);
+    }
+
     followUser(followerId: number, followeeId: number): Observable<string> {
         return this.http.post(`${this.apiUrl}/follow`, { FollowerId: followerId, FolloweeId: followeeId }, { responseType: 'text' });
     }
@@ -69,4 +73,7 @@ export class AuthService {
         return this.http.get<any[]>(`${this.apiUrl}/followers/${userId}`);
     }
 
+    blockUser(userId: number): Observable<{ message: string }> {
+        return this.http.post<{ message: string }>(`${this.apiUrl}/block-user/${userId}`, {});
+    }
 }

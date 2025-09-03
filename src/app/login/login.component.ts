@@ -38,13 +38,17 @@ export class LoginComponent implements OnInit{
       },
       error: (error) => {
         if (error.status === 401) {
-          this.loginError = "Invalid email or password."; 
+          // Print whatever the backend returns
+          this.loginError = error.error.message; 
         } else {
           this.loginError = "An unexpected error occurred. Please try again later.";
         }
       }
     });
   }
+
+
+
 
 
   onSignUp(): void {

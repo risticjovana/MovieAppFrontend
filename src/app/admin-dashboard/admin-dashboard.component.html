@@ -31,4 +31,33 @@
       </div>
     </div>
   </div>
+
+  <h2>User overview</h2>
+  <div class="user-table">
+    <div class="request-header-user">
+      <div>Name</div>
+      <div>Email</div> 
+      <div>Status</div>
+      <div>Actions</div>
+    </div> 
+    <div 
+      class="request-row-user" 
+      *ngFor="let user of users" 
+      [ngClass]="{'blocked-user': user.status.toLowerCase() === 'blocked'}"
+      (click)="goToUserProfile(user.id)">
+      
+      <div>{{ user.firstName }} {{ user.lastName }}</div>
+      <div>{{ user.email }}</div> 
+      <div>{{ user.status }}</div>  
+      <div class="card-actions">
+        <button 
+          class="btn btn-success" 
+          (click)="blockUser(user.id)" 
+          [disabled]="user.status.toLowerCase() === 'blocked'">
+          {{ user.status.toLowerCase() === 'blocked' ? 'Blocked' : 'Block' }}
+        </button>
+      </div>
+    </div> 
+  </div>
 </div>
+

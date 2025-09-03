@@ -1,0 +1,69 @@
+.user-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  margin-top: 50px;
+}
+
+.user-card {
+  background: linear-gradient(135deg, #e64747, #A847C8);
+  color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  text-align: center;
+  width: 300px;
+}
+
+.user-card h2 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.user-card p {
+  margin: 0.5rem 0;
+  color: #fff;
+}
+
+.block-btn {
+  margin-top: 1.5rem;
+  width: 40%;
+  padding: 7px 0px;
+  background: white;
+  color: back;
+  border: none;
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  margin-left: 230px;
+  margin-bottom: 100px;
+}
+
+.btn-primary{
+    background: linear-gradient(135deg, #e64747, #A847C8);
+    color: #fff;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 15px;
+    font-weight: 600;
+}
