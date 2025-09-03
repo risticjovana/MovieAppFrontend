@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs'; 
 import { VisualContent } from '../model/visual-content';
 import { Review } from '../model/review';
+import { Critique } from '../model/critique';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,13 @@ export class ContentService {
 
   deleteReview(reviewId: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${reviewId}/delete-review`);
+  }
+
+  addCritique(critique: Omit<Critique, 'critiqueId' | 'date'>): Observable<Critique> {
+    return this.http.post<Critique>(`${this.baseUrl}/add-critique`, critique);
+  }
+
+  getCritiquesByContentId(contentId: number): Observable<Critique[]> {
+    return this.http.get<Critique[]>(`${this.baseUrl}/${contentId}/content-critiques`);
   }
 }

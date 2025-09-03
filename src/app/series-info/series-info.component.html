@@ -26,8 +26,11 @@
     </div>
 
     <!-- Rate button -->
-    <button class="rate-button" (click)="showReviewPopup = true">
+    <button *ngIf = "user!=null && user.role != 'filmski_kriticar'" class="rate-button" (click)="showReviewPopup = true">
       LEAVE A REVIEW
+    </button>
+    <button *ngIf = "user!=null && user.role == 'filmski_kriticar'" class="rate-button" (click)="showCritiquePopup = true">
+      SUBMIT A CRITIQUE
     </button>
   </div>
 </div>
@@ -87,6 +90,39 @@
     </div>
   </div>
 
+  <!-- Popup Modal Critique -->
+  <div class="popup-overlay" *ngIf="showCritiquePopup">
+    <div class="popup-content">
+      <h2>Write Your <span class="gradient-text">Critique</span></h2>
+
+      <!-- Review Textbox -->
+      <textarea [(ngModel)]="reviewText" placeholder="Write your critique here..." rows="5"></textarea>
+
+      <!-- Stars -->
+      <div class="stars">
+        <ng-container *ngFor="let star of stars; let i = index">
+          <span
+            class="star"
+            [class.filled]="(stars.length - 1 - i) < reviewRating"
+            (click)="setRating(stars.length - i)"
+            (mouseenter)="hoverRating = stars.length - i"
+            (mouseleave)="hoverRating = 0"
+          >
+            &#9733;
+          </span>
+        </ng-container>
+      </div>
+
+      <!-- Submit Button -->
+      <button class="submit-button" (click)="submitCritique()">
+        Submit
+      </button>
+
+
+      <!-- Close Button -->
+      <button class="close-button" (click)="showReviewPopup = false">&times;</button>
+    </div>
+  </div>
 <!-- Season Selector -->
 <div class="season-section" *ngIf="seasons.length > 0">
   <select

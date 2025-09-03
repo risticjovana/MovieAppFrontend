@@ -9,6 +9,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
 import { CollectionService } from '../services/collection.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Critique } from '../model/critique';
 
 @Component({
   selector: 'app-series-info',
@@ -24,6 +25,7 @@ export class SeriesInfoComponent implements OnDestroy {
   episodes: any[] = [];
   selectedSeason!: number;
   showReviewPopup = false;
+  showCritiquePopup = false;
   reviewRating = 0;
   hoverRating = 0;
   reviewText = '';
@@ -136,11 +138,9 @@ export class SeriesInfoComponent implements OnDestroy {
   loadReviews(contentId: number) {
     this.contentService.getReviewsByContentId(contentId).subscribe({
       next: (reviews) => {
-        this.reviews = reviews;
-        console.log('Loaded reviews:', this.reviews);
+        this.reviews = reviews; 
       },
-      error: (err) => {
-        console.log('Failed to load reviews:', err);
+      error: (err) => { 
         this.reviews = [];  
       }
     });
@@ -217,6 +217,29 @@ export class SeriesInfoComponent implements OnDestroy {
       }
     });
   }
+
+ submitCritique() {
+    if (this.reviewRating === 0 || !this.reviewText.trim()) return;
+
+    const critique: Omit<Critique, 'critiqueId' | 'date'> = {
+      description: this.reviewText,
+      rating: this.reviewRating,
+      contentId: this.contentId,  
+      criticId: this.user.id       
+    };
+
+    this.contentService.addCritique(critique).subscribe({
+      next: (created) => {
+        console.log('Critique submitted:', created);
+        this.showCritiquePopup = false;
+        this.reviewText = '';
+        this.reviewRating = 0;
+      },
+      error: (err) => console.error('Failed to submit critique:', err)
+    });
+  }
+
+
 
   loadUserCollections(userId: number) {
     this.collectionService.getUserCollections(userId).subscribe({
