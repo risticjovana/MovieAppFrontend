@@ -239,8 +239,6 @@ export class SeriesInfoComponent implements OnDestroy {
     });
   }
 
-
-
   loadUserCollections(userId: number) {
     this.collectionService.getUserCollections(userId).subscribe({
       next: (collections) => {
