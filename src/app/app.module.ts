@@ -27,7 +27,8 @@ import { OtherUsersComponent } from './other-users/other-users.component';
 import { FollowersComponent } from './followers/followers.component';
 import { SavedCollectionsComponent } from './saved-collections/saved-collections.component';
 import { EditorsCollectionsComponent } from './editors-collections/editors-collections.component';
-import { UserDetailsComponent } from './user-details/user-details.component'; 
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { StatisticsComponent } from './statistics/statistics.component'; 
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     FollowersComponent,
     SavedCollectionsComponent,
     EditorsCollectionsComponent,
-    UserDetailsComponent 
+    UserDetailsComponent,
+    StatisticsComponent 
   ],
   imports: [
     BrowserModule,

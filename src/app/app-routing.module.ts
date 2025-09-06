@@ -19,6 +19,7 @@ import { FollowersComponent } from './followers/followers.component';
 import { SavedCollectionsComponent } from './saved-collections/saved-collections.component';
 import { EditorsCollectionsComponent } from './editors-collections/editors-collections.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'saved-collections', component: SavedCollectionsComponent },
   { path: 'editors-collections', component: EditorsCollectionsComponent},
   { path: 'user-details/:userId', component: UserDetailsComponent},
+  { path: 'statistics', component: StatisticsComponent},
   { path: '**', redirectTo: 'login' }, // move this to the end
 ];
 @NgModule({

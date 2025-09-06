@@ -49,6 +49,11 @@
         <i class="fas fa-users" style="color: #FFF;"></i> Following
       </a>
     </li>
+    <li *ngIf="isGuest()">
+      <a routerLink="/statistics" routerLinkActive="active">
+        <i class="fas fa-pie-chart" style="color: #FFF;"></i> Statistics
+      </a>
+    </li>
     <!--Admin-only--> 
     <li *ngIf="isAdmin()">
       <a routerLink="/admin-dashboard" routerLinkActive="active">

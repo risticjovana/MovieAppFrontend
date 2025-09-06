@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { UserActivity } from "../model/user-activity";
 
 interface LoginPayload {
     email: string;
@@ -75,5 +76,9 @@ export class AuthService {
 
     blockUser(userId: number): Observable<{ message: string }> {
         return this.http.post<{ message: string }>(`${this.apiUrl}/block-user/${userId}`, {});
+    }
+
+    getUserActivity(userId: number): Observable<UserActivity> {
+        return this.http.get<UserActivity>(`${this.apiUrl}/user-activity/${userId}`);
     }
 }

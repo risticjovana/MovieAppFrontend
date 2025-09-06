@@ -1,0 +1,71 @@
+<div class="statistics-grid">
+  <div class="stats-container" *ngIf="activity">
+    <h2>Contributions</h2> 
+    <div class="chart-wrapper">
+      <!-- Donut chart -->
+      <div 
+        class="pie-chart"
+        [style.--collections]="activity.collectionCount"
+        [style.--reviews]="activity.reviewCount"
+        [style.--comments]="activity.commentCount">
+        <div class="center-text">
+          {{ activity.collectionCount + activity.reviewCount + activity.commentCount }}
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend">
+        <div class="legend-item">
+          <span class="color-box collections"></span> Collections: {{ activity.collectionCount }}
+        </div>
+        <div class="legend-item">
+          <span class="color-box comments"></span> Comments: {{ activity.commentCount }}
+        </div>
+        <div class="legend-item">
+          <span class="color-box reviews"></span> Reviews: {{ activity.reviewCount }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="engagement-card">
+    <h2>Engagement</h2>
+    <div class="engagement-content">
+      <!-- Activity Level -->
+      <div class="progress-group">
+        <p>Activity Level: {{ activity?.activityLevel ?? 0 }}</p>
+        <div class="level-bar">
+          <div *ngFor="let i of [].constructor(maxLevel); let idx = index"
+              class="level-segment"
+              [class.filled]="activity ? idx < activity.activityLevel : false">
+          </div>
+        </div> 
+
+      <!-- Hours Watched -->
+      <div class="progress-group">
+        <p>Hours Watched: {{ activity?.watchHours ?? 0 }}</p>
+        <div class="progress-bar">
+          <div class="progress-fill hours" 
+              [style.width.%]="activity ? (activity.watchHours / maxHours) * 100 : 0">
+          </div>
+        </div>
+      </div>
+      <p class="watch-info">
+        You need 
+        {{ activity ? maxHours - activity.watchHours : maxHours }} more hours 
+        to reach the next level.
+      </p>
+    </div>
+  </div> 
+  </div>
+
+  <div class="third-card">
+    <h2>Summary</h2> 
+    <div class="bar-chart">
+      <div class="bar" 
+      [style.height.%]="(activity?.userSavesCount ?? 0) * 25" style="background: #A847C8"> {{activity?.userSavesCount}}</div> 
+      <div class="bar" 
+      [style.height.%]="(activity?.savedCollectionsCount ?? 0) * 25" style="background: #e64747"> {{activity?.savedCollectionsCount}}</div> 
+    </div> 
+  </div>
+</div>
