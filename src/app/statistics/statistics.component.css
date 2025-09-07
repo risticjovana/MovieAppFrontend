@@ -1,11 +1,16 @@
+.page-wrapper {
+  display: flex;
+  justify-content: center;   
+  align-items: center;       
+  min-height: 100vh;        
+}
+
 .statistics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));  
-  justify-content: center; 
-  max-width: 1030px;  
-  margin: 200px auto;   
+  max-width: 1030px;   
   gap: 20px; 
-} 
+}
 
 .stats-container {
   background: #1e1e2f;
@@ -101,10 +106,11 @@ h2{
 }
 
 .engagement-card {
-  background: #fff;
+  background: linear-gradient(135deg, #e64747, #A847C8);
   padding: 20px 40px;
   border-radius: 12px;
-  color: #1e1e2f;
+  color: #fff;
+  font-size: large;
   width: 420px;
   display: flex;
   flex-direction: column;
@@ -113,7 +119,7 @@ h2{
 
 .engagement-card h2 {
   margin: 0 0 20px 0;  
-  text-align: center;
+  text-align: center; 
 }
 
 .engagement-content {
@@ -134,14 +140,14 @@ h2{
 }
 
 .level-segment {
-  width: 35px;
-  height: 18px;
-  background: #dddbe1; 
-  border-radius: 7px;
+  width: 37.5px;
+  height: 14px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 
 .level-segment.filled {
-  background: linear-gradient(135deg, #e64747, #A847C8);
+  background: #fff;
 }
  
 .progress-bar { 
@@ -149,11 +155,11 @@ h2{
   height: 14px;
   width: 100%;
   overflow: hidden;
-  background-color: #dddbe1;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .progress-fill {
-  background: linear-gradient(135deg, #e64747, #A847C8);
+  background: #fff;
   height: 100%;
   width: 0; 
   border-radius: 8px;
@@ -161,30 +167,64 @@ h2{
 
 .watch-info {
   font-size: 0.9rem;
-  color: #555;
+  color: #fff;
   margin-top: 15px;
   text-align: center;
 }
 
 .third-card {
-  background: #1e1e2f;
+  background: linear-gradient(135deg, #fff, #fff);
   padding: 20px 40px;
   border-radius: 12px;
-  color: white;
+  color: #1e1e2f;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
   grid-column: span 2;
 }
 
+.interactions-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.interaction-descriptions {
+  flex: 1;
+  font-size: 1rem;
+  color: #000;
+  line-height: 1.4;
+}
+
+.interaction-descriptions p {
+  display: flex;
+  align-items: flex-start;
+  margin: 12px 0;
+}
+
+.dot {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-top: 5px; 
+}
+
+
 .bar-chart {
   display: flex;
   align-items: flex-end;
-  gap: 10px;
-  width: 40%;
+  gap: 20px;
+  width: 30%;
   height: 200px;
   border-left: 2px solid #333;
   border-bottom: 2px solid #333;
-  padding: 10px;
+  padding:  0px 20px;
   margin: 0 auto;
 }
 

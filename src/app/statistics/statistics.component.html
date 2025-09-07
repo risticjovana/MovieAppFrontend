@@ -1,71 +1,97 @@
-<div class="statistics-grid">
-  <div class="stats-container" *ngIf="activity">
-    <h2>Contributions</h2> 
-    <div class="chart-wrapper">
-      <!-- Donut chart -->
-      <div 
-        class="pie-chart"
-        [style.--collections]="activity.collectionCount"
-        [style.--reviews]="activity.reviewCount"
-        [style.--comments]="activity.commentCount">
-        <div class="center-text">
-          {{ activity.collectionCount + activity.reviewCount + activity.commentCount }}
-        </div>
-      </div>
-
-      <!-- Legend -->
-      <div class="legend">
-        <div class="legend-item">
-          <span class="color-box collections"></span> Collections: {{ activity.collectionCount }}
-        </div>
-        <div class="legend-item">
-          <span class="color-box comments"></span> Comments: {{ activity.commentCount }}
-        </div>
-        <div class="legend-item">
-          <span class="color-box reviews"></span> Reviews: {{ activity.reviewCount }}
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="engagement-card">
-    <h2>Engagement</h2>
-    <div class="engagement-content">
-      <!-- Activity Level -->
-      <div class="progress-group">
-        <p>Activity Level: {{ activity?.activityLevel ?? 0 }}</p>
-        <div class="level-bar">
-          <div *ngFor="let i of [].constructor(maxLevel); let idx = index"
-              class="level-segment"
-              [class.filled]="activity ? idx < activity.activityLevel : false">
+<div class="page-wrapper">
+  <div class="statistics-grid">
+    <div class="stats-container" *ngIf="activity">
+      <h2>Contributions</h2> 
+      <div class="chart-wrapper">
+        <!-- Donut chart -->
+        <div 
+          class="pie-chart"
+          [style.--collections]="activity.collectionCount"
+          [style.--reviews]="activity.reviewCount"
+          [style.--comments]="activity.commentCount">
+          <div class="center-text">
+            {{ activity.collectionCount + activity.reviewCount + activity.commentCount }}
           </div>
-        </div> 
+        </div>
 
-      <!-- Hours Watched -->
-      <div class="progress-group">
-        <p>Hours Watched: {{ activity?.watchHours ?? 0 }}</p>
-        <div class="progress-bar">
-          <div class="progress-fill hours" 
-              [style.width.%]="activity ? (activity.watchHours / maxHours) * 100 : 0">
+        <!-- Legend -->
+        <div class="legend">
+          <div class="legend-item">
+            <span class="color-box collections"></span> Collections: {{ activity.collectionCount }}
+          </div>
+          <div class="legend-item">
+            <span class="color-box comments"></span> Comments: {{ activity.commentCount }}
+          </div>
+          <div class="legend-item">
+            <span class="color-box reviews"></span> Reviews: {{ activity.reviewCount }}
           </div>
         </div>
       </div>
-      <p class="watch-info">
-        You need 
-        {{ activity ? maxHours - activity.watchHours : maxHours }} more hours 
-        to reach the next level.
-      </p>
     </div>
-  </div> 
-  </div>
 
-  <div class="third-card">
-    <h2>Summary</h2> 
-    <div class="bar-chart">
-      <div class="bar" 
-      [style.height.%]="(activity?.userSavesCount ?? 0) * 25" style="background: #A847C8"> {{activity?.userSavesCount}}</div> 
-      <div class="bar" 
-      [style.height.%]="(activity?.savedCollectionsCount ?? 0) * 25" style="background: #e64747"> {{activity?.savedCollectionsCount}}</div> 
+    <div class="engagement-card">
+      <h2>Engagement</h2>
+      <div class="engagement-content">
+        <!-- Activity Level -->
+        <div class="progress-group">
+          <p>Activity Level: {{ activity?.activityLevel ?? 0 }}</p>
+          <div class="level-bar">
+            <div *ngFor="let i of [].constructor(maxLevel); let idx = index"
+                class="level-segment"
+                [class.filled]="activity ? idx < activity.activityLevel : false">
+            </div>
+          </div> 
+
+        <!-- Hours Watched -->
+        <div class="progress-group">
+          <p>Hours Watched: {{ activity?.watchHours ?? 0 }}</p>
+          <div class="progress-bar">
+            <div class="progress-fill hours" 
+                [style.width.%]="activity ? (activity.watchHours / maxHours) * 100 : 0">
+            </div>
+          </div>
+        </div>
+        <p class="watch-info">
+          You need 
+          {{ activity ? maxHours - activity.watchHours : maxHours }} more hours 
+          to reach the next level.
+        </p>
+      </div>
     </div> 
+    </div>
+
+    <div class="third-card">
+      <h2>Interactions</h2> 
+      <div class="interactions-content">
+        <!-- Left: Descriptions -->
+        <div class="interaction-descriptions">
+          <p>
+            <span class="dot" style="background:linear-gradient(135deg, #e64747, #A847C8);"></span> 
+            Number of users who have saved the collections you created. 
+            This shows how often other people found your collections interesting enough to keep.
+          </p>
+          <p>
+            <span class="dot" style="background:#1e1e2f;"></span> 
+            Number of collections from other users that you have saved. 
+            This reflects how many times you engaged with and followed other people's collections.
+          </p>
+      </div>
+
+        <!-- Right: Chart -->
+        <div class="bar-chart">
+          <div class="bar" 
+            [style.height.%]="(activity?.userSavesCount ?? 0) * 25" 
+            style="background: linear-gradient(135deg, #e64747, #A847C8)">
+            {{activity?.userSavesCount}}
+          </div> 
+          <div class="bar" 
+            [style.height.%]="(activity?.savedCollectionsCount ?? 0) * 25" 
+            style="background: #1e1e2f">
+            {{activity?.savedCollectionsCount}}
+          </div> 
+        </div> 
+      </div>
+    </div>
+
   </div>
 </div>
