@@ -30,6 +30,7 @@ export class SeriesInfoComponent implements OnDestroy {
   hoverRating = 0;
   reviewText = '';
   reviews: Review[] = [];
+  critiques: Critique[] = [];
   stars = Array(10);
   user: any;
   collections: any[] = [];
@@ -56,6 +57,7 @@ export class SeriesInfoComponent implements OnDestroy {
         this.loadSeriesInfo(this.contentId);
         this.loadUserFromToken();
         this.loadReviews(this.contentId);
+        this.loadCritiques(this.contentId);
       }
     });
   }
@@ -63,6 +65,18 @@ export class SeriesInfoComponent implements OnDestroy {
   ngOnDestroy() {
     this.destroySwiper();
   }
+
+  loadCritiques(contentId: number) {
+    this.contentService.getCritiquesByContentId(contentId).subscribe({
+      next: (critiques) => {
+        this.critiques = critiques;
+      },
+      error: (err) => {
+        console.error('Failed to load critiques:', err);
+        this.critiques = [];
+      }
+    });
+  } 
 
   loadSeriesInfo(id: number) {
     this.movieService.getSeriesById(id).subscribe({

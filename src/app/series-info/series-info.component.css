@@ -550,4 +550,61 @@ textarea {
   color: #333;
   font-size: 0.95rem;
 } 
- 
+
+.critiques-section {
+  margin: 2rem 0.8rem;
+  margin-left: 10px; 
+}
+
+.critiques-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #141116;
+}
+
+.critiques-section h3::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #A847C8;
+  margin: 0.3rem 0px;
+  border-radius: 2px; 
+}
+
+.critique-card {
+  position: relative;
+  min-width: 267px;
+  max-width: 267px;
+  height: 140px;
+  background: linear-gradient(135deg, #e64747, #A847C8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 1rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.critique-card:hover { 
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+
+.critique-text {
+  font-style: italic;
+  color: #F0EEF5;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.critique-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 600;
+}
+
+.review-rating span.filledQ {
+  font-size: 1.2rem;
+  color: #000;
+}

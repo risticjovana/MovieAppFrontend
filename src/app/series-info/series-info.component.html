@@ -178,9 +178,22 @@
             <span class="numeric-rating">{{ review.rating }}/10</span>
           </p>          
       </div>
-    </div>
+    </div> 
 
-
-
-
-</div>
+    <!-- Critiques List -->
+    <div class="critiques-section" *ngIf="critiques && critiques.length > 0">
+      <h3>Critiques</h3>
+      <div class="reviews-row">
+        <div *ngFor="let critique of critiques | slice:0:5" class="critique-card">
+          <p class="critique-text">"{{ critique.description }}"</p>
+          
+          <p class="review-rating">
+            <ng-container *ngFor="let star of stars; let i = index">
+              <span [class.filledQ]="i < critique.rating">&#9733;</span>
+            </ng-container>
+            <span class="numeric-rating">{{ critique.rating }}/10</span>
+          </p>          
+        </div>
+      </div>
+    </div> 
+</div> 
