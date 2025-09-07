@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { MovieService } from '../services/movie.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { UserActivity } from '../model/user-activity';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,6 +21,9 @@ export class UserProfileComponent implements OnInit {
   };
   availableRoles: string[] = ['MODERATOR', 'ADMINISTRATOR', 'CRITIC', 'EDITOR'];  
   selectedRole: string = '';
+  activity: UserActivity | null = null;
+  maxLevel = 10;     
+  maxHours = 500; 
 
   constructor(private authService: AuthService, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -36,6 +40,10 @@ export class UserProfileComponent implements OnInit {
       try {
         this.user = jwtDecode(token);
         console.log('Decoded user:', this.user);
+
+        if (this.user && this.user.id) {
+          this.loadUserActivity(this.user.id);
+        }
       } catch {
         this.user = null;
       }
@@ -86,6 +94,18 @@ export class UserProfileComponent implements OnInit {
       },
       error: (err) => {
         alert('Failed to send role request: ' + err.error);
+      }
+    });
+  }
+
+  loadUserActivity(userId: number) {
+    this.authService.getUserActivity(userId).subscribe({
+      next: (activity) => {
+        this.activity = activity;
+        console.log('User activity:', activity);
+      },
+      error: (err) => {
+        console.error('Error fetching user activity', err);
       }
     });
   }

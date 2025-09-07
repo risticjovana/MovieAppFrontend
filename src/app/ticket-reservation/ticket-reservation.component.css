@@ -11,11 +11,11 @@
 .movie-card {
   position: relative;
   width: 253px;
-  height: 350px;
+  height: 380px;
   cursor: pointer;
   overflow: hidden;
-  border-radius: 25px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .movie-card:hover img.movie-poster {
-  transform: scale(1.05);
+  transform: scale(1.05); 
 }
 
 .movie-card::after {

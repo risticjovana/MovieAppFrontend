@@ -1,29 +1,51 @@
-.form-wrapper {
-    display: flex; 
-    height: 289px;
-    width: 581px;
-    margin-top: 182px;  
-    margin-left: 36.95%;
+.page-container {
+  position: fixed;     
+  top: 0;
+  right: 0;               
+  height: 100vh;         
+  width: 39.6%;            
+  background-color: #24182B;  
+  display: flex;
+  justify-content: center; 
+  align-items: center;      
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
-.form-wrapper:hover form {
-    background-color: rgba(0, 0, 0, 0.5); 
-    transition: background-color 0.3s ease-in-out;
+.form-wrapper {
+  width: 100%;         
+  max-width: 600px;    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 80px;
+} 
+
+h2 { font-family: 'Roboto Slab', serif;
+  font-weight: 900; 
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  
+  /* gradient text */
+  background: linear-gradient(90deg, #e64747, #A847C8); /* red to purple */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
 
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 700px;  
-    background-color: rgba(0, 0, 0, 0.1);  
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 800px;    
     transition: width 0.3s ease-in-out;
 }
 
 .input-grid { 
-    margin-top: 2rem; 
+    margin-top: 0rem; 
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.2rem 0rem;
@@ -60,7 +82,7 @@ button {
     display: block;
     width: 23%;  
     padding: 0.75rem;
-    background-color: #e65447;
+    background: linear-gradient(135deg, #e64747, #A847C8);
     border: none;
     border-radius: 35px;
     color: white;
@@ -68,6 +90,7 @@ button {
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    margin-top: 1rem;
 }
 
 button:disabled {
