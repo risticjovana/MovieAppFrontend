@@ -71,11 +71,22 @@ export class CollectionContentsComponent implements OnInit {
       next: (data) => {
         this.contents = data;
         this.loading = false;
-        for (const movie of this.contents) {
-          this.movieService.getSeriesPoster(movie.name).subscribe({
-            next: (posterUrl) => this.posterMap[movie.contentId] = posterUrl,
-            error: () => this.posterMap[movie.contentId] = 'assets/default-movie.jpg'
-          });
+
+        for (const content of this.contents) {
+          if (content.contentTypeString === 'Movie') {
+            this.movieService.getPoster(content.name).subscribe({
+              next: (posterUrl) => this.posterMap[content.contentId] = posterUrl,
+              error: () => this.posterMap[content.contentId] = 'assets/default-movie.jpg'
+            });
+          } else if (content.contentTypeString === 'TVSeries') {
+            this.movieService.getSeriesPoster(content.name).subscribe({
+              next: (posterUrl) => this.posterMap[content.contentId] = posterUrl,
+              error: () => this.posterMap[content.contentId] = 'assets/default-movie.jpg'
+            });
+          } else {
+            // fallback if type is unknown
+            this.posterMap[content.contentId] = 'assets/default-movie.jpg';
+          }
         }
       },
       error: () => {
@@ -113,7 +124,7 @@ export class CollectionContentsComponent implements OnInit {
         this.availableContents = contents.map(c => ({ ...c, selected: false }));
         for (const content of this.availableContents) {
           const fetchPoster$ =
-            content.typeString === 'Movie'
+            content.contentTypeString === 'Movie'
               ? this.movieService.getPoster(content.name)
               : this.movieService.getSeriesPoster(content.name);
 
@@ -167,23 +178,26 @@ export class CollectionContentsComponent implements OnInit {
   }
 
   removeContentFromCollection(contentId: number) {
-  if (!this.collectionInfo) return;
+    if (!this.collectionInfo) return;
 
-  this.collectionService.removeContentFromCollection(this.collectionInfo.id, contentId).subscribe({
-    next: () => { 
-      this.contents = this.contents.filter(c => c.contentId !== contentId);
+    this.collectionService.removeContentFromCollection(this.collectionInfo.id, contentId).subscribe({
+      next: () => { 
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([`/collections/${this.collectionId}/contents`]);
+        });
 
-      delete this.posterMap[contentId];
- 
-      this.cdr.detectChanges();
-    },
-    error: (err) => { 
-      console.error('Failed to remove content', err);
-    }
-  });
-}
-
-
+        delete this.posterMap[contentId];
+  
+        this.cdr.detectChanges();
+      },
+      error: (err) => { 
+        console.error('Failed to remove content', err);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([`/collections/${this.collectionId}/contents`]);
+        });
+      }
+    });
+  } 
 
   saveCollection(): void {
     if (!this.user?.id || !this.collectionInfo?.id) return;
