@@ -251,12 +251,12 @@
 .popup button {
   margin-top: 2rem;
   margin-left:40%;
-  padding: 12px;
+  padding: 12px 20px;
   font-weight: bold;
-  font-size: 1.2rem;
-  background-color: #A847C8;
+  font-size: 1.2rem; 
+  background: linear-gradient(135deg, #e64747, #A847C8);
   border: none;
-  border-radius: 10px;
+  border-radius: 25px;
   color: white;
   cursor: pointer;
   transition: background-color 0.25s ease;
@@ -424,9 +424,9 @@ hr {
   left: 55%;
   transform: translate(-50%, -50%);
   
-  background: #141116;
+  background: #fff;
   border-radius: 15px;
-  color: #fff;
+  color: #141116;
   padding: 2rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   z-index: 1000;
@@ -463,13 +463,13 @@ hr {
 }
 
 .card {
-  background: linear-gradient(to bottom, #e64747 0%, #A847C8 26%, #ecedef 26%, #ecedef 100%);
+  background: linear-gradient(to bottom, #e64747 0%, #A847C8 26%, #fff 26%, #fff 100%);
   height: 11em;
   width: 25.5em;
   float: left;
   position: relative;
   padding: 1em;
-  margin-top: 10px;
+  margin-top: 10px; 
 }
 
 .gradient-word {
@@ -484,7 +484,7 @@ hr {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   width: 16em;
-
+  box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.45);
   display: flex;
   flex-direction: column;
   justify-content: center; 
@@ -492,23 +492,13 @@ hr {
 
 .cardRight {
   width: 6.5em;
-  border-left: 0.18em dashed #1E2136;
+  border-left: 0.18em dashed #fff;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   position: relative;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.45);
 }
 
-.cardRight::before,
-.cardRight::after {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 0.9em;
-  height: 0.9em;
-  background: #1E2136;
-  border-radius: 50%;
-  left: -0.5em;
-}
 
 .cardRight::before {
   top: -0.4em;

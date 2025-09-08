@@ -14,13 +14,13 @@
 .screen-arc {
   width: 600px;
   height: 50px;
-  border-top: 4px solid #e94f20;
+  border-top: 4px solid #A847C8;
   border-radius: 800px / 80px;
   position: relative;
 
   background: transparent;
   box-shadow: none; 
-  filter: drop-shadow(0 0 6px #e94f20);
+  filter: drop-shadow(0 0 6px #A847C8);
 }
 
 .screen-wrapper {
@@ -32,7 +32,7 @@
 .screen-label {
   font-weight: bold;
   font-family: Arial, sans-serif;
-  color: #fff;
+  color: #423f44;
   font-size: 14px;
   margin-top: -30px;
 }
@@ -58,7 +58,7 @@
   justify-content: center;
   font-size: 17px;
   border-right: 2px solid #ccc;
-  color: #757575;
+  color: #141116;
   font-weight: bold;
   position: relative;
   transition: transform 0.5s ease;
@@ -71,11 +71,11 @@
 }
 
 .parking-spot:hover {
-  background-image: url('/assets/car.png'); /* Your car icon path */
-  background-size: 138% 85%;
+  background-image: url('/assets/carBooked.png'); /* Your car icon path */
+  background-size: 130% 85%;
   background-repeat: no-repeat;
   background-position: center;
-  color: transparent; 
+  color: transparent;  
 }
 
 .parking-spot:hover { 
@@ -87,15 +87,15 @@
 } 
 
 button {
-  margin-top: 25px;
-  padding: 10px 15px;
-  background-color: #ff5623;
-  color: white;
+  margin-top: 0rem; 
+  padding: 0.5rem 1rem;
+  font-size: 1rem; 
+  background: linear-gradient(135deg, #e64747, #A847C8);;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
+  color: white;
   cursor: pointer;
-  width: 60%;
-  margin: 0 auto;
+  transition: background-color 0.2s ease;
 }
 
 button:hover {
@@ -108,29 +108,28 @@ button:hover {
   gap: 1rem;
   padding: 1.5rem;
   border-radius: 12px;
-  color: #ffffff; 
-  width: 300px; 
-  margin-top: 14.5rem;
+  color: #141116;   
+  margin-top: 16rem;  
   margin-left: 80px;
-  margin-bottom: auto;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-  background-color: #33223d;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); 
 }
 
-/* Title and Summary Text */
+ 
 .seat-summary h3,
 .seat-summary h4 {
-  margin: 0;
+  margin: 10px 0 0 0px;
   font-size: 1.5rem;
+  text-align: center;
 }
 
 .seat-summary p {
+  margin: 0.25rem 0 0.25rem 0px;
   font-size: 0.95rem;
+  text-align: center;
 }
 
 hr{
-  border: 1px solid #fff;
+  border: 1px solid #3B3545;
   width: 300px;
 }
 
@@ -139,27 +138,29 @@ hr{
   grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
   gap: 0.5rem;
   list-style: none;
-  padding: 0;
-  margin-top: 0px;
-  min-height: 30px; /* reserve space even when empty */
+  padding: 0; 
+  min-height: 30px;  
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .seat-list li {
-  background-color: #493157;
+  background: linear-gradient(135deg, #e64747, #A847C8);
+  justify-content: center;
   border-radius: 5px;
   padding: 0.7rem 0.4rem;
   text-align: center;
   font-weight: bold;
   font-size: 0.9rem;
-  color: #ff5623;
+  color: #fff;
 }
 
 .parking-spot.selected {
-  background-image: url('/assets/car.png');
-  background-size: 138% 85%; 
+  background-image: url('/assets/carSelected.png');
+  background-size: 125% 85%; 
   background-repeat: no-repeat;
-  background-position: center;
-  color: transparent;   
+  background-position: center; 
+  color: transparent;    
 } 
 
 .seat-legend {
@@ -181,7 +182,7 @@ hr{
   align-items: center;
   gap: 8px;
   font-size: 0.95rem;
-  color: #fff;
+  color: #141116;
 }
 
 .seat.example {
@@ -193,27 +194,25 @@ hr{
 }
 
 .seat.example.booked {
-  background-image: url('/assets/car.png');
-  background-size: 138% 85%; 
+  background-image: url('/assets/carBooked.png');
+  background-size: 130% 85%; 
   background-repeat: no-repeat;
-  background-position: center;
-  filter: grayscale(80%) brightness(60%);
-  border-color: #fff; 
+  background-position: center; 
+  border-color: #ccc; 
 }
 
 .seat.example.selected {
-  background-image: url('/assets/car.png');
-  background-size: 138% 85%; 
+  background-image: url('/assets/carSelected.png');
+  background-size: 130% 85%; 
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center; 
   filter: none; 
 }
 
 .parking-spot.reserved {
-  background-image: url('/assets/car.png');
-  background-size: 138% 85%; 
+  background-image: url('/assets/carBooked.png');
+  background-size: 125% 85%; 
   background-repeat: no-repeat;
-  background-position: center;
-  filter: grayscale(80%) brightness(60%);
+  background-position: center; 
   color: transparent;
 }
