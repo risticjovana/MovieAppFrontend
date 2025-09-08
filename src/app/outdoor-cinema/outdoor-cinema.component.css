@@ -70,14 +70,6 @@
   border-left: 2px solid #ccc;
 }
 
-.parking-spot:hover {
-  background-image: url('/assets/carBooked.png'); /* Your car icon path */
-  background-size: 130% 85%;
-  background-repeat: no-repeat;
-  background-position: center;
-  color: transparent;  
-}
-
 .parking-spot:hover { 
   color: transparent; /* hide text */
 }
@@ -155,8 +147,16 @@ hr{
   color: #fff;
 }
 
+.parking-spot:hover {
+  background-image: url('/assets/carBooked2.png'); /* Your car icon path */
+  background-size: 130% 85%;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: transparent;  
+}
+
 .parking-spot.selected {
-  background-image: url('/assets/carSelected.png');
+  background-image: url('/assets/carSelected2.png');
   background-size: 125% 85%; 
   background-repeat: no-repeat;
   background-position: center; 
@@ -194,7 +194,7 @@ hr{
 }
 
 .seat.example.booked {
-  background-image: url('/assets/carBooked.png');
+  background-image: url('/assets/carBooked2.png');
   background-size: 130% 85%; 
   background-repeat: no-repeat;
   background-position: center; 
@@ -202,7 +202,7 @@ hr{
 }
 
 .seat.example.selected {
-  background-image: url('/assets/carSelected.png');
+  background-image: url('/assets/carSelected2.png');
   background-size: 130% 85%; 
   background-repeat: no-repeat;
   background-position: center; 
@@ -210,7 +210,7 @@ hr{
 }
 
 .parking-spot.reserved {
-  background-image: url('/assets/carBooked.png');
+  background-image: url('/assets/carBooked2.png');
   background-size: 125% 85%; 
   background-repeat: no-repeat;
   background-position: center; 
