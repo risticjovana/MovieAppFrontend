@@ -623,3 +623,41 @@
 .delete-comment-btn:hover {
   background: #c0392b;
 }
+
+.popup-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: #141116;
+  color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  width: 350px;
+  text-align: center;
+  margin-left: 220px;
+}
+
+.popup-actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.popup-actions button {
+  padding: 6px 12px!important;
+  border: none!important;
+  border-radius: 8px!important;
+  cursor: pointer!important;
+  font-size: medium!important;
+}
+ 

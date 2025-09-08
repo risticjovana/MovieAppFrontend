@@ -41,6 +41,8 @@ export class CollectionContentsComponent implements OnInit {
 ];
   isSaved = false; 
   commentAvatars: string[] = [];
+  showDeleteCommentPopup = false;
+  commentToDelete: number | null = null; 
 
   constructor(
     private route: ActivatedRoute,
@@ -284,17 +286,32 @@ export class CollectionContentsComponent implements OnInit {
     return this.user?.role || 'Unknown';
   }
 
-  deleteComment(commentId: number): void {
-      if (!this.collectionInfo?.id) return;
+  confirmDeleteComment(commentId: number) {
+    this.commentToDelete = commentId;
+    this.showDeleteCommentPopup = true;
+  }
 
-      this.collectionService.deleteCommentFromCollection(this.collectionInfo.id, commentId).subscribe({
+  cancelDeleteComment() {
+    this.commentToDelete = null;
+    this.showDeleteCommentPopup = false;
+  }
+
+  deleteConfirmedComment() {
+    if (this.commentToDelete === null || !this.collectionInfo?.id) return;
+
+    this.collectionService.deleteCommentFromCollection(this.collectionInfo.id, this.commentToDelete)
+      .subscribe({
         next: () => {
-          this.comments = this.comments.filter(c => c.id !== commentId);
-          console.log(`Comment ${commentId} deleted successfully`);
+          this.comments = this.comments.filter(c => c.id !== this.commentToDelete);
+          this.showDeleteCommentPopup = false;
+          this.commentToDelete = null;
         },
         error: (err) => {
-          console.error(`Failed to delete comment ${commentId}`, err);
+          console.error(`Failed to delete comment ${this.commentToDelete}`, err);
+          this.showDeleteCommentPopup = false;
+          this.commentToDelete = null;
         }
       });
-    }
+  }
+
 }

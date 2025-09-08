@@ -15,7 +15,7 @@
       
       <button 
         *ngIf="collection.typeString === 'Urednicka' && userRole === 'moderator'"
-        (click)="deleteCollection(collection.id); $event.stopPropagation()"
+        (click)="popupOpen(collection.id); $event.stopPropagation()"
         class="delete-btn">
         <i class="fas fa-trash"></i>
       </button>
@@ -43,6 +43,17 @@
       </span>
     </div> 
   </div>
+</div> 
 </div>
 
+<!-- Delete Confirmation Popup -->
+<div class="popup-backdrop" *ngIf="showDeletePopup">
+  <div class="popup">
+    <h3>Confirm Deletion</h3>
+    <p>Are you sure you want to delete this collection?</p>
+    <div class="popup-actions">
+      <button (click)="cancelDelete()">Cancel</button>
+      <button class="delete-confirm" (click)="deleteConfirmed()">Delete</button>
+    </div>
+  </div>
 </div>

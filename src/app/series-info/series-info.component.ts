@@ -67,35 +67,50 @@ export class SeriesInfoComponent implements OnDestroy {
   }
 
   loadCritiques(contentId: number) {
+    if (!contentId || contentId <= 0) {
+      console.warn('Invalid content id for critiques.');
+      this.critiques = [];
+      return;
+    }
+
     this.contentService.getCritiquesByContentId(contentId).subscribe({
       next: (critiques) => {
-        this.critiques = critiques;
+        this.critiques = critiques ?? [];
       },
-      error: (err) => {
-        console.error('Failed to load critiques:', err);
+      error: () => {
+        // no error spam, just fallback
         this.critiques = [];
       }
     });
-  } 
+  }
+
 
   loadSeriesInfo(id: number) {
+    if (!id || id <= 0) {
+      console.warn('Invalid series id provided.');
+      return;
+    }
+
     this.movieService.getSeriesById(id).subscribe({
       next: (seriesData) => {
-        this.series = seriesData;
-
-        const name = this.series?.name;
-        if (!name) {
-          console.warn('Series name is missing.');
+        if (!seriesData) {
+          console.warn('No series data returned.');
           return;
         }
+
+        this.series = seriesData;
+        const name = this.series?.name;
+        if (!name) return;
 
         this.loadBackdrop(name);
         this.loadCast(name);
         this.loadSeasons(name);
       },
-      error: (err) => console.error('Failed to load series info:', err)
+      error: () => { 
+        this.series = null;
+      }
     });
-  }
+  } 
 
   loadBackdrop(name: string) {
     this.movieService.getSeriesBackdrop(name).subscribe({
@@ -248,6 +263,8 @@ export class SeriesInfoComponent implements OnDestroy {
         this.showCritiquePopup = false;
         this.reviewText = '';
         this.reviewRating = 0;
+        
+      this.loadCritiques(this.contentId);
       },
       error: (err) => console.error('Failed to submit critique:', err)
     });

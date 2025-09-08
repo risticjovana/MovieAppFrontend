@@ -15,6 +15,8 @@ export class ExploreCollectionsComponent implements OnInit {
   error: string | null = null;
   userId: number | null = null;
   userRole: string | null = null;
+  showDeletePopup = false;
+  collectionToDelete: any | null = null;
 
   constructor(
     private collectionService: CollectionService,
@@ -74,17 +76,27 @@ export class ExploreCollectionsComponent implements OnInit {
     this.router.navigate(['/collections', collectionId, 'contents']);
   }
 
-  deleteCollection(collectionId: number) {
-    if (!confirm('Are you sure you want to delete this collection?')) return;
-
-    this.collectionService.deleteCollection(collectionId).subscribe({
-      next: () => {
-        this.collections = this.collections.filter(c => c.id !== collectionId);
-        location.reload();
-      },
-      error: () => {
-        location.reload();
-      }
-    }); 
+  confirmDelete(collectionId: number) {
+    this.collectionToDelete = collectionId;
+    this.showDeletePopup = true;
   }
+ 
+  cancelDelete() {
+    this.collectionToDelete = null;
+    this.showDeletePopup = false;
+  }
+
+  popupOpen(collectionId: number) {
+    this.collectionToDelete = collectionId;
+    this.showDeletePopup = true;
+  }
+
+  deleteConfirmed() {
+    if (this.collectionToDelete === null) return;
+
+    this.collectionService.deleteCollection(this.collectionToDelete).subscribe({ 
+      next: () => { 
+        this.collections = this.collections.filter(c => c.id !== this.collectionToDelete); 
+        location.reload(); }, 
+    error: () => { location.reload(); } }); } 
 }

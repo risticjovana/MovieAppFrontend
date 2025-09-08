@@ -111,12 +111,23 @@
       <button 
         *ngIf="userRole === 'moderator'" 
         class="delete-comment-btn" 
-        (click)="deleteComment(comment.id)">
+        (click)="confirmDeleteComment(comment.id)">
         Delete
       </button>
     </div>
   </div>
 </div>
 
+<!-- Delete Comment Confirmation Popup -->
+<div class="popup-backdrop" *ngIf="showDeleteCommentPopup">
+  <div class="popup">
+    <h3>Confirm Deletion</h3>
+    <p>Are you sure you want to delete this comment?</p>
+    <div class="popup-actions">
+      <button class="delete-cancel" (click)="cancelDeleteComment()">Cancel</button>
+      <button class="delete-confirm" (click)="deleteConfirmedComment()">Delete</button>
+    </div>
+  </div>
+</div>
 
 
