@@ -142,6 +142,9 @@
                     [disabled]="selectedSeats.size === 0">
                     Reserve tickets
                   </button>
+                  <p class="late-warning" *ngIf="showLateMessage">
+                    Reservations are disabled for projections that have started or begin in less than 30 minutes.
+                  </p>
                 </div>
               </div>
             </div>
@@ -201,3 +204,4 @@
     ></app-outdoor-cinema>
   </div>
 </div>
+ 

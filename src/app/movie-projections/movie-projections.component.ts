@@ -38,6 +38,7 @@ export class MovieProjectionsComponent implements OnInit {
   movieInfo: any;
   posterUrl: string = 'assets/default-movie.jpg';
   backdropUrl: string = 'assets/default-backdrop.jpg';
+  showLateMessage = false; 
 
   constructor(private route: ActivatedRoute, private movieService: MovieService, private router: Router) {
     this.generateWeek(this.startDate);
@@ -147,11 +148,13 @@ export class MovieProjectionsComponent implements OnInit {
   }
 
   onProjectionChange() {
-    this.selectedProjection = this.filteredProjections.find(p => p.id === this.selectedProjectionId);
-    const available = this.selectedProjection?.seatNumber ?? 50;
-    this.generateSeatMap(available);
-    this.generateSeats(available);
-  }
+  this.selectedProjection = this.filteredProjections.find(p => p.id === this.selectedProjectionId); 
+  this.selectedSeats.clear(); 
+  const available = this.selectedProjection?.seatNumber ?? 50;
+  this.generateSeatMap(available);
+  this.generateSeats(available);
+}
+
 
   getColumnCount(seatCount: number): number {
     return Math.ceil(Math.sqrt(seatCount));
@@ -212,10 +215,26 @@ export class MovieProjectionsComponent implements OnInit {
   submitReservation() {
     if (!this.isBrowser()) return;
 
+    if (!this.selectedProjection) {
+      alert('No projection selected!');
+      return;
+    }
+  
+    const selectedTime = this.selectedProjection?.time?.substring(0, 5);
+  
+    if (selectedTime === '18:30') {
+      this.showLateMessage = true;
+ 
+      setTimeout(() => {
+        this.showLateMessage = false;
+      }, 3000);
+
+      return;
+    }
+
     const reservedSeats = Array.from(this.selectedSeats);
     const key = this.getStorageKey();
-
-    // Load existing data from localStorage
+ 
     const rawData = localStorage.getItem(key);
     let allReservations: Record<number, number[]> = {};
 
