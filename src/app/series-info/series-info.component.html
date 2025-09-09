@@ -17,8 +17,7 @@
         {{ getSelectedCollectionName() || 'ADD TO COLLECTION' }}
         <span class="arrow"></span>
       </div>
-      <ul class="options" *ngIf="isDropdownOpen">
-        <li (click)="selectCollection(null)" class="placeholder">ADD TO COLLECTION</li>
+      <ul class="options" *ngIf="isDropdownOpen"> 
         <li *ngFor="let col of collections" (click)="selectCollection(col.id)">
           {{ col.name }}
         </li> 
@@ -176,7 +175,8 @@
               <span [class.filled]="i < review.rating">&#9733;</span>
             </ng-container>
             <span class="numeric-rating">{{ review.rating }}/10</span>
-          </p>          
+          </p>  
+          <p class="review-author"><strong>{{ review.userFullName }}</strong></p>    
       </div>
     </div> 
 
@@ -192,8 +192,16 @@
               <span [class.filledQ]="i < critique.rating">&#9733;</span>
             </ng-container>
             <span class="numeric-rating">{{ critique.rating }}/10</span>
-          </p>          
+          </p>         
+          <p class="review-author"><strong>{{ critique.userFullName }}</strong></p>   
         </div>
       </div>
     </div> 
 </div> 
+
+<!-- Collection Popup -->
+<div class="popup-overlay" *ngIf="popupMessage">
+  <div class="popup-content small-popup">
+    <p>{{ popupMessage }}</p>
+  </div>
+</div>

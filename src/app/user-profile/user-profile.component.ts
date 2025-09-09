@@ -24,6 +24,8 @@ export class UserProfileComponent implements OnInit {
   activity: UserActivity | null = null;
   maxLevel = 10;     
   maxHours = 500; 
+  requestSuccessMessage: string | null = null;
+
 
   constructor(private authService: AuthService, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -91,12 +93,15 @@ export class UserProfileComponent implements OnInit {
     }).subscribe({
       next: (res) => {
         this.selectedRole = '';
+        this.requestSuccessMessage = 'Your role change request has been sent.';
+        setTimeout(() => this.requestSuccessMessage = null, 4000);  
       },
       error: (err) => {
         alert('Failed to send role request: ' + err.error);
       }
     });
   }
+
 
   loadUserActivity(userId: number) {
     this.authService.getUserActivity(userId).subscribe({
@@ -109,4 +114,18 @@ export class UserProfileComponent implements OnInit {
       }
     });
   }
+
+  roleTranslations: Record<string, string> = {
+    obican_korisnik: 'Regular User',
+    administrator: 'Administrator',
+    moderator: 'Moderator',
+    kriticar: 'Critic',
+    urednik: 'Editor'
+  };
+
+  get displayRole(): string {
+    if (!this.user?.role) return 'N/A';
+    return this.roleTranslations[this.user.role] || this.user.role;
+  } 
+
 }

@@ -38,7 +38,7 @@
       <h3>{{ content.name }}</h3>
     </div>
   </div>
-  <div class="genre-movie-card add-card"  (click)="openAddContentModal()" style="cursor: pointer;">
+  <div class="genre-movie-card add-card" *ngIf="isMyCollection" (click)="openAddContentModal()" style="cursor: pointer;">
     <div class="plus-icon">+</div>
   </div>
 </div>

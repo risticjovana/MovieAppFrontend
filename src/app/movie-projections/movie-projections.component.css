@@ -246,28 +246,7 @@
   margin-left: 8px;
   font-size: 1rem;
   color: #141116; 
-}
-
-.popup button {
-  margin-top: 2rem;
-  margin-left:40%;
-  padding: 12px 20px;
-  font-weight: bold;
-  font-size: 1.2rem; 
-  background: linear-gradient(135deg, #e64747, #A847C8);
-  border: none;
-  border-radius: 25px;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-}
-.popup button:hover:not(:disabled) {
-  background-color: #8738A2;
-}
-.popup button:disabled {
-  background-color: #8738A2;
-  cursor: not-allowed;
-}
+} 
 
 .seat-layout-container {
   display: flex;  
@@ -677,4 +656,41 @@ h2 {
   width: 30px;
   height: 40px;
   border: 2px solid #afadb5;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+ 
+.popup-buttons button {
+  padding: 12px 20px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+ 
+.reservation-btn {
+  background: linear-gradient(135deg, #e64747, #A847C8);
+  color: #fff;
+} 
+ 
+.pdf-btn {
+  background: #f5f5f5;
+  color: #141116;
+  border: 2px solid #141116;
+}
+.pdf-btn i {
+  color: #d9534f;
+}
+.pdf-btn:hover {
+  background: #eaeaea;
 }

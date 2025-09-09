@@ -43,6 +43,8 @@ export class CollectionContentsComponent implements OnInit {
   commentAvatars: string[] = [];
   showDeleteCommentPopup = false;
   commentToDelete: number | null = null; 
+  isMyCollection = false;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -61,6 +63,12 @@ export class CollectionContentsComponent implements OnInit {
     this.collectionService.getCollectionInfo(this.collectionId).subscribe({
         next: (info) => {
           this.collectionInfo = info;
+ 
+          if (this.user && Number(info.userId) === Number(this.user.id)) {
+            this.isMyCollection = true;
+          } else {
+            this.isMyCollection = false;
+          }
           this.loadComments();   
         },
         error: () => this.error = 'Failed to load collection info.'

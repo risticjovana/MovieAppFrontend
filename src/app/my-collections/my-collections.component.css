@@ -141,37 +141,37 @@
   top: 50%;
   left: 55%; /* center horizontally */
   transform: translate(-50%, -50%);
-  background: #141116;
+  background: #fff;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0,0,0,0.8);
   z-index: 1000;
-  color: #fff;
+  color: #141116;
   width: 93%;
   max-width: 420px;
 
   display: flex;
   flex-direction: column;
-  align-items: center; /* centers content horizontally */
-  text-align: center;  /* ensures text is centered */
+  align-items: center;  
+  text-align: center;  
 }
 
 .modal-content h3 {
   margin-top: 0;
-  color: #fff;
-  font-size: 2rem; /* bigger header */
+  color: #141116;
+  font-size: 2rem; 
 }
 
 .modal-content input,
 .modal-content textarea,
 .modal-content select {
-  width: 80%; /* narrower so it looks centered */
+  width: 80%;  
   margin: 0.5rem 0;
   padding: 0.5rem;
   border-radius: 6px;
   border: 1px solid #ccc;
-  background: #141116;
-  color: #fff; /* make text visible on light background */
+  background: #fff;
+  color: #141116;  
 }
 
 .modal-content .create-btn {
@@ -180,7 +180,7 @@
   background: linear-gradient(135deg, #e64747, #A847C8);
   border: none;
   color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: large;
 }
@@ -189,9 +189,9 @@
 .modal-content .cancel-btn {
   margin-top: 1rem;
   padding: 0.6rem 1.2rem;
-  background: #555;
+  background: #fff;
   border: none;
-  color: white;
+  color: black;
   border-radius: 10px;
   cursor: pointer;
   font-size: small;

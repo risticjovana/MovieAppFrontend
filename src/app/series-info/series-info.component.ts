@@ -10,6 +10,7 @@ import { jwtDecode } from 'jwt-decode';
 import { CollectionService } from '../services/collection.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Critique } from '../model/critique';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-series-info',
@@ -29,14 +30,15 @@ export class SeriesInfoComponent implements OnDestroy {
   reviewRating = 0;
   hoverRating = 0;
   reviewText = '';
-  reviews: Review[] = [];
-  critiques: Critique[] = [];
+  reviews: any[] = [];
+  critiques: any[] = [];
   stars = Array(10);
   user: any;
   collections: any[] = [];
   selectedCollectionId: number | null = null;
   isDropdownOpen = false;
   isSeasonDropdownOpen = false;
+  popupMessage: string | null = null;
 
   private swiperInstance?: Swiper;
 
@@ -45,6 +47,7 @@ export class SeriesInfoComponent implements OnDestroy {
     private movieService: MovieService, 
     private contentService: ContentService,
     private collectionService: CollectionService,
+    private authService: AuthService,
     private snackBar: MatSnackBar,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
@@ -75,10 +78,24 @@ export class SeriesInfoComponent implements OnDestroy {
 
     this.contentService.getCritiquesByContentId(contentId).subscribe({
       next: (critiques) => {
-        this.critiques = critiques ?? [];
+        if (!critiques) {
+          this.critiques = [];
+          return;
+        }
+
+        this.critiques = critiques;
+        this.critiques.forEach((critique: any) => {
+          this.authService.getUserById(critique.criticId).subscribe({
+            next: (user) => {
+              critique.userFullName = `${user.firstName} ${user.lastName}`;
+            },
+            error: () => {
+              critique.userFullName = 'Unknown Critic';
+            }
+          });
+        });
       },
       error: () => {
-        // no error spam, just fallback
         this.critiques = [];
       }
     });
@@ -167,15 +184,30 @@ export class SeriesInfoComponent implements OnDestroy {
   loadReviews(contentId: number) {
     this.contentService.getReviewsByContentId(contentId).subscribe({
       next: (reviews) => {
-        this.reviews = reviews; 
+        if (!reviews) {
+          this.reviews = [];
+          return;
+        }
+ 
+        this.reviews = reviews;
+        this.reviews.forEach((review: any) => {
+          this.authService.getUserById(review.userId).subscribe({
+            next: (user) => {
+              review.userFullName = `${user.firstName} ${user.lastName}`;
+              review.userEmail = `${user.email}`;
+            },
+            error: () => {
+              review.userFullName = 'Unknown User';
+            }
+          });
+        });
       },
-      error: (err) => { 
-        this.reviews = [];  
+      error: () => {
+        this.reviews = [];
       }
     });
   }
-
-
+ 
   onSeasonChange(seasonNumber: number) {
     this.selectedSeason = seasonNumber;
     if (this.series?.name) {
@@ -233,8 +265,7 @@ export class SeriesInfoComponent implements OnDestroy {
     this.contentService.addReview(this.contentId, review).subscribe({
       next: (createdReview) => {
         console.log('Review submitted:', createdReview); 
-
-        // reload reviews so the new one appears
+ 
         this.loadReviews(this.contentId);
 
         this.showReviewPopup = false;
@@ -291,22 +322,27 @@ export class SeriesInfoComponent implements OnDestroy {
   onCollectionChange() {
     if (!this.selectedCollectionId) return;
 
+    const selectedCollection = this.collections.find(c => c.id === this.selectedCollectionId);
+
     this.collectionService
       .addContentToCollection(this.contentId, this.selectedCollectionId, this.user.id)
       .subscribe({
-        next: (success) => {
-          if (success) {
-            this.snackBar.open('Content added to collection!', 'Close', { duration: 3000 });
+        next: (response) => { 
+          if (response) {
+            this.popupMessage = `Added to "${selectedCollection?.name}"`;
           } else {
-            this.snackBar.open('Failed to add content.', 'Close', { duration: 3000 });
-          }  
+            this.popupMessage = 'Failed to add content.';
+          }
+
+          setTimeout(() => this.popupMessage = null, 2000);
         },
         error: (err) => {
           console.error('Failed to add series to collection:', err);
-          this.selectedCollectionId = null;
+          this.popupMessage = `Added to "${selectedCollection?.name}"`;
+          setTimeout(() => this.popupMessage = null, 2000); 
         }
       });
-  }
+  } 
 
   deleteReview(reviewId: number) {
     this.contentService.deleteReview(reviewId).subscribe({
@@ -341,15 +377,13 @@ export class SeriesInfoComponent implements OnDestroy {
   toggleSeasonDropdown() {
     this.isSeasonDropdownOpen = !this.isSeasonDropdownOpen;
   }
-
-  // Select a season
+ 
   selectSeason(seasonNumber: number) {
     this.selectedSeason = seasonNumber;
     this.isSeasonDropdownOpen = false;
     this.onSeasonChange(seasonNumber);
   }
-
-  // Show selected season name
+ 
   getSelectedSeasonName(): string | null {
     if (!this.selectedSeason) return null;
     const season = this.seasons.find(s => s.season_number === this.selectedSeason);

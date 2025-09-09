@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '../services/movie.service';
 import { Seat } from '../model/seat';
 import { jwtDecode } from 'jwt-decode';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
 
 @Component({
   selector: 'app-movie-projections',
@@ -389,4 +392,48 @@ export class MovieProjectionsComponent implements OnInit {
       error: (err) => console.error('Reservation failed', err)
     });
   }
-}
+
+  generateTicketPdf() {
+    if (!this.movieInfo || !this.selectedCinema || !this.selectedProjection) return;
+
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+ 
+    doc.setFontSize(18);
+    doc.text('Purchased Movie Tickets', pageWidth / 2, 20, { align: 'center' });
+ 
+    doc.setFontSize(12);
+    doc.text(`Movie: ${this.movieInfo.name}`, 20, 40);
+    doc.text(`Cinema: ${this.selectedCinema.cinemaName}`, 20, 50);
+    doc.text(`Projection Time: ${this.selectedProjection.time}`, 20, 60);
+    doc.text(`Date: ${this.selectedDate?.toDateString()}`, 20, 70);
+
+    // Seats Table
+    const tableData = this.reservedSeats.map(seat => [
+      seat,
+      `$20`,
+      `$${(20 * 1.1).toFixed(2)}`, // price with tax
+      `-$5`,
+      `$${(20 * 1.1 - 5).toFixed(2)}`
+    ]);
+
+    autoTable(doc, {
+      head: [['Seat', 'Base Price', 'With Tax (10%)', 'Discount', 'Final Price']],
+      body: tableData,
+      startY: 85,
+    });
+ 
+    const finalY = (doc as any).lastAutoTable?.finalY || 90;
+ 
+    const totalSeats = this.reservedSeats.length;
+    const totalPrice = totalSeats * (20 * 1.1 - 5);
+    doc.setFontSize(14);
+    doc.text(`Total: $${totalPrice.toFixed(2)} for ${totalSeats} seat(s)`, pageWidth / 2, finalY + 15, { align: 'center' });
+ 
+    doc.setFontSize(10);
+    doc.text('Thank you for your reservation! Enjoy the movie', pageWidth / 2, finalY + 30, { align: 'center' });
+
+    doc.save(`ticket-${this.movieInfo.name}.pdf`);
+  }
+
+} 

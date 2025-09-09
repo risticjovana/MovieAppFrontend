@@ -363,7 +363,7 @@
   align-items: center;   
   left: 20%;
   height: 40%;   
-  background: #141116;
+  background: #fff;
   padding: 2rem;
   border-radius: 12px;
   width: 470px; 
@@ -374,7 +374,7 @@
 .popup-content h2{
   margin-bottom: 3rem;
   margin-left: 20px;
-  color: #fff;
+  color: #141414;
   font-size: 1.7rem;
 }
 
@@ -417,8 +417,8 @@ textarea {
   border-radius: 6px;
   border: 1px solid #ccc;
   margin: 0 auto;
-  background-color: #141116;
-  color: #fff;
+  background-color: #fff;
+  color: #141414;
 }
 
 .submit-button {  
@@ -434,6 +434,10 @@ textarea {
   color: white;
   border-radius: 10px;
   margin-left: 25px;
+} 
+
+.submit-button:hover{
+  transform: scale(12px);
 }
 
 .close-button {
@@ -545,6 +549,13 @@ textarea {
   color: #A847C8;
 }
 
+.review-author{
+  font-style: italic;
+  color: #F0EEF5;
+  font-size: 1rem;
+  text-align: right;
+}
+
 .numeric-rating {
   margin-left: 0.3rem;
   color: #333;
@@ -607,4 +618,29 @@ textarea {
 .review-rating span.filledQ {
   font-size: 1.2rem;
   color: #000;
+}
+
+.small-popup {
+  max-width: 300px;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(135deg, #e64747, #A847C8); 
+  padding: 0.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  height: 40px;  
+  animation: fadeInOut 3s forwards;
+} 
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(20px); }
+}
+
+.small-popup p {
+  margin: 5px 0 0px;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
